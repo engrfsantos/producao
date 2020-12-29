@@ -5,16 +5,20 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface Producoes extends JpaRepository<Producao,Long> {
 	
 	@Query(value = "SELECT u from Producao u WHERE u.td01Dt = CURRENT_DATE order by u.td01Dt, u.td01Hr DESC")
 	List<Producao> ProducoesHoje();
 
-	@Query(value = "SELECT u from Producao u WHERE u.td01Dt = ?1 order by u.td01Dt, u.td01Hr DESC")
-	List<Producao> ProducoesData(Date td01Dt);
+	@Query(value = "SELECT u from Producao u WHERE u.td01Dt = :dt order by u.td01Dt, u.td01Hr DESC")
+	List<Producao> ProducoesData(@Param("dt") Date dt);
 
-	@Query(value = "SELECT u from Producao u WHERE u.td01Dt <= ?1 order by u.td01Dt, u.td01Hr DESC")	
-	List<Producao> ProducoesAte(Date dtf);
-	
+	@Query(value = "SELECT u from Producao u WHERE u.td01Dt <= :dt order by u.td01Dt, u.td01Hr DESC")	
+	List<Producao> ProducoesAte(@Param("dt") Date date);
+
+	@Query(value = "SELECT u from Producao u WHERE u.td01Dt between :dt and :dtf order by u.td01Dt, u.td01Hr DESC")
+	List<Producao> ProducoesPeriodo(@Param("dt") Date dt, @Param("dtf") Date dtf);
+		
 }

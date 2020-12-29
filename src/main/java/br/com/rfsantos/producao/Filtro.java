@@ -1,45 +1,86 @@
 package br.com.rfsantos.producao;
 import java.text.DateFormat;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.Date;
 
 
 public class Filtro{	
-	private LocalDate dt;	
-	private LocalDate dtf;
+	private Date dt;	
+	private Date dtf;
+	private String sDt;
+	private String sDtf;
 	boolean bPeriodo;
-	boolean bFiltrado;
-	public Filtro(String sDt, String sDtf) {
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	boolean bFiltrado;	
+	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+	public Filtro(String sDt, String sDtf) throws ParseException {
 		if ((sDt==null) & (sDtf==null)) {
 			this.bPeriodo = false;		
 			this.bFiltrado = false;
-			this.dt = LocalDate.now();
-			this.dtf = this.dt;}
+			this.dt = null;
+			this.dtf = null;
+			this.sDt = "";
+			this.sDtf = "";
+			}
 		
 		if ((sDt==null) & (sDtf!=null)) {
 			this.bFiltrado = true;
-			this.dt = LocalDate.parse(String.format("01/01/1900", formatter));			
-			this.dtf = LocalDate.parse(String.format(sDtf, formatter)); }
+			this.bPeriodo = true;
+			this.dt =  formatter.parse("01/01/1900"); //LocalDate.parse(String.format("01/01/1900", formatter));			
+			this.dtf = formatter.parse(String.format(sDtf, formatter));
+			this.sDt = "01/01/1900";
+			this.sDtf = sDtf;		
+		}
 		
 		if ((sDt!=null) & (sDtf==null)) {
 			this.bFiltrado = true;
-			this.dt = LocalDate.parse(String.format(sDt, formatter));			
-			this.dtf = this.dt; }				
+			this.bPeriodo = false;
+			this.dt = formatter.parse(String.format(sDt, formatter));			
+			this.dtf = this.dt; 
+			this.sDt = sDt;
+			this.sDtf = sDt;
 		}
-	public LocalDate getDt() {
+		
+		if ((sDt!=null) & (sDtf!=null)) {
+			this.bFiltrado = true;
+			this.bPeriodo = true;
+			this.dt = formatter.parse(String.format(sDt, formatter));			
+			this.dtf = formatter.parse(String.format(sDtf, formatter)); 
+			this.sDt = sDt;
+			this.sDtf = sDtf;
+		}
+		
+		}
+	
+	public Date getDt() {
 		return dt;
 	}
-	public void setDt(LocalDate dt) {
+	public void setDt(Date dt) {				
 		this.dt = dt;
 	}
-	public LocalDate getDtf() {
-		return dtf;
+	public Date getDtf() {
+		return dtf;		
 	}
-	public void setDtf(LocalDate dtf) {
+	public void setDtf(Date dtf) {
 		this.dtf = dtf;
+	}	
+	public String getsDt() {
+		return sDt;
 	}
+
+	public void setsDt(String sDt) {
+		this.sDt = sDt;
+	}
+
+	public String getsDtf() {
+		return sDtf;
+	}
+
+	public void setsDtf(String sDtf) {
+		this.sDtf = sDtf;
+	}
+
 	public boolean isbPeriodo() {
 		return bPeriodo;
 	}

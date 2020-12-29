@@ -34,25 +34,22 @@ xmlns:th="http://www.thymeleaf.org">
 	
 	<form action="#" class="form-inline" method="GET" th:object="${producao}" th:action="@{/producoes}" style="margin: 20px 0">
 	<div class="form-group">
+		<p><h3>Filtros da Produção</h3></p>		
 				<b>Local:</b> 
 				<SELECT class="form-control">					
 					<OPTION  th:each="local : ${locais}" th:text="${local.ts01Desc}">				
 				</SELECT>				
-			<table class="table">
+			<table class="table">			
 				<tr>
 					<td style="width:90px;"><INPUT TYPE="button" id="btData" class="btn btn-primary" NAME="OPCAO" value="Data/Hoje" CHECKED style="width:90px;" > </td>
-					<td> 
-						<input type="text" id="dt" th:value="moment(${filtro.dt},'yyyy-MM-dd')"> 
-						
-						
-						<!-- input type="text" id="dt" th:value="${filtro.dt}"-->
+					<td>
+						<input type="text" id="dt" th:value="${filtro.sDt}">
 					</td> 										
 				</tr>
 				<tr>			
 					<td style="width:90px;"><INPUT TYPE="button" id="btSemana" class="btn btn-primary"  NAME="OPCAO" VALUE="Semana" style="width:90px;"></td>
-					<td >
-						<!-- input type="text" id="dtf" th:value="${moment(filtro.dtf,'yyyy-MM-dd')}"-->
-						<input type="text" id="dtf" th:value="${filtro.dtf}">
+					<td >						
+						<input type="text" id="dtf" th:value="${filtro.sDtf}">
 					</td>										
 				<tr>
 				<tr>			

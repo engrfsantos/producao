@@ -29,35 +29,36 @@ public class ProducaoController {
 	private Locais locais;
 
 	@GetMapping
-	public ModelAndView listarProducao(@RequestParam(value="dt", required = false) String dt, @RequestParam(value="dtf", required = false) String dtf) {
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	public ModelAndView listarProducao(@RequestParam(value="dt", required = false) String dt, @RequestParam(value="dtf", required = false) String dtf) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
+		
 		Filtro filtro = new Filtro(dt, dtf); 
 		
 		//sem filtro dt e dtf são nulos
 		if (!filtro.isbFiltrado()) {
 			modelAndView.addObject("producoes", producoes.ProducoesHoje());
 			
-		} else {			
+		} else {
+			
 			if (filtro.isbPeriodo()) {
-				//dt é nulo e dtf é preenchido - todos dias até dtf		
-				if ((dt==null)&(dtf!=null)) {		
-					try {						
-						modelAndView.addObject("producoes", producoes.ProducoesAte(formatter.parse(dtf)));
-					} catch (ParseException e) { 
-						e.printStackTrace();
-					}
-				}					
-				//dtf é nulo - somente dia selecionado
+				
+				//dt é nulo e dtf é preenchido - todos dias até dtf
+				if ((dt==null)&(dtf!=null)) {
+					modelAndView.addObject("producoes", producoes.ProducoesAte(filtro.getDtf())); }					
+				
+				//dtf é nulo - somente dia selecionado				
 				if ((dt!=null)&(dtf==null)) {		
-					try {
-						modelAndView.addObject("producoes", producoes.ProducoesData(formatter.parse(dt)));
-						} catch (ParseException e) { 
-							e.printStackTrace();
-						}
-					}
-				}
+					modelAndView.addObject("producoes", producoes.ProducoesData(filtro.getDt())); }
+				 
+				if ((dt!=null)&(dtf!=null)) {		
+					modelAndView.addObject("producoes", producoes.ProducoesPeriodo(filtro.getDt(), filtro.getDtf())); }
+				} 
+
+			if (!filtro.isbPeriodo()) {
+					modelAndView.addObject("producoes", producoes.ProducoesData(filtro.getDt())); }
 		}
+	
+	
 		
 		modelAndView.addObject("locais", locais.findAll());
 		modelAndView.addObject("filtro", filtro);
