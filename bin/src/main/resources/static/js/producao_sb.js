@@ -5,16 +5,12 @@ $('#inputLeitura').on('blur', function(){
 	 //validar a leitura	 
 	});    
 
-
 $(function(){
 	$("#dt").datepicker({    	
-		showOn: 'button',
-        //buttonImage: 'img/calendar.jpg',
-        //buttonImageOnly: false,
-        showButtonPanel:true,
+		//showOn: 'button',
+        dateFormat: 'yy-MM-dd',
         changeMonth: true,
         changeYear: true,
-        dateFormat: 'dd/mm/yy',
         dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
         dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
         dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -25,13 +21,10 @@ $(function(){
 
 $(function(){
 	$("#dtf").datepicker({    	
-		showOn: 'button',
-        //buttonImage: 'img/calendar.png',
-        //buttonImageOnly: false,
-        showButtonPanel:true,
+		//showOn: 'button',
+        dateFormat: 'yy-MM-dd',
         changeMonth: true,
         changeYear: true,
-        dateFormat: 'dd/mm/yy',
         dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
         dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
         dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -43,7 +36,9 @@ $(function(){
 $(function(){
 	$("#btData").click(function(){
 	$("#dt").val(dataHoje()) ;	
-	$("#dtf").val("00/00/0000");
+	$("#dtf").val("");
+	$("#dtf").hide();
+	//$("#dtf").datepicker().showButtonPanel=hide;	
 	});
 });
 
@@ -51,13 +46,26 @@ $(function(){
 	$("#btSemana").click(function(){	
 	$("#dt").val(dataPrimeiroDiaSemana()) ;	
 	$("#dtf").val(dataUltimoDiaSemana()) ;
+	$("#dtf").show();
+	//$("#dtf").datepicker.showButtonPanel=true;	
 	});
 });
 
 $(function(){
 	$("#btMes").click(function(){	
 	$("#dt").val(dataPrimeiroDiaMes());
-	$("#dtf").val(dataUltimoDiaMes());	
+	$("#dtf").val(dataUltimoDiaMes());
+	$("#dtf").show();
+	//$("#dtf").datepicker.showButtonPanel=true;	
+	});
+});
+
+$(function(){
+	$("#btX").click(function(){	
+	$("#dt").val("");
+	$("#dtf").val("");	
+	$("#dtf").hide();
+	//$("#dtf").datepicker.showButtonPanel=false;	
 	});
 });
 
@@ -66,7 +74,8 @@ function dataHoje() {
         dia = data.getDate(),
         mes = data.getMonth() + 1,
         ano = data.getFullYear();        
-    return [dia, mes, ano].join('/') ;
+    //return [dia, mes, ano].join('/');
+	return [ano, mes, dia].join('-') ;
 	};
 
 function dataHoraHoje() {
@@ -85,7 +94,9 @@ function dataPrimeiroDiaSemana() {
         dia = data.getDate(),
         mes = data.getMonth() + 1,
         ano = data.getFullYear();        
-    return [dia, mes, ano].join('/');
+    //return [dia, mes, ano].join('/');
+	return [ano, mes, dia].join('-') ;
+	
 	};
 
 function dataUltimoDiaSemana() {
@@ -93,7 +104,9 @@ function dataUltimoDiaSemana() {
         dia = data.getDate()+7,
         mes = data.getMonth() + 1,
         ano = data.getFullYear();        
-    return [dia, mes, ano].join('/');
+    //return [dia, mes, ano].join('/');
+	return [ano, mes, dia].join('-') ;
+	
 	};
 
 function dataPrimeiroDiaMes() {    
@@ -102,7 +115,9 @@ function dataPrimeiroDiaMes() {
 		dia = primeiroDia.getDate(),
         mes = primeiroDia.getMonth() + 1,
         ano = primeiroDia.getFullYear();  
-    return [dia, mes, ano].join('/');
+    //return [dia, mes, ano].join('/');
+	return [ano, mes, dia].join('-') ;
+	
 	};
 
 function dataUltimoDiaMes() {
@@ -111,7 +126,8 @@ function dataUltimoDiaMes() {
     	dia = ultimoDia.getDate(),
         mes = ultimoDia.getMonth() + 1,
         ano = ultimoDia.getFullYear();  
-    return [dia, mes, ano].join('/');     
+    //return [dia, mes, ano].join('/');
+	return [ano, mes, dia].join('-') ;  
 	};
 	
 function segundaFeira(date) {

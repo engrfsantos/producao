@@ -15,7 +15,7 @@ public class Filtro{
 	DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
 	public Filtro(String sDt, String sDtf) throws ParseException {
-		if ((sDt==null) & (sDtf==null)) {
+		if ((sDt==null | sDt=="") & (sDtf==null | sDtf=="")) {
 			sDt = formatter.format(new Date());
 			this.bPeriodo = false;		
 			this.bFiltrado = false;
@@ -26,7 +26,7 @@ public class Filtro{
 			return;
 			}
 		
-		if ((sDt==null) & (sDtf!=null)) {
+		if ((sDt==null | sDt=="") & (sDtf!=null | sDtf!="")) {
 			this.bFiltrado = true;
 			this.bPeriodo = true;
 			this.dt =  formatter.parse("01/01/1900"); //LocalDate.parse(String.format("01/01/1900", formatter));			
@@ -36,7 +36,7 @@ public class Filtro{
 			return;
 		}
 		
-		if ((sDt!=null) & (sDtf==null)) {
+		if ((sDt!=null & sDt!="") & (sDtf==null | sDtf=="")) {
 			this.bFiltrado = true;
 			this.bPeriodo = false;
 			this.dt = formatter.parse(String.format(sDt, formatter));			
@@ -46,7 +46,7 @@ public class Filtro{
 			return;
 		}
 		
-		if ((sDt!=null) & (sDtf!=null)) {
+		if ((sDt!=null & sDt!="") & (sDtf!=null & sDtf!="")) {
 			this.bFiltrado = true;
 			this.bPeriodo = true;
 			this.dt = formatter.parse(String.format(sDt, formatter));			

@@ -8,7 +8,7 @@ $('#inputLeitura').on('blur', function(){
 $(function(){
 	$("#dt").datepicker({    	
 		//showOn: 'button',
-        dateFormat: 'yy-MM-dd',
+        dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
@@ -21,8 +21,8 @@ $(function(){
 
 $(function(){
 	$("#dtf").datepicker({    	
-		//showOn: 'button',
-        dateFormat: 'yy-MM-dd',
+		//showOn: 'button',        
+        dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],

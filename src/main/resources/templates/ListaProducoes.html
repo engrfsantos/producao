@@ -17,21 +17,17 @@ xmlns:th="http://www.thymeleaf.org">
 	<script src="js/producao_sb.js"></script>
 	<script src="js/moment.js"></script>
 	
-	<script type="text/javascript">	
-
-	 
-	</script>
+	<script type="text/javascript">	</script>
 </head>
 <body>
-
-	
-	
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
 			<h1 class="panel-title">Lista de Producoes</h1>
 		</div>
 	</div>
+	
 	<p><h3>Filtros da Produção</h3>
+	
 	<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/producoes}" style="margin: 20px 0">
 	<div class="form-group">	
 		<b>Local:</b> 
@@ -43,7 +39,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<INPUT TYPE="button" id="btData" class="btn btn-primary" value="Data/Hoje" CHECKED style="width:90px;" >
 				<INPUT TYPE="button" id="btSemana" class="btn btn-primary"  VALUE="Semana" style="width:90px;">
 				<INPUT TYPE="button" id="btMes" class="btn btn-primary" VALUE="Mês" style="width:90px;">
-				<INPUT TYPE="button" id="btX" class="btn btn-primary" ALUE="X" style="width:40px;">
+				<INPUT TYPE="button" id="btX" class="btn btn-primary" VALUE="X" style="width:40px;">
 				<input type="text" name="dt" id="dt" style="width:80px;" th:value="${filtro.sDt}">
 				<input type="text" name="dtf" id="dtf" style="width:80px;" th:value="${filtro.sDtf}">
 				<button type="submit" class="btn btn-primary">Aplicar</button>
@@ -57,10 +53,10 @@ xmlns:th="http://www.thymeleaf.org">
 				<tr>
 					<td><input id="inputLeitura" type="text" class="form-control" placeholder="Leitura" th:field="*{td01Leitura}" style="width: 366px; "/></td>
 					<td> </td>
-					<td> <button type="submit" class="btn btn-primary">Aprovado</button> </td>				
-					<td> <button type="submit" class="btn btn-primary">Reprovado</button> </td>
-					<td> <button type="submit" class="btn btn-primary">Retrabalho</button> </td>
-					<td> <button type="submit" class="btn btn-primary">Sem Defeito</button> </td>
+					<td> <button type="submit" class="btn btn-primary" style="background: green; ">Aprovado</button> </td>				
+					<td> <button type="submit" class="btn btn-primary"style="background: red; ">Reprovado</button> </td>
+					<td> <button type="submit" class="btn btn-primary"style="background: orange; ">Retrabalho</button> </td>
+					<td> <button type="submit" class="btn btn-primary"style="background: grey; ">Sem Defeito</button> </td>
 				</tr>
 			</table>
 	
