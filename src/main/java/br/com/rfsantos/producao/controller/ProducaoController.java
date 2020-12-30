@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.model.Locais;
+import br.com.rfsantos.producao.model.ProdDefeitos;
 import br.com.rfsantos.producao.model.Producao;
 import br.com.rfsantos.producao.model.Producoes;
 
@@ -24,6 +25,7 @@ public class ProducaoController {
 
 	@Autowired
 	private Locais locais;
+	
 
 	@GetMapping
 	public ModelAndView listarProducao(@RequestParam(value="dt", required = false) String dt, @RequestParam(value="dtf", required = false) String dtf) throws ParseException {		
@@ -55,10 +57,10 @@ public class ProducaoController {
 					modelAndView.addObject("producoes", producoes.ProducoesData(filtro.getDt())); }
 		}
 	
-	
-		
 		modelAndView.addObject("locais", locais.findAll());
 		modelAndView.addObject("filtro", filtro);
+		
+		
 		modelAndView.addObject(new Producao());	
 		
 		return modelAndView;
