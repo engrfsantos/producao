@@ -4,11 +4,10 @@ $(document).ready(function(){
 $('#inputLeitura').on('blur', function(){
 	 //validar a leitura	 
 	});    
-});
 
 
 $(function(){
-	$("#dataunica").datepicker({    	
+	$("#dt").datepicker({    	
 		showOn: 'button',
         //buttonImage: 'img/calendar.jpg',
         //buttonImageOnly: false,
@@ -22,27 +21,10 @@ $(function(){
         monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
         monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
 	});
+});
 
-	
 $(function(){
-	$("#datainicio").datepicker({    	
-		showOn: 'button',
-        //buttonImage: 'img/calendar.png',
-        //buttonImageOnly: false,
-        showButtonPanel:true,
-        changeMonth: true,
-        changeYear: true,
-        dateFormat: 'dd/mm/yy',
-        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
-	});
-
-	
-$(function(){
-	$("#datafinal").datepicker({    	
+	$("#dtf").datepicker({    	
 		showOn: 'button',
         //buttonImage: 'img/calendar.png',
         //buttonImageOnly: false,
@@ -57,32 +39,25 @@ $(function(){
         monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
 		});		
 	});	
-});
 
 $(function(){
 	$("#btData").click(function(){
-	$("#dataunica").val(dataHoje()) ;	
-	$("#datainicio").visible = false;	
-	$("#datafinal").visible = false;
-	$("#datainicio").val("Inicio");
-	$("#datafinal").val("Final");
+	$("#dt").val(dataHoje()) ;	
+	$("#dtf").val("00/00/0000");
 	});
 });
 
 $(function(){
 	$("#btSemana").click(function(){	
-	$("#datainicio").val(dataPrimeiroDiaSemana()) ;	
-	$("#datafinal").val(dataUltimoDiaSemana()) ;	
-	$("#dataunica").val("Data") ;
+	$("#dt").val(dataPrimeiroDiaSemana()) ;	
+	$("#dtf").val(dataUltimoDiaSemana()) ;
 	});
 });
 
 $(function(){
 	$("#btMes").click(function(){	
-	$("#datainicio").val(dataPrimeiroDiaMes());
-	$("#datafinal").val(dataUltimoDiaMes());	
-	$("#dataunica").visible = false;
-	$("#dataunica").val("Data");
+	$("#dt").val(dataPrimeiroDiaMes());
+	$("#dtf").val(dataUltimoDiaMes());	
 	});
 });
 

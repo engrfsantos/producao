@@ -31,38 +31,26 @@ xmlns:th="http://www.thymeleaf.org">
 			<h1 class="panel-title">Lista de Producoes</h1>
 		</div>
 	</div>
-	
-	<form action="#" class="form-inline" method="GET" th:object="${producao}" th:action="@{/producoes}" style="margin: 20px 0">
-	<div class="form-group">
-		<p><h3>Filtros da Produção</h3></p>		
-				<b>Local:</b> 
-				<SELECT class="form-control">					
-					<OPTION  th:each="local : ${locais}" th:text="${local.ts01Desc}">				
-				</SELECT>				
-			<table class="table">			
-				<tr>
-					<td style="width:90px;"><INPUT TYPE="button" id="btData" class="btn btn-primary" NAME="OPCAO" value="Data/Hoje" CHECKED style="width:90px;" > </td>
-					<td>
-						<input type="text" id="dt" th:value="${filtro.sDt}">
-					</td> 										
-				</tr>
-				<tr>			
-					<td style="width:90px;"><INPUT TYPE="button" id="btSemana" class="btn btn-primary"  NAME="OPCAO" VALUE="Semana" style="width:90px;"></td>
-					<td >						
-						<input type="text" id="dtf" th:value="${filtro.sDtf}">
-					</td>										
-				<tr>
-				<tr>			
-					<td style="width:90px;"><INPUT TYPE="button" id="btMes" class="btn btn-primary" NAME="OPCAO" VALUE="Mês" style="width:90px;"></td>
-				<tr>
-				<tr>
-				<td> <button type="submit" class="btn btn-primary">Filtrar</button> </td>
-				<td> <button type="submit" class="btn btn-primary">Limpar Filtro</button> </td>
-				</tr>				
-			</table>
+	<p><h3>Filtros da Produção</h3>
+	<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/producoes}" style="margin: 20px 0">
+	<div class="form-group">	
+		<b>Local:</b> 
+		<SELECT class="form-control">					
+			<OPTION  th:each="local : ${locais}" th:text="${local.ts01Desc}">				
+		</SELECT>
+		<hr>
+			<div>
+				<INPUT TYPE="button" id="btData" class="btn btn-primary" value="Data/Hoje" CHECKED style="width:90px;" >
+				<INPUT TYPE="button" id="btSemana" class="btn btn-primary"  VALUE="Semana" style="width:90px;">
+				<INPUT TYPE="button" id="btMes" class="btn btn-primary" VALUE="Mês" style="width:90px;">
+				<INPUT TYPE="button" id="btX" class="btn btn-primary" ALUE="X" style="width:40px;">
+				<input type="text" name="dt" id="dt" style="width:80px;" th:value="${filtro.sDt}">
+				<input type="text" name="dtf" id="dtf" style="width:80px;" th:value="${filtro.sDtf}">
+				<button type="submit" class="btn btn-primary">Aplicar</button>
+			</div>				
 		</div>
 	</form>
-	
+	<hr>
 	
 	<form class="form-inline" method="POST" th:object="${producao}" th:action="@{/producoes}"   style="margin: 20px 0">
 			<table>

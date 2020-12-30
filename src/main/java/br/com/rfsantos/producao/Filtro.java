@@ -16,12 +16,14 @@ public class Filtro{
 		
 	public Filtro(String sDt, String sDtf) throws ParseException {
 		if ((sDt==null) & (sDtf==null)) {
+			sDt = formatter.format(new Date());
 			this.bPeriodo = false;		
 			this.bFiltrado = false;
-			this.dt = null;
+			this.dt = formatter.parse(String.format(sDt, formatter));
 			this.dtf = null;
-			this.sDt = "";
+			this.sDt = sDt;
 			this.sDtf = "";
+			return;
 			}
 		
 		if ((sDt==null) & (sDtf!=null)) {
@@ -30,7 +32,8 @@ public class Filtro{
 			this.dt =  formatter.parse("01/01/1900"); //LocalDate.parse(String.format("01/01/1900", formatter));			
 			this.dtf = formatter.parse(String.format(sDtf, formatter));
 			this.sDt = "01/01/1900";
-			this.sDtf = sDtf;		
+			this.sDtf = sDtf;
+			return;
 		}
 		
 		if ((sDt!=null) & (sDtf==null)) {
@@ -40,6 +43,7 @@ public class Filtro{
 			this.dtf = this.dt; 
 			this.sDt = sDt;
 			this.sDtf = sDt;
+			return;
 		}
 		
 		if ((sDt!=null) & (sDtf!=null)) {
@@ -49,6 +53,7 @@ public class Filtro{
 			this.dtf = formatter.parse(String.format(sDtf, formatter)); 
 			this.sDt = sDt;
 			this.sDtf = sDtf;
+			return;
 		}
 		
 		}
