@@ -1,33 +1,32 @@
-package br.com.rfsantos.producao.controller;
+package br.com.rfsantos.producao.resource;
 
 import java.text.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
-import br.com.rfsantos.producao.model.Locais;
-import br.com.rfsantos.producao.model.ProdDefeitos;
-import br.com.rfsantos.producao.model.Producao;
-import br.com.rfsantos.producao.model.Producoes;
+import br.com.rfsantos.producao.domain.Locais;
+import br.com.rfsantos.producao.domain.Producao;
+import br.com.rfsantos.producao.repository.ProducaoRepository;
 
-@Controller
+@RestController
 @RequestMapping("/producoes")
-public class ProducaoController {
+public class ProducaoResource {
 
 	@Autowired
-	private Producoes producoes;
+	private ProducaoRepository producoes;
 
 	@Autowired
 	private Locais locais;
 	
 
-	@GetMapping
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listarProducao(@RequestParam(value="dt", required = false) String dt, @RequestParam(value="dtf", required = false) String dtf) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
 		

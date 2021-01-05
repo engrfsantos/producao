@@ -1,4 +1,4 @@
-package br.com.rfsantos.producao.model;
+package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
 import javax.persistence.GeneratedValue;

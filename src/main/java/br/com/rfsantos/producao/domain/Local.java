@@ -1,13 +1,13 @@
-package br.com.rfsantos.producao.model;
+package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-/**
- * The persistent class for the ts01_local database table.
- * 
- */
 @Entity
 @Table(name="ts01_local")
 @NamedQuery(name="Local.findAll", query="SELECT l FROM Local l")
@@ -16,17 +16,17 @@ public class Local implements Serializable {
 
 	@Id	
 	@Column(name="ts01_desc")
-	private String ts01Desc;
+	private String desc;
 
 	public Local() {
 	}
 
 	public String getTs01Desc() {
-		return this.ts01Desc;
+		return this.desc;
 	}
 
 	public void setTs01Desc(String ts01Desc) {
-		this.ts01Desc = ts01Desc;
+		this.desc = ts01Desc;
 	}
 
 }

@@ -1,18 +1,11 @@
-package br.com.rfsantos.producao.model;
+package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
-
-
-/**
- * The persistent class for the ts01_produto database table.
- * 
- */
 @Entity
 @Table(name="ts01_produto")
-@NamedQuery(name="Produto.findAll", query="SELECT p FROM Produto p")
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -20,83 +13,83 @@ public class Produto implements Serializable {
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name="ts01_codigo")
-	private String ts01Codigo;
+	private String codigo;
 
 	@Column(name="ts01_cod_barras")
-	private String ts01CodBarras;
+	private String codBarras;
 
 	@Column(name="ts01_desc_esp")
-	private String ts01DescEsp;
+	private String descEsp;
 
 	@Column(name="ts01_descricao")
-	private String ts01Descricao;
+	private String descricao;
 
 	@Column(name="ts01_grupo")
-	private String ts01Grupo;
+	private String grupo;
 
 	@Column(name="ts01_narrativa")
-	private String ts01Narrativa;
+	private String narrativa;
 
 	@Column(name="ts01_unidade")
-	private String ts01Unidade;
+	private String unidade;
 
 	public Produto() {
 	}
 
 	public String getTs01Codigo() {
-		return this.ts01Codigo;
+		return this.codigo;
 	}
 
 	public void setTs01Codigo(String ts01Codigo) {
-		this.ts01Codigo = ts01Codigo;
+		this.codigo = ts01Codigo;
 	}
 
 	public String getTs01CodBarras() {
-		return this.ts01CodBarras;
+		return this.codBarras;
 	}
 
 	public void setTs01CodBarras(String ts01CodBarras) {
-		this.ts01CodBarras = ts01CodBarras;
+		this.codBarras = ts01CodBarras;
 	}
 
 	public String getTs01DescEsp() {
-		return this.ts01DescEsp;
+		return this.descEsp;
 	}
 
 	public void setTs01DescEsp(String ts01DescEsp) {
-		this.ts01DescEsp = ts01DescEsp;
+		this.descEsp = ts01DescEsp;
 	}
 
 	public String getTs01Descricao() {
-		return this.ts01Descricao;
+		return this.descricao;
 	}
 
 	public void setTs01Descricao(String ts01Descricao) {
-		this.ts01Descricao = ts01Descricao;
+		this.descricao = ts01Descricao;
 	}
 
 	public String getTs01Grupo() {
-		return this.ts01Grupo;
+		return this.grupo;
 	}
 
 	public void setTs01Grupo(String ts01Grupo) {
-		this.ts01Grupo = ts01Grupo;
+		this.grupo = ts01Grupo;
 	}
 
 	public String getTs01Narrativa() {
-		return this.ts01Narrativa;
+		return this.narrativa;
 	}
 
 	public void setTs01Narrativa(String ts01Narrativa) {
-		this.ts01Narrativa = ts01Narrativa;
+		this.narrativa = ts01Narrativa;
 	}
 
 	public String getTs01Unidade() {
-		return this.ts01Unidade;
+		return this.unidade;
 	}
 
 	public void setTs01Unidade(String ts01Unidade) {
-		this.ts01Unidade = ts01Unidade;
+		this.unidade = ts01Unidade;
 	}
 
 }

@@ -1,4 +1,4 @@
-package br.com.rfsantos.producao.model;
+package br.com.rfsantos.producao.domain;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

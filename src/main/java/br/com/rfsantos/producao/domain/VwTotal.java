@@ -1,7 +1,12 @@
-package br.com.rfsantos.producao.model;
+package br.com.rfsantos.producao.domain;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 
 /**
@@ -11,66 +16,43 @@ import java.util.Date;
 @Entity
 @Table(name="vw_total")
 //@NamedQuery(name="VwTotal.findAll", query="SELECT v FROM VwTotal v")
-public class VwTotal  {
-	//private static final long serialVersionUID = 1L;
+public class VwTotal implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
-	private String anadef;
+	@Id
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	private UUID id;
 	
+	private String anadef;	
 	private String codbarras;
-
 	private String codbarrasrep;
-
 	private String codigo;
-
 	private String def;
-
 	private String descesp;
-
 	private String descr;
-
 	@Temporal(TemporalType.DATE)
 	private Date dt;
-
 	@Temporal(TemporalType.DATE)
 	private Date dtrep;
-
 	private String ean;
-
 	private String eanrep;
-
 	private String grupo;
-
 	private String hora;
-
 	private String hrrep;
-
-	@Id
 	private Long idprod;
-
 	private String idsetor;
-
 	private String local;
-
 	private String narrativa;
-
 	private String prodcodrep;
-
 	private String proddescrep;
-
 	private String prodnarrarep;
-
 	private String reparo;
-
 	private String serial;
-
 	private String status;
-
 	private String stdef;
-
 	private String un;
-
 	private String usuario;
-
 	public VwTotal() {
 	}
 

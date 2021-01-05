@@ -1,15 +1,9 @@
-package br.com.rfsantos.producao.model;
+package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
-
-
-/**
- * The persistent class for the ts01_status database table.
- * 
- */
 @Entity
 @Table(name="ts01_status")
 @NamedQuery(name="Status.findAll", query="SELECT s FROM Status s")
@@ -20,39 +14,39 @@ public class Status implements Serializable {
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name="ts01_status")
-	private Integer ts01Status;
+	private Integer status;
 
 	@Column(name="ts01_desc_breve")
-	private String ts01DescBreve;
+	private String descBreve;
 
 	@Column(name="ts01_descricao")
-	private String ts01Descricao;
+	private String descricao;
 
 	public Status() {
 	}
 
 	public Integer getTs01Status() {
-		return this.ts01Status;
+		return this.status;
 	}
 
 	public void setTs01Status(Integer ts01Status) {
-		this.ts01Status = ts01Status;
+		this.status = ts01Status;
 	}
 
 	public String getTs01DescBreve() {
-		return this.ts01DescBreve;
+		return this.descBreve;
 	}
 
 	public void setTs01DescBreve(String ts01DescBreve) {
-		this.ts01DescBreve = ts01DescBreve;
+		this.descBreve = ts01DescBreve;
 	}
 
 	public String getTs01Descricao() {
-		return this.ts01Descricao;
+		return this.descricao;
 	}
 
 	public void setTs01Descricao(String ts01Descricao) {
-		this.ts01Descricao = ts01Descricao;
+		this.descricao = ts01Descricao;
 	}
 
 }

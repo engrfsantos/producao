@@ -66,6 +66,7 @@ xmlns:th="http://www.thymeleaf.org">
 	
 	</form>
  	
+<form class="form-inline" method="POST" th:object="${proddefeitos}" th:action="@{/producoes}"   style="margin: 20px 0">
 	<div id="div-producao" class="panel-body">
 	<table class="table">
 		<thead>
@@ -86,7 +87,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</thead>
 		<tbody>
 				<tr th:each="producao : ${producoes}">
-				<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;" value="x"></BUTTON></td>				
+				<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>				
 				<td th:text="${producao.td01CodProduto}"></td>
 				<td th:text="${producao.td01Descricao}"></td>
 				<td th:text="${producao.td01Dt}"></td>
@@ -102,7 +103,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</tbody>
 	</table>
 	</div>
-	
+	</form>
 	
 	<div id="div-proddefeito" class="panel-body">
 		<table class="table" th:object="${proddefeito}">
