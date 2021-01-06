@@ -21,10 +21,12 @@ public class Usuario implements Serializable {
 
 	private String nome;
 
+	@Column(columnDefinition = "bpchar", length=1)
 	private String perfil;
 
 	private String senha;
-
+	
+	@Column(columnDefinition = "bpchar", length=1)
 	private String status;
 
 	private String usuario;

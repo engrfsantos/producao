@@ -2,27 +2,12 @@ package br.com.rfsantos.producao.domain;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
-
-
-/**
- * The persistent class for the vw_total database table.
- * 
- */
-@Entity
-@Table(name="vw_total")
+//@Entity
+//@Table(name="vw_total")
 //@NamedQuery(name="VwTotal.findAll", query="SELECT v FROM VwTotal v")
-public class VwTotal implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
-	private UUID id;
+public class VwTotal {
+	//private static final long serialVersionUID = 1L;		
 	
 	private String anadef;	
 	private String codbarras;
@@ -40,6 +25,7 @@ public class VwTotal implements Serializable {
 	private String grupo;
 	private String hora;
 	private String hrrep;
+	@EmbeddedId
 	private Long idprod;
 	private String idsetor;
 	private String local;

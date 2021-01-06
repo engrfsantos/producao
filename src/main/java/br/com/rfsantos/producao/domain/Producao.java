@@ -16,7 +16,8 @@ public class Producao implements Serializable {
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name="td01_producao_id")
+	
+	@Column(name="td01_producao_id", columnDefinition = "NUMERIC(19,0)")
 	private Long producaoId;
 
 	@Column(name="td01_cod_produto")
@@ -37,7 +38,7 @@ public class Producao implements Serializable {
 	@Column(name="td01_id")
 	private String id;
 
-	@Column(name="td01_leitura")
+	@Column(name="td01_leitura", columnDefinition = "bpchar", length=24)
 	private String leitura;
 
 	@ManyToOne

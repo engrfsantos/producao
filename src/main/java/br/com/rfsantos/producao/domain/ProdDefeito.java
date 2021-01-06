@@ -2,7 +2,6 @@ package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,7 +26,7 @@ public class ProdDefeito implements Serializable {
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name="td01_prod_defeito_id")
+	@Column(name="td01_prod_defeito_id", columnDefinition = "NUMERIC(19,0)")
 	private Long prodDefeitoId;
 
 	@Column(name="td01_analise")
@@ -40,12 +39,11 @@ public class ProdDefeito implements Serializable {
 	@Column(name="td01_dt")	
 	private Date dt;
 
-	@Temporal(TemporalType.TIME)
-	@Column(name="td01_hr", columnDefinition = "TIME")
-	private LocalDate hr;
+	@Column(name="td01_hr")
+	private Time hr;
 
 	@ManyToOne
-	@JoinColumn(name="td01_producao_id")
+	@JoinColumn(name="td01_producao_id", columnDefinition = "NUMERIC(19,0)")
 	private Producao producaoId;
 
 	@Column(name="td01_reparo")
@@ -93,11 +91,11 @@ public class ProdDefeito implements Serializable {
 		this.dt = td01Dt;
 	}
 
-	public LocalDate getTd01Hr() {
+	public Time getTd01Hr() {
 		return this.hr;
 	}
 
-	public void setTd01Hr(LocalDate td01Hr) {
+	public void setTd01Hr(Time td01Hr) {
 		this.hr = td01Hr;
 	}
 
