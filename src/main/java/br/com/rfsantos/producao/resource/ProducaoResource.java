@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
-import br.com.rfsantos.producao.domain.Locais;
 import br.com.rfsantos.producao.domain.Producao;
+import br.com.rfsantos.producao.repository.LocalRepository;
 import br.com.rfsantos.producao.repository.ProducaoRepository;
 
 @RestController
@@ -23,7 +23,7 @@ public class ProducaoResource {
 	private ProducaoRepository producoes;
 
 	@Autowired
-	private Locais locais;
+	private LocalRepository locais;
 	
 
 	@RequestMapping(method=RequestMethod.GET)

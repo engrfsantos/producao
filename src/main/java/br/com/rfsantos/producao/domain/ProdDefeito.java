@@ -32,8 +32,8 @@ public class ProdDefeito implements Serializable {
 	@Column(name="td01_analise")
 	private String analise;
 
-	@Column(name="td01_defeito_id")
-	private Integer defeitoId;
+	@Column(name="td01_defeito_id", columnDefinition = "NUMERIC(19,0)")
+	private Long defeitoId;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="td01_dt")	
@@ -75,11 +75,11 @@ public class ProdDefeito implements Serializable {
 		this.analise = td01Analise;
 	}
 
-	public Integer getTd01DefeitoId() {
+	public Long getTd01DefeitoId() {
 		return this.defeitoId;
 	}
 
-	public void setTd01DefeitoId(Integer td01DefeitoId) {
+	public void setTd01DefeitoId(Long td01DefeitoId) {
 		this.defeitoId = td01DefeitoId;
 	}
 

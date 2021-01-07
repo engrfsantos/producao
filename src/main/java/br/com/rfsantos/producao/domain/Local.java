@@ -5,12 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="ts01_local")
-@NamedQuery(name="Local.findAll", query="SELECT l FROM Local l")
+//@NamedQuery(name="Local.findAll", query="SELECT l FROM Local l")
 public class Local implements Serializable {
 	private static final long serialVersionUID = 1L;
 
