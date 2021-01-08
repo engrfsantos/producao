@@ -6,7 +6,6 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="ts01_status")
-@NamedQuery(name="Status.findAll", query="SELECT s FROM Status s")
 public class Status implements Serializable {
 	private static final long serialVersionUID = 1L;
 

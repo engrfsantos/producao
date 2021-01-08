@@ -1,18 +1,20 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
-import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
 @Table(name="ts01_produto")
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name="ts01_codigo")
+	@Column(name="ts01_codigo", columnDefinition = "bpchar", length=15)
 	private String codigo;
 
 	@Column(name="ts01_cod_barras")

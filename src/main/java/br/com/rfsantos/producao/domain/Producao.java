@@ -41,9 +41,9 @@ public class Producao implements Serializable {
 	@Column(name="td01_leitura", columnDefinition = "bpchar", length=24)
 	private String leitura;
 
-	@ManyToOne
-	@JoinColumn(name="td01_local")
-	private Local local;
+	//@ManyToOne
+	@Column(name="td01_local")
+	private String local;
 
 	@Column(name="td01_re")
 	private String re;
@@ -51,9 +51,10 @@ public class Producao implements Serializable {
 	@Column(name="td01_serie")
 	private String serie;
 	
-	@ManyToOne
-	@JoinColumn(name="td01_status")
-	private Status status;
+	//@ManyToOne
+	//@JoinColumn(name="td01_status", referencedColumnName = "ts01_status")
+	@Column(name="td01_status")
+	private Integer status;
 
 	public Producao() {
 	}
@@ -114,11 +115,11 @@ public class Producao implements Serializable {
 		this.leitura = td01Leitura;
 	}
 
-	public Local getTd01Local() {
+	public String getTd01Local() {
 		return this.local;
 	}
 
-	public void setTd01Local(Local td01Local) {
+	public void setTd01Local(String td01Local) {
 		this.local = td01Local;
 	}
 
@@ -138,11 +139,11 @@ public class Producao implements Serializable {
 		this.serie = td01Serie;
 	}
 
-	public Status getTd01Status() {
+	public Integer getTd01Status() {
 		return this.status;
 	}
 
-	public void setTd01Status(Status td01Status) {
+	public void setTd01Status(Integer td01Status) {
 		this.status = td01Status;
 	}
 

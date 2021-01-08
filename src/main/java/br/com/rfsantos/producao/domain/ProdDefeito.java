@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,7 +18,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="td01_prod_defeito")
-@NamedQuery(name="ProdDefeito.findAll", query="SELECT p FROM ProdDefeito p")
 public class ProdDefeito implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,11 +27,18 @@ public class ProdDefeito implements Serializable {
 	@Column(name="td01_prod_defeito_id", columnDefinition = "NUMERIC(19,0)")
 	private Long prodDefeitoId;
 
+	//@ManyToOne
+	//@JoinColumn(name="td01_producao_id") //, columnDefinition = "NUMERIC(19,0)"
+	@Column(name="td01_producao_id", columnDefinition = "NUMERIC(19,0)")
+	private Long producaoId;
+
+	
+	@Column(name="td01_defeito_id", columnDefinition = "NUMERIC(19,0)")
+	private Defeito defeitoId;
+		
 	@Column(name="td01_analise")
 	private String analise;
 
-	@Column(name="td01_defeito_id", columnDefinition = "NUMERIC(19,0)")
-	private Long defeitoId;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="td01_dt")	
@@ -42,19 +47,17 @@ public class ProdDefeito implements Serializable {
 	@Column(name="td01_hr")
 	private Time hr;
 
-	@ManyToOne
-	@JoinColumn(name="td01_producao_id", columnDefinition = "NUMERIC(19,0)")
-	private Producao producaoId;
-
+	
 	@Column(name="td01_reparo")
 	private String reparo;
 
 	@Column(name="td01_serie")
 	private String serie;
 
-	@ManyToOne
-	@JoinColumn(name="td01_status")
-	private Status status;
+	//@ManyToOne	
+	//@JoinColumn(name="td01_status", referencedColumnName = "ts01_status")
+	@Column(name="td01_status")
+	private Integer status;
 
 	public ProdDefeito() {
 	}
@@ -75,11 +78,11 @@ public class ProdDefeito implements Serializable {
 		this.analise = td01Analise;
 	}
 
-	public Long getTd01DefeitoId() {
+	public Defeito getTd01DefeitoId() {
 		return this.defeitoId;
 	}
 
-	public void setTd01DefeitoId(Long td01DefeitoId) {
+	public void setTd01DefeitoId(Defeito td01DefeitoId) {
 		this.defeitoId = td01DefeitoId;
 	}
 
@@ -99,11 +102,11 @@ public class ProdDefeito implements Serializable {
 		this.hr = td01Hr;
 	}
 
-	public Producao getTd01ProducaoId() {
+	public Long getTd01ProducaoId() {
 		return this.producaoId;
 	}
 
-	public void setTd01ProducaoId(Producao td01ProducaoId) {
+	public void setTd01ProducaoId(Long td01ProducaoId) {
 		this.producaoId = td01ProducaoId;
 	}
 
@@ -123,11 +126,11 @@ public class ProdDefeito implements Serializable {
 		this.serie = td01Serie;
 	}
 
-	public Status getTd01Status() {
+	public Integer getTd01Status() {
 		return this.status;
 	}
 
-	public void setTd01Status(Status td01Status) {
+	public void setTd01Status(Integer td01Status) {
 		this.status = td01Status;
 	}
 

@@ -14,7 +14,7 @@ public class Local implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id	
-	@Column(name="ts01_desc")
+	@Column(name="ts01_desc", columnDefinition = "bpchar", length=4)
 	private String desc;
 
 	public Local() {

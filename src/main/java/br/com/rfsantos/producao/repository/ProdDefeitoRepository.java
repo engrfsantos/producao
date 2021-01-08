@@ -11,7 +11,7 @@ import br.com.rfsantos.producao.domain.Producao;
 
 public interface ProdDefeitoRepository extends JpaRepository<ProdDefeito, Long> {
 
-	@Query(value = "SELECT u from ProdDefeito u WHERE u.prodDefeitoId = :IdProducao")
+	@Query(value = "SELECT u from ProdDefeito u WHERE u.producaoId = :IdProducao")
 	List<Producao> ProdDefeitosIDProducao(@Param("IdProducao") Long IDProducao);
 	
 }
