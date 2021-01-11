@@ -26,7 +26,19 @@ public class ProducaoResource {
 	private LocalRepository locais;
 	
 
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="{id}", method=RequestMethod.GET)
+	public ModelAndView listarProducao(Long id) throws ParseException {
+		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
+		
+		Filtro filtro = new Filtro(dt, dtf); 
+		
+		modelAndView.addObject(modelAndView)
+		
+		return modelAndView;
+		
+	}
+		
+	
 	public ModelAndView listarProducao(@RequestParam(value="dt", required = false) String dt, @RequestParam(value="dtf", required = false) String dtf) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
 		

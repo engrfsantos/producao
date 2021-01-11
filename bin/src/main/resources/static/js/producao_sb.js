@@ -1,6 +1,5 @@
 $(document).ready(function(){
-        
-	
+        	
 $('#inputLeitura').on('blur', function(){
 	 //validar a leitura	 
 	});    
@@ -8,7 +7,7 @@ $('#inputLeitura').on('blur', function(){
 $(function(){
 	$("#dt").datepicker({    	
 		//showOn: 'button',
-        dateFormat: 'yy-MM-dd',
+        dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
@@ -21,8 +20,8 @@ $(function(){
 
 $(function(){
 	$("#dtf").datepicker({    	
-		//showOn: 'button',
-        dateFormat: 'yy-MM-dd',
+		//showOn: 'button',        
+        dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
@@ -37,8 +36,7 @@ $(function(){
 	$("#btData").click(function(){
 	$("#dt").val(dataHoje()) ;	
 	$("#dtf").val("");
-	$("#dtf").hide();
-	//$("#dtf").datepicker().showButtonPanel=hide;	
+	$("#dtf").hide();	
 	});
 });
 
@@ -46,8 +44,7 @@ $(function(){
 	$("#btSemana").click(function(){	
 	$("#dt").val(dataPrimeiroDiaSemana()) ;	
 	$("#dtf").val(dataUltimoDiaSemana()) ;
-	$("#dtf").show();
-	//$("#dtf").datepicker.showButtonPanel=true;	
+	$("#dtf").show();		
 	});
 });
 
@@ -55,8 +52,7 @@ $(function(){
 	$("#btMes").click(function(){	
 	$("#dt").val(dataPrimeiroDiaMes());
 	$("#dtf").val(dataUltimoDiaMes());
-	$("#dtf").show();
-	//$("#dtf").datepicker.showButtonPanel=true;	
+	$("#dtf").show();	
 	});
 });
 
@@ -64,8 +60,25 @@ $(function(){
 	$("#btX").click(function(){	
 	$("#dt").val("");
 	$("#dtf").val("");	
-	$("#dtf").hide();
-	//$("#dtf").datepicker.showButtonPanel=false;	
+	$("#dtf").hide();	
+	});
+});
+
+$(function(){
+	$("#submit").click(function(){
+	if ($("#dt").val() = "") {
+		$("#dt").name = "";
+	}else{
+		$("#dt").name = "dt";}
+	
+	if ($("#dtf").val() = "") {
+		$("#dtf").name = "";
+	}else{
+		$("#dtf").name = "dtf";
+	}
+	
+	
+	 
 	});
 });
 
@@ -74,7 +87,6 @@ function dataHoje() {
         dia = data.getDate(),
         mes = data.getMonth() + 1,
         ano = data.getFullYear();        
-    //return [dia, mes, ano].join('/');
 	return [ano, mes, dia].join('-') ;
 	};
 
