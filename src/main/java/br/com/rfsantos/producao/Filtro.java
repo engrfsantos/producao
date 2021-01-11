@@ -4,19 +4,36 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import br.com.rfsantos.producao.domain.Usuario;
+
 
 public class Filtro{	
 	private Date dt;	
 	private Date dtf;
 	private String dtS;
 	private String dtfS;
+	private String local;
+	private Usuario usuario;
 	boolean periodoFiltrado;
 	boolean temFiltro;
 	boolean setorFiltrado;
 	boolean usuarioFiltrado;
 	
 	static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		
+	
+	public Filtro() {
+	}
+	
+	public Filtro(Usuario usuario) {
+		if (!usuario.equals(null))
+		this.usuario=usuario;
+	}
+	
+	public Filtro(String local) {
+		if (!local.equals(""))
+				this.local = local;
+	}
+			
 	public Filtro(String sDt, String sDtf) throws ParseException {
 		if ((sDt==null | sDt=="") & (sDtf==null | sDtf=="")) {
 			sDt = formatter.format(new Date());
@@ -57,6 +74,9 @@ public class Filtro{
 			
 		}
 	
+
+	
+
 	private void dtTodtS() {
 		if (dt!=null)
 			this.dtS = formatter.format(this.dt);
@@ -142,67 +162,24 @@ public class Filtro{
 		this.dtfS = dtfS;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dt == null) ? 0 : dt.hashCode());
-		result = prime * result + ((dtS == null) ? 0 : dtS.hashCode());
-		result = prime * result + ((dtf == null) ? 0 : dtf.hashCode());
-		result = prime * result + ((dtfS == null) ? 0 : dtfS.hashCode());
-		result = prime * result + (periodoFiltrado ? 1231 : 1237);
-		result = prime * result + (setorFiltrado ? 1231 : 1237);
-		result = prime * result + (temFiltro ? 1231 : 1237);
-		result = prime * result + (usuarioFiltrado ? 1231 : 1237);
-		return result;
+	public String getLocal() {
+		return local;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Filtro other = (Filtro) obj;
-		if (dt == null) {
-			if (other.dt != null)
-				return false;
-		} else if (!dt.equals(other.dt))
-			return false;
-		if (dtS == null) {
-			if (other.dtS != null)
-				return false;
-		} else if (!dtS.equals(other.dtS))
-			return false;
-		if (dtf == null) {
-			if (other.dtf != null)
-				return false;
-		} else if (!dtf.equals(other.dtf))
-			return false;
-		if (dtfS == null) {
-			if (other.dtfS != null)
-				return false;
-		} else if (!dtfS.equals(other.dtfS))
-			return false;
-		if (periodoFiltrado != other.periodoFiltrado)
-			return false;
-		if (setorFiltrado != other.setorFiltrado)
-			return false;
-		if (temFiltro != other.temFiltro)
-			return false;
-		if (usuarioFiltrado != other.usuarioFiltrado)
-			return false;
-		return true;
+	public void setLocal(String local) {
+		this.local = local;
 	}
 
-	@Override
-	public String toString() {
-		return "Filtro [dt=" + dt + ", dtf=" + dtf + ", dtS=" + dtS + ", dtfS=" + dtfS + ", periodoFiltrado="
-				+ periodoFiltrado + ", temFiltro=" + temFiltro + ", setorFiltrado=" + setorFiltrado
-				+ ", usuarioFiltrado=" + usuarioFiltrado + "]";
+	public Usuario getUsuario() {
+		return usuario;
 	}
+
+	public void setUsuario(Usuario usuario) {		
+		this.usuarioFiltrado = (usuario.equals(null));
+		this.usuario = usuario;
+	}
+
+
 
 
 
