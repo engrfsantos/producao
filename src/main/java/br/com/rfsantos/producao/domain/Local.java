@@ -20,12 +20,12 @@ public class Local implements Serializable {
 	public Local() {
 	}
 
-	public String getTs01Desc() {
+	public String getDesc() {
 		return this.desc;
 	}
 
-	public void setTs01Desc(String ts01Desc) {
-		this.desc = ts01Desc;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 }

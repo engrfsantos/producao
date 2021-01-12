@@ -3,74 +3,68 @@ package br.com.rfsantos.producao.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the td01_identificador database table.
- * 
- */
 @Entity
 @Table(name="td01_identificador")
-@NamedQuery(name="Identificador.findAll", query="SELECT i FROM Identificador i")
 public class Identificador implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="td01_id")
-	private String td01Id;
+	private String id;
 
 	@Column(name="td01_desc_breve")
-	private String td01DescBreve;
+	private String descBreve;
 
 	@Column(name="td01_descricao")
-	private String td01Descricao;
+	private String descricao;
 
 	@Column(name="td01_local")
-	private String td01Local;
+	private String local;
 
 	@Column(name="td01_status")
-	private String td01Status;
+	private String status;
 
 	public Identificador() {
 	}
 
-	public String getTd01Id() {
-		return this.td01Id;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setTd01Id(String td01Id) {
-		this.td01Id = td01Id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getTd01DescBreve() {
-		return this.td01DescBreve;
+	public String getDescBreve() {
+		return this.descBreve;
 	}
 
-	public void setTd01DescBreve(String td01DescBreve) {
-		this.td01DescBreve = td01DescBreve;
+	public void setDescBreve(String descBreve) {
+		this.descBreve = descBreve;
 	}
 
-	public String getTd01Descricao() {
-		return this.td01Descricao;
+	public String getDescricao() {
+		return this.descricao;
 	}
 
-	public void setTd01Descricao(String td01Descricao) {
-		this.td01Descricao = td01Descricao;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getTd01Local() {
-		return this.td01Local;
+	public String getLocal() {
+		return this.local;
 	}
 
-	public void setTd01Local(String td01Local) {
-		this.td01Local = td01Local;
+	public void setLocal(String local) {
+		this.local = local;
 	}
 
-	public String getTd01Status() {
-		return this.td01Status;
+	public String getStatus() {
+		return this.status;
 	}
 
-	public void setTd01Status(String td01Status) {
-		this.td01Status = td01Status;
+	public void setTStatus(String td01Status) {
+		this.status = td01Status;
 	}
 
 }

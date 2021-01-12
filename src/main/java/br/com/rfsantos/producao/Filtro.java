@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import br.com.rfsantos.producao.domain.Identificador;
 import br.com.rfsantos.producao.domain.Usuario;
 
 
@@ -13,25 +14,33 @@ public class Filtro{
 	private String dtS;
 	private String dtfS;
 	private String local;
+	private String identificador;
 	private Usuario usuario;
 	boolean periodoFiltrado;
 	boolean temFiltro;
 	boolean setorFiltrado;
 	boolean usuarioFiltrado;
 	
-	static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	static private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public Filtro() {
 	}
 	
+	public Filtro(String local, Usuario usuario) {
+		if (!usuario.equals(null))
+			this.usuario=usuario;
+		if (!local.equals(""))
+			this.local = local;
+	}
+	
 	public Filtro(Usuario usuario) {
 		if (!usuario.equals(null))
-		this.usuario=usuario;
+			this.usuario=usuario;
 	}
 	
 	public Filtro(String local) {
 		if (!local.equals(""))
-				this.local = local;
+			this.local = local;
 	}
 			
 	public Filtro(String sDt, String sDtf) throws ParseException {
@@ -179,7 +188,13 @@ public class Filtro{
 		this.usuario = usuario;
 	}
 
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;		
+	}
 
+	public String getIdentificador() {
+		return this.identificador;
+	}
 
 
 

@@ -32,8 +32,12 @@ xmlns:th="http://www.thymeleaf.org">
 			<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/producoes}" style="margin: 20px 0">
 			<div class="form-group">	
 				<b>Local:</b> 
-				<SELECT class="form-control">					
-					<OPTION  th:each="local : ${locais}" th:text="${local.ts01Desc}">				
+				<SELECT class="form-control" name="local" id="identificador" th:value="${filtro.local}">					
+					<OPTION  th:each="local : ${locais}" th:text="${local.desc}">				
+				</SELECT>
+				<b>- Setor:</b> 
+				<SELECT class="form-control" name="identificador" id="identificador" th:value="${filtro.identificador}">					
+					<OPTION  th:each="identificador : ${identificadores}"  th:text="${identificador.id}" >  				
 				</SELECT>
 				<hr>
 					<div>
@@ -55,7 +59,7 @@ xmlns:th="http://www.thymeleaf.org">
 	<form class="form-inline" method="POST" th:object="${producao}" th:action="@{/producoes}"   style="margin: 20px 0">
 			<table>
 				<tr>
-					<td><input id="inputLeitura" type="text" class="form-control" placeholder="Leitura" th:field="*{td01Leitura}" style="width: 366px; "/></td>
+					<td><input id="inputLeitura" type="text" class="form-control" placeholder="Leitura" th:field="*{td01Leitura}" style="width: 250px; "/></td>
 					<td> </td>
 					<td> <button type="submit" class="btn btn-primary" style="background: green; height: 30px;">Aprovado</button> </td>				
 					<td> <button type="submit" class="btn btn-primary" style="background: red; height: 30px;">Reprovado</button> </td>

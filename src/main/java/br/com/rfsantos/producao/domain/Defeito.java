@@ -72,4 +72,30 @@ public class Defeito implements Serializable {
 		this.td01Grupo = td01Grupo;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((td01DefeitoId == null) ? 0 : td01DefeitoId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Defeito other = (Defeito) obj;
+		if (td01DefeitoId == null) {
+			if (other.td01DefeitoId != null)
+				return false;
+		} else if (!td01DefeitoId.equals(other.td01DefeitoId))
+			return false;
+		return true;
+	}
+
+	
 }

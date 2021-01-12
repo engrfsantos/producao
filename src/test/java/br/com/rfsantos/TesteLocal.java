@@ -1,6 +1,5 @@
 package br.com.rfsantos;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.rfsantos.producao.Filtro;

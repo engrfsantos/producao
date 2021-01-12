@@ -15,8 +15,7 @@ public class Producao implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
-	
+	@GenericGenerator(name = "increment", strategy = "increment")	
 	@Column(name="td01_producao_id", columnDefinition = "NUMERIC(19,0)")
 	private Long producaoId;
 
@@ -147,4 +146,29 @@ public class Producao implements Serializable {
 		this.status = td01Status;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codProduto == null) ? 0 : codProduto.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Producao other = (Producao) obj;
+		if (codProduto == null) {
+			if (other.codProduto != null)
+				return false;
+		} else if (!codProduto.equals(other.codProduto))
+			return false;
+		return true;
+	}
+	
 }

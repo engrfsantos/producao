@@ -12,15 +12,15 @@ import br.com.rfsantos.producao.domain.Producao;
 public interface ProducaoRepository extends JpaRepository<Producao, Long> {
 	
 	@Query(value = "SELECT u from Producao u WHERE u.producaoId >= ((select Max(producaoId) from Producao u)-2) order by u.dt DESC, u.hr DESC ")
-	List<Producao> ProducoesHoje();
+	List<Producao> producoesHoje();
 
 	@Query(value = "SELECT u from Producao u WHERE u.dt = :dt order by u.dt DESC, u.hr DESC ")
-	List<Producao> ProducoesData(@Param("dt") Date dt);
+	List<Producao> producoesData(@Param("dt") Date dt);
 
 	@Query(value = "SELECT u from Producao u WHERE u.dt <= :dt order by u.dt DESC, u.hr DESC ")	
-	List<Producao> ProducoesAte(@Param("dt") Date date);
+	List<Producao> producoesAte(@Param("dt") Date date);
 
 	@Query(value = "SELECT u from Producao u WHERE u.dt between :dt and :dtf order by u.dt DESC, u.hr DESC ")
-	List<Producao> ProducoesPeriodo(@Param("dt") Date dt, @Param("dtf") Date dtf);
+	List<Producao> producoesPeriodo(@Param("dt") Date dt, @Param("dtf") Date dtf);
 
 }

@@ -48,4 +48,29 @@ public class Status implements Serializable {
 		this.descricao = ts01Descricao;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descBreve == null) ? 0 : descBreve.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Status other = (Status) obj;
+		if (descBreve == null) {
+			if (other.descBreve != null)
+				return false;
+		} else if (!descBreve.equals(other.descBreve))
+			return false;
+		return true;
+	}
+
 }
