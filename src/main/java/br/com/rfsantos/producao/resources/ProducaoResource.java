@@ -1,4 +1,4 @@
-package br.com.rfsantos.producao.resource;
+package br.com.rfsantos.producao.resources;
 
 import java.text.ParseException;
 
@@ -12,18 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.Producao;
-import br.com.rfsantos.producao.repository.LocalRepository;
-import br.com.rfsantos.producao.repository.ProducaoRepository;
+import br.com.rfsantos.producao.sevices.ProducaoService;
 
 @RestController
 @RequestMapping("/producoes")
 public class ProducaoResource {
 
 	@Autowired
-	private ProducaoRepository producoes;
+	private ProducaoService producao;
 
 	@Autowired
-	private LocalRepository locais;
+	private LocalService local;
 	
 /*
 	@RequestMapping(value="{id}", method=RequestMethod.GET)

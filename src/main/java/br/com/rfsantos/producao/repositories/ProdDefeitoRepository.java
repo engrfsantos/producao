@@ -1,4 +1,4 @@
-package br.com.rfsantos.producao.repository;
+package br.com.rfsantos.producao.repositories;
 
 import java.util.List;
 
