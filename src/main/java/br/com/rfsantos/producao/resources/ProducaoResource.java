@@ -2,6 +2,7 @@ package br.com.rfsantos.producao.resources;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,20 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.Producao;
+import br.com.rfsantos.producao.domain.Usuario;
+import br.com.rfsantos.producao.repositories.UsuarioRepository;
 import br.com.rfsantos.producao.sevices.IdentificadorService;
 import br.com.rfsantos.producao.sevices.LocalService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
+
 
 @RestController
 @RequestMapping("/producoes")
 public class ProducaoResource {
 
-	private Filtro filtro = new Filtro();
+	@Autowired
+	private UsuarioRepository repo;
+	
+	private Optional<Usuario> usuario = repo.findById("2320");
+	private Filtro filtro = new Filtro("PROD", usuario.get());
 
 	
 	@Autowired

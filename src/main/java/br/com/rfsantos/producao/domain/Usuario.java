@@ -3,14 +3,8 @@ package br.com.rfsantos.producao.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the ts01_usuario database table.
- * 
- */
 @Entity
 @Table(name="ts01_usuario")
-@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
