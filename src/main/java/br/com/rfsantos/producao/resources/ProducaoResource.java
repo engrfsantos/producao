@@ -2,10 +2,8 @@ package br.com.rfsantos.producao.resources;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Usuario;
-import br.com.rfsantos.producao.repositories.UsuarioRepository;
 import br.com.rfsantos.producao.sevices.IdentificadorService;
 import br.com.rfsantos.producao.sevices.LocalService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
@@ -26,12 +23,9 @@ import br.com.rfsantos.producao.sevices.ProducaoService;
 @RequestMapping("/producoes")
 public class ProducaoResource {
 
-	@Autowired
-	private UsuarioRepository repo;
+	private Usuario usuario = new Usuario("2320", "PROD", "Reginaldo", "A", "franco", "A","A");
 	
-	private Optional<Usuario> usuario = repo.findById("2320");
-	private Filtro filtro = new Filtro("PROD", usuario.get());
-
+	private Filtro filtro = new Filtro("PROD", usuario);
 	
 	@Autowired
 	private ProducaoService producoes;
@@ -42,24 +36,15 @@ public class ProducaoResource {
 	@Autowired
 	private IdentificadorService identificadores;	
 	
-	
-	@RequestMapping(value="/{producaoID}", method=RequestMethod.GET)
-	public ModelAndView buscarProducao(@PathVariable Long producaoID) throws ParseException {
-		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
-		
-		Producao producao = this.producoes.buscar(producaoID);		
-		
-		modelAndView.addObject("producoes", new ArrayList<Producao>().add(producao)); 
-		modelAndView.addObject("locais", locais.listar());
-		modelAndView.addObject("identificadores", identificadores.listar());
-		modelAndView.addObject("filtro", filtro);
-		
-		return modelAndView;
-		
-	}
+	/*
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ModelAndView buscarProducao(@PathVariable Long id) throws ParseException {
+		ModelAndView modelAndView = new ModelAndView("ListaProducoes");		
+	}*/
 		
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView listarProducao (@RequestParam(value="local", required = false) String local,
+	public ModelAndView listarProducao (@RequestParam(value="id", required = false) long id,
+										@RequestParam(value="local", required = false) String local,
 										@RequestParam(value="identificador", required = false) String identificador,
 										@RequestParam(value="dt", required = false) String dt, 
 										@RequestParam(value="dtf", required = false) String dtf) throws ParseException {		
@@ -69,6 +54,18 @@ public class ProducaoResource {
 		filtro.setDtfS(dtf);
 		filtro.setLocal(local);
 		filtro.setIdentificador(identificador);
+		
+		if (id>0) {
+			Producao producao = this.producoes.buscar(id);		
+			
+			modelAndView.addObject("producoes", new ArrayList<Producao>().add(producao)); 
+			modelAndView.addObject("locais", locais.listar());
+			modelAndView.addObject("identificadores", identificadores.listar());
+			modelAndView.addObject("filtro", filtro);
+			
+			return modelAndView;			
+		}
+		
 		
 		//sem filtro dt e dtf são nulos
 		if (!filtro.isbFiltrado()) {

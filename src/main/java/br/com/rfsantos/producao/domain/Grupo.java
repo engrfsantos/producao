@@ -14,7 +14,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="ts01_grupo")
-@NamedQuery(name="Grupo.findAll", query="SELECT g FROM Grupo g")
 public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 

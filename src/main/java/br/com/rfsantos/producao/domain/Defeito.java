@@ -18,7 +18,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name="td01_defeito")
-@NamedQuery(name="Defeito.findAll", query="SELECT d FROM Defeito d")
 public class Defeito implements Serializable {
 	private static final long serialVersionUID = 1L;
 
