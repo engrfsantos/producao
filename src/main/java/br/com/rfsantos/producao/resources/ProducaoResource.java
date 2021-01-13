@@ -43,7 +43,7 @@ public class ProducaoResource {
 	}*/
 		
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView listarProducao (@RequestParam(value="id", required = false) long id,
+	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id,
 										@RequestParam(value="local", required = false) String local,
 										@RequestParam(value="identificador", required = false) String identificador,
 										@RequestParam(value="dt", required = false) String dt, 
@@ -55,13 +55,14 @@ public class ProducaoResource {
 		filtro.setLocal(local);
 		filtro.setIdentificador(identificador);
 		
-		if (id>0) {
-			Producao producao = this.producoes.buscar(id);		
-			
-			modelAndView.addObject("producoes", new ArrayList<Producao>().add(producao)); 
+		if (id!=null) { // & !id.isEmpty()) {
+			long idL = Long.parseLong(id);						
+			modelAndView.addObject("producoes", producoes.producoesId(idL)); 
 			modelAndView.addObject("locais", locais.listar());
 			modelAndView.addObject("identificadores", identificadores.listar());
 			modelAndView.addObject("filtro", filtro);
+			
+			modelAndView.addObject(new Producao());	
 			
 			return modelAndView;			
 		}

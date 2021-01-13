@@ -23,4 +23,9 @@ public interface ProducaoRepository extends JpaRepository<Producao, Long> {
 	@Query(value = "SELECT u from Producao u WHERE u.dt between :dt and :dtf order by u.dt DESC, u.hr DESC ")
 	List<Producao> producoesPeriodo(@Param("dt") Date dt, @Param("dtf") Date dtf);
 
+	@Query(value = "SELECT u from Producao u WHERE u.producaoId = :producaoId order by u.dt DESC, u.hr DESC ")
+	List<Producao> producoesId(@Param("producaoId") Long producaoId);
+	
+	
+
 }

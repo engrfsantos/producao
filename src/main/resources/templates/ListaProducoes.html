@@ -31,25 +31,29 @@ xmlns:th="http://www.thymeleaf.org">
 			<h1 class="panel-title">Filtros</h1>
 			<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/producoes}" style="margin: 20px 0">
 			<div class="form-group">	
-				<b>Local:</b> 
-				<SELECT class="form-control" name="local" id="identificador" th:value="${filtro.local}">					
+			
+			<label for="local">Local:</label>
+			<input class="form-control" list="locais" name="local" th:value="${filtro.local}">
+  				<datalist id="locais">					
 					<OPTION  th:each="local : ${locais}" th:text="${local.desc}">				
-				</SELECT>
-				<b>- Setor:</b> 
-				<SELECT class="form-control" name="identificador" id="identificador" th:value="${filtro.identificador}">					
+				</datalist>	
+						
+			<label for="identificador">Identificador:</label>
+			<input class="form-control" list="identificadores" name="identificador" th:value="${filtro.identificador}">
+				<DATALIST id="identificadores" >					
 					<OPTION  th:each="identificador : ${identificadores}"  th:text="${identificador.id}" >  				
-				</SELECT>
+				</DATALIST>
 				<hr>
-					<div>
-						<INPUT TYPE="button" id="btData" class="btn btn-primary" value="Data/Hoje" CHECKED style="width:90px; height: 30px;" >
-						<INPUT TYPE="button" id="btSemana" class="btn btn-primary"  VALUE="Semana" style="width:90px; height: 30px;">
-						<INPUT TYPE="button" id="btMes" class="btn btn-primary" VALUE="Mês" style="width:90px; height: 30px;">
-						<INPUT TYPE="button" id="btX" class="btn btn-primary" VALUE="X" style="width:40px; height: 30px;">
-						<input type="text" name="dt" id="dt" class="form-control" style="width:100px;" th:value="${filtro.dtS}">
-						<input type="text" name="dtf" id="dtf" class="form-control" style="width:100px;" th:value="${filtro.dtfS}">
-						<button type="submit" class="btn btn-primary" style="width:80px; height: 30px;">Aplicar</button>
-					</div>				
-				</div>
+			<div>
+				<INPUT TYPE="button" id="btData" class="btn btn-primary" value="Data/Hoje" CHECKED style="width:90px; height: 30px;" >
+				<INPUT TYPE="button" id="btSemana" class="btn btn-primary"  VALUE="Semana" style="width:90px; height: 30px;">
+				<INPUT TYPE="button" id="btMes" class="btn btn-primary" VALUE="Mês" style="width:90px; height: 30px;">
+				<INPUT TYPE="button" id="btX" class="btn btn-primary" VALUE="X" style="width:40px; height: 30px;">
+				<input type="text" name="dt" id="dt" class="form-control" style="width:100px;" th:value="${filtro.dtS}">
+				<input type="text" name="dtf" id="dtf" class="form-control" style="width:100px;" th:value="${filtro.dtfS}">
+				<button type="submit" class="btn btn-primary" style="width:80px; height: 30px;">Aplicar</button>
+			</div>				
+		</div>
 			</form>
 		</div>
 	</div>
