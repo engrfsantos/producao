@@ -72,14 +72,15 @@ xmlns:th="http://www.thymeleaf.org">
 				</tr>
 			</table>
 	
-	</form>
- 	
-<form class="form-inline" method="POST" th:object="${proddefeitos}" th:action="@{/producoes}"   style="margin: 20px 0">
+	</form> 	
+	
+	
 	<div id="div-producao" class="panel-body">
 	<table class="table">
 		<thead>
 			<tr id="linha-producao" onblur="AtualizarDefeitos">
-				<th>Def</th>				
+				<th>Def</th>
+				<th>ProduçãoID</th> <!-- style="visibility:hidden;" -->				
 				<th>Código</th>
 				<th>Descrição</th>
 				<th>Data</th>
@@ -90,12 +91,14 @@ xmlns:th="http://www.thymeleaf.org">
 				<th>RE</th>
 				<th>Série</th>
 				<th>Status</th>
-				<th style="visibility:hidden;">IdP</th>
+				
 			</tr>
 		</thead>
-		<tbody>
+		<tbody>			
 				<tr th:each="producao : ${producoes}">
-				<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>				
+				<form id="frmProducao" class="form-inline" method="get" th:object="${proddefeitos}" th:action="@{/producoes}"   style="margin: 20px 0">				
+				<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
+				<td> <Input type="text" id="producaoID" name = "producaoID" th:value="${producao.td01ProducaoId}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>									
 				<td th:text="${producao.td01CodProduto}"></td>
 				<td th:text="${producao.td01Descricao}"></td>
 				<td th:text="${producao.td01Dt}"></td>
@@ -106,36 +109,41 @@ xmlns:th="http://www.thymeleaf.org">
 				<td th:text="${producao.td01Re}"></td>
 				<td th:text="${producao.td01Serie}"></td>
 				<td th:text="${producao.td01Status}"></td>
-				<td style="visibility:hidden;" th:text="${producao.td01ProducaoId}"></td>
-				</tr>		
+				</form>				
+				</tr>
+		
 		</tbody>
 	</table>
 	</div>
-	</form>
+					
+	
 	
 	<div id="div-proddefeito" class="panel-body">
-		<table class="table" th:object="${proddefeito}">
+		<table class="table" th:object="proddefeitos">
 			<thead>
 				<tr>
+					<th>ProdDefID</th>
+					<th>ProdID</th>
+					<th>DefID</th>
+					<th>Análise</th>
 					<th>Dt</th>
 					<th>Hr</th>
-					<th>Bipagem/Cód/PN</th>
-					<th>Defeito</th>
 					<th>Ação</th>
-					<th>Status</th>
-					<th>Análise</th>			
+					<th>Bipagem/Cód/PN</th>
+					<th>Status</th>								
 				</tr>
 			</thead>
 			<tbody>
-					<tr th:each="proddefeito : ${proddefeitos}">
-					<td th:text="${proddefeito.td01ProducaoId}"></td>
-					<td th:text="${proddefeito.td01CodProduto}"></td>
-					<td th:text="${proddefeito.td01Descricao}"></td>
-					<td th:text="${proddefeito.td01Dt}"></td>
-					<td th:text="${proddefeito.td01Hr}"></td>
-					<td th:text="${proddefeito.td01Id}"></td>
-					<td th:text="${proddefeito.td01Leitura}"></td>
-					<td th:text="${proddefeito.td01Local}"></td>
+				<tr th:each="proddefeito : ${proddefeitos}">
+					<td th:text="${proddefeito.prodDefeitoId}"></td>
+					<td th:text="${proddefeito.producaoId}"></td>
+					<td th:text="${proddefeito.defeitoId}"></td>
+					<td th:text="${proddefeito.analise}"></td>
+					<td th:text="${proddefeito.dt}"></td>
+					<td th:text="${proddefeito.hr}"></td>
+					<td th:text="${proddefeito.reparo}"></td>
+					<td th:text="${proddefeito.serie}"></td>
+					<td th:text="${proddefeito.status}"></td>
 					</tr>		
 			</tbody>
 		</table>

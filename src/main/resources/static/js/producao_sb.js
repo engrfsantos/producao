@@ -5,6 +5,13 @@ $('#inputLeitura').on('blur', function(){
 	});    
 
 $(function(){
+$('#frmProducao').submit(function(event){	 
+	 alert($("#producaoID").val());
+	}); 
+});
+
+
+$(function(){
 	$("#dt").datepicker({    	
 		//showOn: 'button',
         dateFormat: 'yy-mm-dd',

@@ -1,7 +1,6 @@
 package br.com.rfsantos.producao.resources;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,10 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
+import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Usuario;
 import br.com.rfsantos.producao.sevices.IdentificadorService;
 import br.com.rfsantos.producao.sevices.LocalService;
+import br.com.rfsantos.producao.sevices.ProdDefeitoService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
 
 
@@ -29,6 +30,10 @@ public class ProducaoResource {
 	
 	@Autowired
 	private ProducaoService producoes;
+	
+	@Autowired
+	private ProdDefeitoService prodDefeito;
+	
 
 	@Autowired
 	private LocalService locais;	
@@ -95,9 +100,11 @@ public class ProducaoResource {
 		modelAndView.addObject("locais", locais.listar());
 		modelAndView.addObject("identificadores", identificadores.listar());
 		modelAndView.addObject("filtro", filtro);
-		
+		modelAndView.addObject("proddefeitos", prodDefeito.listar(id));
+			
 		
 		modelAndView.addObject(new Producao());	
+		modelAndView.addObject(new ProdDefeito());
 		
 		return modelAndView;
 		}
