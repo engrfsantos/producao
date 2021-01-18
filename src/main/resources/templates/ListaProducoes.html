@@ -14,8 +14,7 @@ xmlns:th="http://www.thymeleaf.org">
 	<script th:src="@{http://code.jquery.com/jquery-1.8.3.js}"></script>
     <script th:src="@{http://code.jquery.com/ui/1.9.2/jquery-ui.js}"></script>	
 	
-	<script src="js/producao_sb.js"></script>
-	<script src="js/moment.js"></script>
+	<script src="js/producao.js"></script>
 	
 	<script type="text/javascript">	</script>
 </head>
@@ -98,7 +97,8 @@ xmlns:th="http://www.thymeleaf.org">
 				<tr th:each="producao : ${producoes}">
 				<form id="frmProducao" class="form-inline" method="get" th:object="${proddefeitos}" th:action="@{/producoes}"   style="margin: 20px 0">				
 				<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
-				<td> <Input type="text" id="producaoID" name = "producaoID" th:value="${producao.td01ProducaoId}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>									
+				<td> <Input type="text" id="producaoID" name = "producaoID" th:value="${producao.td01ProducaoId}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
+				</form>										
 				<td th:text="${producao.td01CodProduto}"></td>
 				<td th:text="${producao.td01Descricao}"></td>
 				<td th:text="${producao.td01Dt}"></td>
@@ -109,7 +109,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<td th:text="${producao.td01Re}"></td>
 				<td th:text="${producao.td01Serie}"></td>
 				<td th:text="${producao.td01Status}"></td>
-				</form>				
+							
 				</tr>
 		
 		</tbody>
