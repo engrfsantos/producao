@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.rfsantos.producao.domain.Producao;
-import br.com.rfsantos.producao.resources.ProdDefeitoResource;
+import br.com.rfsantos.producao.domain.ProdDefeito;
+import br.com.rfsantos.producao.repositories.ProdDefeitoRepository;
 
 @Service
 public class ProdDefeitoService {
 	
 	@Autowired
-	private ProdDefeitoResource repo;
+	private ProdDefeitoRepository repo;
 
-	public List<Producao> listar(String id) {
+	public List<ProdDefeito> prodDefeitosProducaoS(String id) {
 		long idL;
 		if(id!=null) 
 			idL = Long.parseLong(id);
@@ -23,6 +23,16 @@ public class ProdDefeitoService {
 		return repo.prodDefeitosProducaoId(idL);
 	}
 
+	public List<ProdDefeito> prodDefeitosProducao() {
+		List<ProdDefeito> lst = repo.findAll();
+		return lst;	
+	}
+
+	public void save(ProdDefeito prodDefeito) {
+		repo.save(prodDefeito);
+		return;
+	}
+	
 
 
 }

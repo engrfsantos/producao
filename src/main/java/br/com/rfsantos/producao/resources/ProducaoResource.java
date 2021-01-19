@@ -29,10 +29,10 @@ public class ProducaoResource {
 	private Filtro filtro = new Filtro("PROD", usuario);
 	
 	@Autowired
-	private ProducaoService producoes;
+	private ProducaoService producoesService;
 	
 	@Autowired
-	private ProdDefeitoService prodDefeito;
+	private ProdDefeitoService prodDefeitoService;
 	
 
 	@Autowired
@@ -48,7 +48,7 @@ public class ProducaoResource {
 	}*/
 		
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id,
+	public ModelAndView listarProducao (@RequestParam(value="producaoId", required = false) String producaoId,
 										@RequestParam(value="local", required = false) String local,
 										@RequestParam(value="identificador", required = false) String identificador,
 										@RequestParam(value="dt", required = false) String dt, 
@@ -60,13 +60,13 @@ public class ProducaoResource {
 		filtro.setLocal(local);
 		filtro.setIdentificador(identificador);
 		
-		if (id!=null) { // & !id.isEmpty()) {
-			long idL = Long.parseLong(id);						
-			modelAndView.addObject("producoes", producoes.producoesId(idL)); 
+		if (producaoId!=null) { // & !id.isEmpty()) {
+			long producaoIdL = Long.parseLong(producaoId);						
+			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
 			modelAndView.addObject("locais", locais.listar());
 			modelAndView.addObject("identificadores", identificadores.listar());
 			modelAndView.addObject("filtro", filtro);
-			
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
 			modelAndView.addObject(new Producao());	
 			
 			return modelAndView;			
@@ -75,7 +75,7 @@ public class ProducaoResource {
 		
 		//sem filtro dt e dtf são nulos
 		if (!filtro.isbFiltrado()) {
-			modelAndView.addObject("producoes", producoes.producoesHoje());
+			modelAndView.addObject("producoes", producoesService.producoesHoje());
 			
 		} else {
 			
@@ -83,24 +83,24 @@ public class ProducaoResource {
 				
 				//dt é nulo e dtf é preenchido - todos dias até dtf
 				if ((dt==null)&(dtf!=null)) {
-					modelAndView.addObject("producoes", producoes.producoesAte(filtro.getDtf())); }					
+					modelAndView.addObject("producoes", producoesService.producoesAte(filtro.getDtf())); }					
 				
 				//dtf é nulo - somente dia selecionado				
 				if ((dt!=null)&(dtf==null)) {		
-					modelAndView.addObject("producoes", producoes.producoesData(filtro.getDt())); }
+					modelAndView.addObject("producoes", producoesService.producoesData(filtro.getDt())); }
 				 
 				if ((dt!=null)&(dtf!=null)) {		
-					modelAndView.addObject("producoes", producoes.producoesPeriodo(filtro.getDt(), filtro.getDtf())); }
+					modelAndView.addObject("producoes", producoesService.producoesPeriodo(filtro.getDt(), filtro.getDtf())); }
 				} 
 
 			if (!filtro.isbPeriodo()) {
-					modelAndView.addObject("producoes", producoes.producoesData(filtro.getDt())); }
+					modelAndView.addObject("producoes", producoesService.producoesData(filtro.getDt())); }
 		}
 	
 		modelAndView.addObject("locais", locais.listar());
 		modelAndView.addObject("identificadores", identificadores.listar());
 		modelAndView.addObject("filtro", filtro);
-		modelAndView.addObject("proddefeitos", prodDefeito.listar(id));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
 			
 		
 		modelAndView.addObject(new Producao());	
@@ -111,7 +111,7 @@ public class ProducaoResource {
 
 	@PostMapping
 	public String salvar(Producao producao) {
-		this.producoes.save(producao);
+		this.producoesService.save(producao);
 		return "redirect:/producoes";
 	}
 }

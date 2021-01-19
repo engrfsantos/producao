@@ -9,6 +9,7 @@ xmlns:th="http://www.thymeleaf.org">
 
 	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
 	<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+	 
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 	
 	<script th:src="@{http://code.jquery.com/jquery-1.8.3.js}"></script>
@@ -97,8 +98,8 @@ xmlns:th="http://www.thymeleaf.org">
 				<tr th:each="producao : ${producoes}">
 				<form id="frmProducao" class="form-inline" method="get" th:object="${proddefeitos}" th:action="@{/producoes}"   style="margin: 20px 0">				
 				<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
-				<td> <Input type="text" id="producaoID" name = "producaoID" th:value="${producao.td01ProducaoId}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
-				</form>										
+				<td> <Input type="text" id="producaoId" name = "producaoId" th:value="${producao.td01ProducaoId}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
+				</form>														
 				<td th:text="${producao.td01CodProduto}"></td>
 				<td th:text="${producao.td01Descricao}"></td>
 				<td th:text="${producao.td01Dt}"></td>
@@ -108,44 +109,46 @@ xmlns:th="http://www.thymeleaf.org">
 				<td th:text="${producao.td01Local}"></td>
 				<td th:text="${producao.td01Re}"></td>
 				<td th:text="${producao.td01Serie}"></td>
-				<td th:text="${producao.td01Status}"></td>
-							
+				<td th:text="${producao.td01Status}"></td>							
 				</tr>
 		
 		</tbody>
 	</table>
 	</div>
 					
-	
-	
 	<div id="div-proddefeito" class="panel-body">
-		<table class="table" th:object="proddefeitos">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>ProdDefID</th>
 					<th>ProdID</th>
-					<th>DefID</th>
-					<th>Análise</th>
+					<th>DefID</th>					
 					<th>Dt</th>
-					<th>Hr</th>
-					<th>Ação</th>
+					<th>Hr</th>					
 					<th>Bipagem/Cód/PN</th>
-					<th>Status</th>								
+					<th>Status</th>
+					<th>Análise</th>
+					<th>Reparo</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="proddefeito : ${proddefeitos}">
-					<td th:text="${proddefeito.prodDefeitoId}"></td>
-					<td th:text="${proddefeito.producaoId}"></td>
-					<td th:text="${proddefeito.defeitoId}"></td>
-					<td th:text="${proddefeito.analise}"></td>
-					<td th:text="${proddefeito.dt}"></td>
-					<td th:text="${proddefeito.hr}"></td>
-					<td th:text="${proddefeito.reparo}"></td>
-					<td th:text="${proddefeito.serie}"></td>
-					<td th:text="${proddefeito.status}"></td>
-					</tr>		
-			</tbody>
+				<form class="form-inline" method="GET" th:object="${proddefeito}" th:action="@{/producoes}" style="margin: 1px 0">			
+					<tr th:each="proddefeito : ${proddefeitos}">						
+						<td><input type="text" name="prodDefeitoId" class="form-control" placeholder="prodDefeitoId" th:value="${proddefeito.prodDefeitoId}"/></td>						
+						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${proddefeito.producaoId}"  /> </td>
+						<td><input type="text" name="defeitoId" class="form-control" placeholder="defeitoId" th:value="${proddefeito.defeitoId}"  /></td>						
+						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${proddefeito.dt}" /></td>
+						<td><input type="text" name="hr" class="form-control" placeholder="hr" th:value="${proddefeito.hr}" /></td>						
+						<td><input type="text" name="serie" class="form-control" placeholder="serie" th:value="${proddefeito.serie}" /></td>
+						<td><input type="text" name="status" class="form-control" placeholder="status" th:value="${proddefeito.status}" /></td>						
+						<td><input type="text" name="analise" class="form-control" placeholder="analise" th:value="${proddefeito.analise}" /></td>
+						<td><input type="text" name="reparo" class="form-control" placeholder="reparo" th:value="${proddefeito.reparo}" /></td>
+				
+					</tr>
+					<button type="submit" class="btn btn-primary" style="background: green; height: 30px;">Enviar</button>
+					<button type="submit" class="btn btn-primary" style="background: gray; height: 30px;">Limpar</button>
+				</form>
+			</tbody>				
 		</table>
 	</div>
 	

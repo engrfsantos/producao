@@ -32,7 +32,7 @@ public class ProdDefeito implements Serializable {
 
 	
 	@Column(name="td01_defeito_id", columnDefinition = "NUMERIC(19,0)")
-	private Defeito defeitoId;
+	private Long defeitoId;
 		
 	@Column(name="td01_analise")
 	private String analise;
@@ -60,76 +60,120 @@ public class ProdDefeito implements Serializable {
 	public ProdDefeito() {
 	}
 
-	public Long getTd01ProdDefeitoId() {
-		return this.prodDefeitoId;
+	public ProdDefeito(Long prodDefeitoId, Long producaoId, Long defeitoId, String analise, Date dt, Time hr,
+			String reparo, String serie, Integer status) {
+		super();
+		this.prodDefeitoId = prodDefeitoId;
+		this.producaoId = producaoId;
+		this.defeitoId = defeitoId;
+		this.analise = analise;
+		this.dt = dt;
+		this.hr = hr;
+		this.reparo = reparo;
+		this.serie = serie;
+		this.status = status;
 	}
 
-	public void setTd01ProdDefeitoId(Long td01ProdDefeitoId) {
-		this.prodDefeitoId = td01ProdDefeitoId;
+	public Long getProdDefeitoId() {
+		return prodDefeitoId;
 	}
 
-	public String getTd01Analise() {
-		return this.analise;
+	public void setProdDefeitoId(Long prodDefeitoId) {
+		this.prodDefeitoId = prodDefeitoId;
 	}
 
-	public void setTd01Analise(String td01Analise) {
-		this.analise = td01Analise;
+	public Long getProducaoId() {
+		return producaoId;
 	}
 
-	public Defeito getTd01DefeitoId() {
-		return this.defeitoId;
+	public void setProducaoId(Long producaoId) {
+		this.producaoId = producaoId;
 	}
 
-	public void setTd01DefeitoId(Defeito td01DefeitoId) {
-		this.defeitoId = td01DefeitoId;
+	public Long getDefeitoId() {
+		return defeitoId;
 	}
 
-	public Date getTd01Dt() {
-		return this.dt;
+	public void setDefeitoId(Long defeitoId) {
+		this.defeitoId = defeitoId;
 	}
 
-	public void setTd01Dt(Date td01Dt) {
-		this.dt = td01Dt;
+	public String getAnalise() {
+		return analise;
 	}
 
-	public Time getTd01Hr() {
-		return this.hr;
+	public void setAnalise(String analise) {
+		this.analise = analise;
 	}
 
-	public void setTd01Hr(Time td01Hr) {
-		this.hr = td01Hr;
+	public Date getDt() {
+		return dt;
 	}
 
-	public Long getTd01ProducaoId() {
-		return this.producaoId;
+	public void setDt(Date dt) {
+		this.dt = dt;
 	}
 
-	public void setTd01ProducaoId(Long td01ProducaoId) {
-		this.producaoId = td01ProducaoId;
+	public Time getHr() {
+		return hr;
 	}
 
-	public String getTd01Reparo() {
-		return this.reparo;
+	public void setHr(Time hr) {
+		this.hr = hr;
 	}
 
-	public void setTd01Reparo(String td01Reparo) {
-		this.reparo = td01Reparo;
+	public String getReparo() {
+		return reparo;
 	}
 
-	public String getTd01Serie() {
-		return this.serie;
+	public void setReparo(String reparo) {
+		this.reparo = reparo;
 	}
 
-	public void setTd01Serie(String td01Serie) {
-		this.serie = td01Serie;
+	public String getSerie() {
+		return serie;
 	}
 
-	public Integer getTd01Status() {
-		return this.status;
+	public void setSerie(String serie) {
+		this.serie = serie;
 	}
 
-	public void setTd01Status(Integer td01Status) {
-		this.status = td01Status;
+	public Integer getStatus() {
+		return status;
 	}
 
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((prodDefeitoId == null) ? 0 : prodDefeitoId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProdDefeito other = (ProdDefeito) obj;
+		if (prodDefeitoId == null) {
+			if (other.prodDefeitoId != null)
+				return false;
+		} else if (!prodDefeitoId.equals(other.prodDefeitoId))
+			return false;
+		return true;
+	}
+
+	
 }
