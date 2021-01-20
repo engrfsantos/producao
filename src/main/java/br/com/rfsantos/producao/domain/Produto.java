@@ -14,7 +14,7 @@ public class Produto implements Serializable {
 
 	@Id
 	@Column(name="ts01_codigo", columnDefinition = "bpchar", length=15)
-	private String codigo;
+	private String id;
 
 	@Column(name="ts01_cod_barras")
 	private String codBarras;
@@ -37,67 +37,78 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public String getTs01Codigo() {
-		return this.codigo;
+	public Produto(String id, String codBarras, String descEsp, String descricao, String grupo, String narrativa,
+			String unidade) {
+		this.id = id;
+		this.codBarras = codBarras;
+		this.descEsp = descEsp;
+		this.descricao = descricao;
+		this.grupo = grupo;
+		this.narrativa = narrativa;
+		this.unidade = unidade;
 	}
 
-	public void setTs01Codigo(String ts01Codigo) {
-		this.codigo = ts01Codigo;
+	public String getId() {
+		return id;
 	}
 
-	public String getTs01CodBarras() {
-		return this.codBarras;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public void setTs01CodBarras(String ts01CodBarras) {
-		this.codBarras = ts01CodBarras;
+	public String getCodBarras() {
+		return codBarras;
 	}
 
-	public String getTs01DescEsp() {
-		return this.descEsp;
+	public void setCodBarras(String codBarras) {
+		this.codBarras = codBarras;
 	}
 
-	public void setTs01DescEsp(String ts01DescEsp) {
-		this.descEsp = ts01DescEsp;
+	public String getDescEsp() {
+		return descEsp;
 	}
 
-	public String getTs01Descricao() {
-		return this.descricao;
+	public void setDescEsp(String descEsp) {
+		this.descEsp = descEsp;
 	}
 
-	public void setTs01Descricao(String ts01Descricao) {
-		this.descricao = ts01Descricao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public String getTs01Grupo() {
-		return this.grupo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public void setTs01Grupo(String ts01Grupo) {
-		this.grupo = ts01Grupo;
+	public String getGrupo() {
+		return grupo;
 	}
 
-	public String getTs01Narrativa() {
-		return this.narrativa;
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
 
-	public void setTs01Narrativa(String ts01Narrativa) {
-		this.narrativa = ts01Narrativa;
+	public String getNarrativa() {
+		return narrativa;
 	}
 
-	public String getTs01Unidade() {
-		return this.unidade;
+	public void setNarrativa(String narrativa) {
+		this.narrativa = narrativa;
 	}
 
-	public void setTs01Unidade(String ts01Unidade) {
-		this.unidade = ts01Unidade;
+	public String getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codBarras == null) ? 0 : codBarras.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -110,10 +121,10 @@ public class Produto implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		if (codBarras == null) {
-			if (other.codBarras != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!codBarras.equals(other.codBarras))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

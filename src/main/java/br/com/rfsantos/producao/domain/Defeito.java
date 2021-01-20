@@ -6,16 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
-/**
- * The persistent class for the td01_defeito database table.
- * 
- */
 @Entity
 @Table(name="td01_defeito")
 public class Defeito implements Serializable {

@@ -1,5 +1,23 @@
 $(document).ready(function(){
         	
+        	
+$(function buscarEmpresa() {
+        $.ajax({
+            type: "GET",
+            url: "/status",
+            data: "{'status':'" + $("#inputstatus").val() + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert(data.Cnpj);
+            },
+            error: function () {
+                alert("Erro");
+            }
+        });
+
+    });        	
+        	
 $('#inputLeitura').on('blur', function(){
 	 //validar a leitura	 
 	});    

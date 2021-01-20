@@ -63,7 +63,7 @@ xmlns:th="http://www.thymeleaf.org">
 			<form class="form-inline" method="POST" th:object="${producao}" th:action="@{/producoes}"   style="margin: 20px 0">
 				<table>
 					<tr>
-						<td><input id="inputLeitura" type="text" class="form-control" placeholder="Leitura" th:field="*{td01Leitura}" style="width: 250px; "/></td>
+						<td><input id="inputLeitura" type="text" class="form-control" placeholder="Leitura" th:field="*{leitura}" style="width: 250px; "/></td>
 						<td> </td>
 						<td> <button type="submit" class="btn btn-primary" style="background: green; height: 30px;">Aprovado</button> </td>				
 						<td> <button type="submit" class="btn btn-primary" style="background: red; height: 30px;">Reprovado</button> </td>
@@ -100,18 +100,18 @@ xmlns:th="http://www.thymeleaf.org">
 				<tr th:each="producao : ${producoes}">
 				<form id="frmProducao" class="form-inline" method="get" th:object="${proddefeitos}" th:action="@{/producoes}"   style="margin: 20px 0">				
 				<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
-				<td> <Input type="text" id="producaoId" name = "producaoId" th:value="${producao.td01ProducaoId}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
+				<td> <Input type="text" id="id" name = "id" th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
 				</form>														
-				<td th:text="${producao.td01CodProduto}"></td>
-				<td th:text="${producao.td01Descricao}"></td>
-				<td th:text="${producao.td01Dt}"></td>
-				<td th:text="${producao.td01Hr}"></td>
-				<td th:text="${producao.td01Id}"></td>
-				<td th:text="${producao.td01Leitura}"></td>
-				<td th:text="${producao.td01Local}"></td>
-				<td th:text="${producao.td01Re}"></td>
-				<td th:text="${producao.td01Serie}"></td>
-				<td th:text="${producao.td01Status}"></td>							
+				<td th:text="${producao.id}"></td>
+				<td th:text="${producao.descricao}"></td>
+				<td th:text="${producao.dt}"></td>
+				<td th:text="${producao.hr}"></td>
+				<td th:text="${producao.identificador}"></td>
+				<td th:text="${producao.leitura}"></td>
+				<td th:text="${producao.local}"></td>
+				<td th:text="${producao.re}"></td>
+				<td th:text="${producao.serie}"></td>
+				<td th:text="${producao.status.descBreve}"></td>							
 				</tr>
 		
 		</tbody>
@@ -135,19 +135,19 @@ xmlns:th="http://www.thymeleaf.org">
 			</thead>
 			<tbody>				
 				<tr th:each="proddefeito : ${proddefeitos}">						
-					<td th:text="${proddefeito.prodDefeitoId}"/></td>
+					<td th:text="${proddefeito.id}"/></td>
 					<td th:text="${proddefeito.producaoId}" /></td>
 					<td th:text= "${proddefeito.defeitoId}" /></td>						
 					<td th:text="${proddefeito.dt}" /></td>
 					<td th:text="${proddefeito.hr}" /></td>						
 					<td  th:text="${proddefeito.serie}" /></td>
-					<td th:text="${proddefeito.status}" /></td>						
+					<td th:text="${proddefeito.status.descBreve}" /></td>						
 					<td th:text="${proddefeito.analise}" /></td>
 					<td th:text="${proddefeito.reparo}" /></td>						 
 				</tr>	
 				<form class="form-inline" method="GET" th:object="${proddefeito}" th:action="@{/proddefeitos}" style="margin: 1px 0">
 					<tr>						
-						<td><input type="text" name="prodDefeitoId" class="form-control" placeholder="prodDefeitoId" th:value="${proddefeito.prodDefeitoId}"/></td>
+						<td><input type="text" name="id" class="form-control" placeholder="id" th:value="${proddefeito.id}"/></td>
 						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${proddefeito.producaoId}"  /> </td>
 						<td><input type="text" name="defeitoId" class="form-control" placeholder="defeitoId" th:value="${proddefeito.defeitoId}"  /></td>						
 						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${proddefeito.dt}" /></td>

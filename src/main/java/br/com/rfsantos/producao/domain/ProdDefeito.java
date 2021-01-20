@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,7 +25,7 @@ public class ProdDefeito implements Serializable {
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name="td01_prod_defeito_id", columnDefinition = "NUMERIC(19,0)")
-	private Long prodDefeitoId;
+	private Long id;
 
 	//@ManyToOne
 	//@JoinColumn(name="td01_producao_id") //, columnDefinition = "NUMERIC(19,0)"
@@ -52,17 +54,17 @@ public class ProdDefeito implements Serializable {
 	@Column(name="td01_serie")
 	private String serie;
 
-	//@ManyToOne	
-	//@JoinColumn(name="td01_status", referencedColumnName = "ts01_status")
-	@Column(name="td01_status")
-	private Integer status;
+	@ManyToOne	
+	@JoinColumn(name="td01_status")
+	//@Column(name="td01_status")
+	private Status status;
 
 	public ProdDefeito() {
 	}
 
-	public ProdDefeito(Long prodDefeitoId, Long producaoId, Long defeitoId, String analise, Date dt, Time hr,
-			String reparo, String serie, Integer status) {
-		this.prodDefeitoId = prodDefeitoId;
+	public ProdDefeito(Long id, Long producaoId, Long defeitoId, String analise, Date dt, Time hr,
+			String reparo, String serie, Status status) {
+		this.id = id;
 		this.producaoId = producaoId;
 		this.defeitoId = defeitoId;
 		this.analise = analise;
@@ -73,12 +75,12 @@ public class ProdDefeito implements Serializable {
 		this.status = status;
 	}
 
-	public Long getProdDefeitoId() {
-		return prodDefeitoId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setProdDefeitoId(Long prodDefeitoId) {
-		this.prodDefeitoId = prodDefeitoId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Long getProducaoId() {
@@ -137,23 +139,20 @@ public class ProdDefeito implements Serializable {
 		this.serie = serie;
 	}
 
-	public Integer getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((prodDefeitoId == null) ? 0 : prodDefeitoId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -166,10 +165,10 @@ public class ProdDefeito implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ProdDefeito other = (ProdDefeito) obj;
-		if (prodDefeitoId == null) {
-			if (other.prodDefeitoId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!prodDefeitoId.equals(other.prodDefeitoId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

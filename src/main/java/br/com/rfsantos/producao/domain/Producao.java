@@ -1,12 +1,20 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 @Entity
 @Table(name="td01_producao")
@@ -17,10 +25,10 @@ public class Producao implements Serializable {
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")	
 	@Column(name="td01_producao_id", columnDefinition = "NUMERIC(19,0)")
-	private Long producaoId;
+	private Long id;
 
 	@Column(name="td01_cod_produto")
-	private String codProduto;
+	private String codigo;
 
 	@Column(name="td01_descricao")
 	private String descricao;
@@ -35,7 +43,7 @@ public class Producao implements Serializable {
 	private Date hr;
 
 	@Column(name="td01_id")
-	private String id;
+	private String identificador;
 
 	@Column(name="td01_leitura", columnDefinition = "bpchar", length=24)
 	private String leitura;
@@ -50,107 +58,124 @@ public class Producao implements Serializable {
 	@Column(name="td01_serie")
 	private String serie;
 	
-	//@ManyToOne
-	//@JoinColumn(name="td01_status", referencedColumnName = "ts01_status")
-	@Column(name="td01_status")
-	private Integer status;
+	@ManyToOne
+	@JoinColumn(name="td01_status")
+	//@Column(name="td01_status")
+	private Status status;
 
 	public Producao() {
+		
 	}
 
-	public Long getTd01ProducaoId() {
-		return this.producaoId;
+	public Producao(Long id, String codigo, String descricao, Date dt, Date hr, String identificador, String leitura,
+			String local, String re, String serie, Status status) {
+		super();
+		this.id = id;
+		this.codigo = codigo;
+		this.descricao = descricao;
+		this.dt = dt;
+		this.hr = hr;
+		this.identificador = identificador;
+		this.leitura = leitura;
+		this.local = local;
+		this.re = re;
+		this.serie = serie;
+		this.status = status;
 	}
 
-	public void setTd01ProducaoId(Long td01ProducaoId) {
-		this.producaoId = td01ProducaoId;
+	public Long getId() {
+		return id;
 	}
 
-	public String getTd01CodProduto() {
-		return this.codProduto;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setTd01CodProduto(String td01CodProduto) {
-		this.codProduto = td01CodProduto;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public String getTd01Descricao() {
-		return this.descricao;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
-	public void setTd01Descricao(String td01Descricao) {
-		this.descricao = td01Descricao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public Date getTd01Dt() {
-		return this.dt;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public void setTd01Dt(Date td01Dt) {
-		this.dt = td01Dt;
+	public Date getDt() {
+		return dt;
 	}
 
-	public Date getTd01Hr() {
-		return this.hr;
+	public void setDt(Date dt) {
+		this.dt = dt;
 	}
 
-	public void setTd01Hr(Date td01Hr) {
-		this.hr = td01Hr;
+	public Date getHr() {
+		return hr;
 	}
 
-	public String getTd01Id() {
-		return this.id;
+	public void setHr(Date hr) {
+		this.hr = hr;
 	}
 
-	public void setTd01Id(String td01Id) {
-		this.id = td01Id;
+	public String getIdentificador() {
+		return identificador;
 	}
 
-	public String getTd01Leitura() {
-		return this.leitura;
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
 	}
 
-	public void setTd01Leitura(String td01Leitura) {
-		this.leitura = td01Leitura;
+	public String getLeitura() {
+		return leitura;
 	}
 
-	public String getTd01Local() {
-		return this.local;
+	public void setLeitura(String leitura) {
+		this.leitura = leitura;
 	}
 
-	public void setTd01Local(String td01Local) {
-		this.local = td01Local;
+	public String getLocal() {
+		return local;
 	}
 
-	public String getTd01Re() {
-		return this.re;
+	public void setLocal(String local) {
+		this.local = local;
 	}
 
-	public void setTd01Re(String td01Re) {
-		this.re = td01Re;
+	public String getRe() {
+		return re;
 	}
 
-	public String getTd01Serie() {
-		return this.serie;
+	public void setRe(String re) {
+		this.re = re;
 	}
 
-	public void setTd01Serie(String td01Serie) {
-		this.serie = td01Serie;
+	public String getSerie() {
+		return serie;
 	}
 
-	public Integer getTd01Status() {
-		return this.status;
+	public void setSerie(String serie) {
+		this.serie = serie;
 	}
 
-	public void setTd01Status(Integer td01Status) {
-		this.status = td01Status;
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codProduto == null) ? 0 : codProduto.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -163,12 +188,13 @@ public class Producao implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Producao other = (Producao) obj;
-		if (codProduto == null) {
-			if (other.codProduto != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!codProduto.equals(other.codProduto))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+	
 	
 }

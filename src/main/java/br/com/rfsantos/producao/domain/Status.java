@@ -1,19 +1,19 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
-import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 @Entity
 @Table(name="ts01_status")
 public class Status implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name="ts01_status")
-	private Integer status;
+	private Integer id;
 
 	@Column(name="ts01_desc_breve")
 	private String descBreve;
@@ -23,36 +23,42 @@ public class Status implements Serializable {
 
 	public Status() {
 	}
-
-	public Integer getTs01Status() {
-		return this.status;
+		
+	public Status(Integer id, String descBreve, String descricao) {
+		this.id = id;
+		this.descBreve = descBreve;
+		this.descricao = descricao;
 	}
 
-	public void setTs01Status(Integer ts01Status) {
-		this.status = ts01Status;
+	public Integer getId() {
+		return id;
 	}
 
-	public String getTs01DescBreve() {
-		return this.descBreve;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setTs01DescBreve(String ts01DescBreve) {
-		this.descBreve = ts01DescBreve;
+	public String getDescBreve() {
+		return descBreve;
 	}
 
-	public String getTs01Descricao() {
-		return this.descricao;
+	public void setDescBreve(String descBreve) {
+		this.descBreve = descBreve;
 	}
 
-	public void setTs01Descricao(String ts01Descricao) {
-		this.descricao = ts01Descricao;
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descBreve == null) ? 0 : descBreve.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -65,12 +71,13 @@ public class Status implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Status other = (Status) obj;
-		if (descBreve == null) {
-			if (other.descBreve != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!descBreve.equals(other.descBreve))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
+	
 }

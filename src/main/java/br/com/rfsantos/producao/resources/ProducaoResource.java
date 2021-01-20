@@ -48,7 +48,7 @@ public class ProducaoResource {
 	}*/
 		
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView listarProducao (@RequestParam(value="producaoId", required = false) String producaoId,
+	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id,
 										@RequestParam(value="local", required = false) String local,
 										@RequestParam(value="identificador", required = false) String identificador,
 										@RequestParam(value="dt", required = false) String dt, 
@@ -60,13 +60,13 @@ public class ProducaoResource {
 		filtro.setLocal(local);
 		filtro.setIdentificador(identificador);
 		
-		if (producaoId!=null & producaoId!="") { // & !id.isEmpty()) {
-			long producaoIdL = Long.parseLong(producaoId);						
+		if (id!=null & id!="") { // & !id.isEmpty()) {
+			long producaoIdL = Long.parseLong(id);						
 			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
 			modelAndView.addObject("locais", locais.listar());
 			modelAndView.addObject("identificadores", identificadores.listar());
 			modelAndView.addObject("filtro", filtro);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
 			modelAndView.addObject("producao", new Producao());		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			return modelAndView;			
@@ -100,7 +100,7 @@ public class ProducaoResource {
 		modelAndView.addObject("locais", locais.listar());
 		modelAndView.addObject("identificadores", identificadores.listar());
 		modelAndView.addObject("filtro", filtro);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
 					
 		modelAndView.addObject("producao", new Producao());		
 		modelAndView.addObject("proddefeito", new ProdDefeito());

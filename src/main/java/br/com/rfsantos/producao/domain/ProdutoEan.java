@@ -5,11 +5,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
-/**
- * The persistent class for the ts01_produto_ean database table.
- * 
- */
 @Entity
 @Table(name="ts01_produto_ean")
 @NamedQuery(name="ProdutoEan.findAll", query="SELECT p FROM ProdutoEan p")
