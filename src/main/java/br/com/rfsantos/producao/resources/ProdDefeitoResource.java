@@ -27,7 +27,7 @@ public class ProdDefeitoResource {
 		
 		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
 		
-		modelAndView.addObject("defeito", new ProdDefeito());
+		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
 		return modelAndView;
 		}

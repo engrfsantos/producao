@@ -45,33 +45,31 @@ xmlns:th="http://www.thymeleaf.org">
 			</thead>
 			<tbody>	
 					<tr th:each="proddefeito : ${proddefeitos}">						
-						<td><input type="text" class="form-control" placeholder="prodDefeitoId" th:field="*{proddefeito.prodDefeitoId}"/></td>						
-						<td><input type="text" placeholder="producaoId" th:field="*{proddefeito.producaoId}"  /> </td>
-						<td><input type="text" class="form-control" placeholder="defeitoId" th:field="*{proddefeito.defeitoId}"  /></td>						
-						<td><input type="text" class="form-control" placeholder="dt" th:field="*{proddefeito.dt}" /></td>
-						<td><input type="text" class="form-control" placeholder="hr" th:field="*{proddefeito.hr}" /></td>						
-						<td><input type="text" class="form-control" placeholder="serie" th:field="*{proddefeito.serie}" /></td>
-						<td><input type="text" class="form-control" placeholder="status" th:field="*{proddefeito.status}" /></td>						
-						<td><input type="text" class="form-control" placeholder="analise" th:field="*{proddefeito.analise}" /></td>
-						<td><input type="text" class="form-control" placeholder="reparo" th:field="*{proddefeito.reparo}" /></td>				
-					</tr>
-				</form>
-				<form class="form-inline" method="GET" th:object="${defeito}" th:action="@{/proddefeitos}" style="margin: 1px 0">
+						<td th:text="${proddefeito.prodDefeitoId}"/></td>
+						<td th:text="${proddefeito.producaoId}" /></td>
+						<td th:text= "${proddefeito.defeitoId}" /></td>						
+						<td th:text="${proddefeito.dt}" /></td>
+						<td th:text="${proddefeito.hr}" /></td>						
+						<td  th:text="${proddefeito.serie}" /></td>
+						<td th:text="${proddefeito.status}" /></td>						
+						<td th:text="${proddefeito.analise}" /></td>
+						<td th:text="${proddefeito.reparo}" /></td>						 
+					</tr>				 	
+				<form class="form-inline" method="GET" th:object="${proddefeito}" th:action="@{/proddefeitos}" style="margin: 1px 0">
 					<tr>						
-						<td><input type="text" name="prodDefeitoId" class="form-control" placeholder="prodDefeitoId" th:value="${defeito.prodDefeitoId}"/></td>						
-						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${defeito.producaoId}"  /> </td>
-						<td><input type="text" name="defeitoId" class="form-control" placeholder="defeitoId" th:value="${defeito.defeitoId}"  /></td>						
-						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${defeito.dt}" /></td>
-						<td><input type="text" name="hr" class="form-control" placeholder="hr" th:value="${defeito.hr}" /></td>						
-						<td><input type="text" name="serie" class="form-control" placeholder="serie" th:value="${defeito.serie}" /></td>
-						<td><input type="text" name="status" class="form-control" placeholder="status" th:value="${defeito.status}" /></td>						
-						<td><input type="text" name="analise" class="form-control" placeholder="analise" th:value="${defeito.analise}" /></td>
-						<td><input type="text" name="reparo" class="form-control" placeholder="reparo" th:value="${defeito.reparo}" /></td>				
-					</tr>
-				
+						<td><input type="text" name="prodDefeitoId" class="form-control" placeholder="prodDefeitoId" th:value="${proddefeito.prodDefeitoId}"/></td>
+						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${proddefeito.producaoId}"  /> </td>
+						<td><input type="text" name="defeitoId" class="form-control" placeholder="defeitoId" th:value="${proddefeito.defeitoId}"  /></td>						
+						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${proddefeito.dt}" /></td>
+						<td><input type="text" name="hr" class="form-control" placeholder="hr" th:value="${proddefeito.hr}" /></td>						
+						<td><input type="text" name="serie" class="form-control" placeholder="serie" th:value="${proddefeito.serie}" /></td>
+						<td><input type="text" name="status" class="form-control" placeholder="status" th:value="${proddefeito.status}" /></td>						
+						<td><input type="text" name="analise" class="form-control" placeholder="analise" th:value="${proddefeito.analise}" /></td>
+						<td><input type="text" name="reparo" class="form-control" placeholder="reparo" th:value="${proddefeito.reparo}" /></td>										
+					</tr>				
 					<button type="submit" class="btn btn-primary" style="background: green; height: 30px;">Enviar</button>
 					<button type="submit" class="btn btn-primary" style="background: gray; height: 30px;">Limpar</button>
-				</form>
+				</form>  
 			</tbody>				
 		</table>
 	</div>

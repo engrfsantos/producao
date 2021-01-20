@@ -60,16 +60,15 @@ public class ProducaoResource {
 		filtro.setLocal(local);
 		filtro.setIdentificador(identificador);
 		
-		if (producaoId!=null) { // & !id.isEmpty()) {
+		if (producaoId!=null & producaoId!="") { // & !id.isEmpty()) {
 			long producaoIdL = Long.parseLong(producaoId);						
 			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
 			modelAndView.addObject("locais", locais.listar());
 			modelAndView.addObject("identificadores", identificadores.listar());
 			modelAndView.addObject("filtro", filtro);
 			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
-			modelAndView.addObject(new Producao());	
-			modelAndView.addObject(new ProdDefeito());
-			
+			modelAndView.addObject("producao", new Producao());		
+			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			return modelAndView;			
 		}
 		
@@ -102,10 +101,9 @@ public class ProducaoResource {
 		modelAndView.addObject("identificadores", identificadores.listar());
 		modelAndView.addObject("filtro", filtro);
 		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
-			
-		
-		modelAndView.addObject(new Producao());	
-		modelAndView.addObject(new ProdDefeito());
+					
+		modelAndView.addObject("producao", new Producao());		
+		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
 		return modelAndView;
 		}

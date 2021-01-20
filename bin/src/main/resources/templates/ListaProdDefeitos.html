@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width" />
+
+	<title>Defeitos Encontrados no Lançamento</title>
+
+	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+	<!-- 
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	
+	<script th:src="@{http://code.jquery.com/jquery-1.8.3.js}"></script>
+    <script th:src="@{http://code.jquery.com/ui/1.9.2/jquery-ui.js}"></script>	
+	 -->
+	<script src="js/producao.js"></script>
+	
+	<script type="text/javascript">	</script>
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista de Defeitos nos Lançamentos</h1>
+		</div>
+	</div>
+	
+	<hr>
+	
+	<div id="div-proddefeito" class="panel-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ProdDefID</th>
+					<th>ProdID</th>
+					<th>DefID</th>					
+					<th>Dt</th>
+					<th>Hr</th>					
+					<th>Bipagem/Cód/PN</th>
+					<th>Status</th>
+					<th>Análise</th>
+					<th>Reparo</th>
+				</tr>
+			</thead>
+			<tbody>	
+					<tr th:each="proddefeito : ${proddefeitos}">						
+						<td><input type="text" class="form-control" placeholder="prodDefeitoId" th:field="*{proddefeito.prodDefeitoId}"/></td>						
+						<td><input type="text" placeholder="producaoId" th:field="*{proddefeito.producaoId}"  /> </td>
+						<td><input type="text" class="form-control" placeholder="defeitoId" th:field="*{proddefeito.defeitoId}"  /></td>						
+						<td><input type="text" class="form-control" placeholder="dt" th:field="*{proddefeito.dt}" /></td>
+						<td><input type="text" class="form-control" placeholder="hr" th:field="*{proddefeito.hr}" /></td>						
+						<td><input type="text" class="form-control" placeholder="serie" th:field="*{proddefeito.serie}" /></td>
+						<td><input type="text" class="form-control" placeholder="status" th:field="*{proddefeito.status}" /></td>						
+						<td><input type="text" class="form-control" placeholder="analise" th:field="*{proddefeito.analise}" /></td>
+						<td><input type="text" class="form-control" placeholder="reparo" th:field="*{proddefeito.reparo}" /></td>				
+					</tr>
+				</form>
+				<form class="form-inline" method="GET" th:object="${defeito}" th:action="@{/proddefeitos}" style="margin: 1px 0">
+					<tr>						
+						<td><input type="text" name="prodDefeitoId" class="form-control" placeholder="prodDefeitoId" th:value="${defeito.prodDefeitoId}"/></td>						
+						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${defeito.producaoId}"  /> </td>
+						<td><input type="text" name="defeitoId" class="form-control" placeholder="defeitoId" th:value="${defeito.defeitoId}"  /></td>						
+						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${defeito.dt}" /></td>
+						<td><input type="text" name="hr" class="form-control" placeholder="hr" th:value="${defeito.hr}" /></td>						
+						<td><input type="text" name="serie" class="form-control" placeholder="serie" th:value="${defeito.serie}" /></td>
+						<td><input type="text" name="status" class="form-control" placeholder="status" th:value="${defeito.status}" /></td>						
+						<td><input type="text" name="analise" class="form-control" placeholder="analise" th:value="${defeito.analise}" /></td>
+						<td><input type="text" name="reparo" class="form-control" placeholder="reparo" th:value="${defeito.reparo}" /></td>				
+					</tr>
+				
+					<button type="submit" class="btn btn-primary" style="background: green; height: 30px;">Enviar</button>
+					<button type="submit" class="btn btn-primary" style="background: gray; height: 30px;">Limpar</button>
+				</form>
+			</tbody>				
+		</table>
+	</div>
+	
+</body>
+</html>

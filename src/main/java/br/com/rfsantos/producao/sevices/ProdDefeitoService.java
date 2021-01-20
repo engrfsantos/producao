@@ -16,7 +16,7 @@ public class ProdDefeitoService {
 
 	public List<ProdDefeito> prodDefeitosProducaoS(String id) {
 		long idL;
-		if(id!=null) 
+		if(id!=null & id!="") 
 			idL = Long.parseLong(id);
 		else
 			idL = 0;

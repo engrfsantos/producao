@@ -62,7 +62,6 @@ public class ProdDefeito implements Serializable {
 
 	public ProdDefeito(Long prodDefeitoId, Long producaoId, Long defeitoId, String analise, Date dt, Time hr,
 			String reparo, String serie, Integer status) {
-		super();
 		this.prodDefeitoId = prodDefeitoId;
 		this.producaoId = producaoId;
 		this.defeitoId = defeitoId;
