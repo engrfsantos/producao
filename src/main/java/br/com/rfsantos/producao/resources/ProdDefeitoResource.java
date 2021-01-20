@@ -21,13 +21,13 @@ public class ProdDefeitoResource {
 	private ProdDefeitoService prodDefeitoService;
 
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id)
+	public ModelAndView listarProducao (@RequestParam(value="producaoId", required = false) String producaoId)
 										throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("ListaProdDefeitos");
 		
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
 		
-		modelAndView.addObject(new ProdDefeito());
+		modelAndView.addObject("defeito", new ProdDefeito());
 		
 		return modelAndView;
 		}

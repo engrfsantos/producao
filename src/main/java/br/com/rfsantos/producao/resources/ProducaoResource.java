@@ -68,6 +68,7 @@ public class ProducaoResource {
 			modelAndView.addObject("filtro", filtro);
 			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
 			modelAndView.addObject(new Producao());	
+			modelAndView.addObject(new ProdDefeito());
 			
 			return modelAndView;			
 		}

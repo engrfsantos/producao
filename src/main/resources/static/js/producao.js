@@ -6,7 +6,7 @@ $('#inputLeitura').on('blur', function(){
 
 $(function(){
 $('#frmProducao').submit(function(event){	 
-	 alert($("#producaoID").val());
+	 //alert($("#producaoID").val());
 	}); 
 });
 
