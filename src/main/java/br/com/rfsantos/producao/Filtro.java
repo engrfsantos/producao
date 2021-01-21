@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import br.com.rfsantos.producao.domain.Identificador;
 import br.com.rfsantos.producao.domain.Usuario;
 
 

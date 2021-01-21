@@ -1,6 +1,6 @@
 $(document).ready(function(){
         	
-        	
+/*        	
 $(function buscarEmpresa() {
         $.ajax({
             type: "GET",
@@ -9,14 +9,14 @@ $(function buscarEmpresa() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                alert(data.Cnpj);
+                alert(data.descBreve);
             },
             error: function () {
                 alert("Erro");
             }
         });
 
-    });        	
+    });  */      	
         	
 $('#inputLeitura').on('blur', function(){
 	 //validar a leitura	 
