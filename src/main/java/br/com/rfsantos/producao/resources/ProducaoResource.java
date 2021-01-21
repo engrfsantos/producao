@@ -24,29 +24,24 @@ import br.com.rfsantos.producao.sevices.ProducaoService;
 @RequestMapping("/producoes")
 public class ProducaoResource {
 
-	private Usuario usuario = new Usuario("2320", "PROD", "Reginaldo", "A", "franco", "A","A");
-	
-	private Filtro filtro = new Filtro("PROD", usuario);
-	
 	@Autowired
 	private ProducaoService producoesService;
 	
 	@Autowired
 	private ProdDefeitoService prodDefeitoService;
 	
-
 	@Autowired
 	private LocalService locais;	
 	
 	@Autowired
-	private IdentificadorService identificadores;	
+	private IdentificadorService identificadores;
 	
-	/*
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ModelAndView buscarProducao(@PathVariable Long id) throws ParseException {
-		ModelAndView modelAndView = new ModelAndView("ListaProducoes");		
-	}*/
-		
+	@Autowired
+	private Usuario usuario;
+	
+	@Autowired
+	private Filtro filtro;
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id,
 										@RequestParam(value="local", required = false) String local,
@@ -54,7 +49,6 @@ public class ProducaoResource {
 										@RequestParam(value="dt", required = false) String dt, 
 										@RequestParam(value="dtf", required = false) String dtf) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
-		
 		filtro.setDtS(dt);
 		filtro.setDtfS(dtf);
 		filtro.setLocal(local);

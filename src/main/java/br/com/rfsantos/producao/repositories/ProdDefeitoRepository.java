@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import br.com.rfsantos.producao.domain.ProdDefeito;
-import br.com.rfsantos.producao.domain.Producao;
 
 public interface ProdDefeitoRepository extends JpaRepository<ProdDefeito, Long> {
 

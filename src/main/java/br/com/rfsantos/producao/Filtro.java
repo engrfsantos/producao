@@ -15,10 +15,8 @@ public class Filtro{
 	private String local;
 	private String identificador;
 	private Usuario usuario;
-	boolean periodoFiltrado;
 	boolean temFiltro;
-	boolean setorFiltrado;
-	boolean usuarioFiltrado;
+	boolean periodoFiltrado;	
 	
 	static private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -28,7 +26,7 @@ public class Filtro{
 	public Filtro(String local, Usuario usuario) {
 		if (!usuario.equals(null))
 			this.usuario=usuario;
-		if (!local.equals(""))
+		if (!local.equals("") & local!=null)
 			this.local = local;
 	}
 	
@@ -67,7 +65,7 @@ public class Filtro{
 			this.periodoFiltrado = false;
 			this.dt = formatter.parse(String.format(sDt, formatter));			
 			this.dtf = this.dt;
-			dtTodtS();
+			dtTodtS();			
 			return;
 		}
 		
@@ -76,16 +74,13 @@ public class Filtro{
 			this.periodoFiltrado = true;
 			this.dt = formatter.parse(String.format(sDt, formatter));			
 			this.dtf = formatter.parse(String.format(sDtf, formatter));	
-			dtTodtS();
+			dtTodtS();			
 			return;
 		}
 			
 		}
 	
-
-	
-
-	private void dtTodtS() {
+		private void dtTodtS() {
 		if (dt!=null)
 			this.dtS = formatter.format(this.dt);
 		else
@@ -98,7 +93,7 @@ public class Filtro{
 		
 	}
 	
-	public Date getDt() {
+	public Date getDt() {		
 		return dt;
 	}	
 	public String getDtS() {		
@@ -146,22 +141,6 @@ public class Filtro{
 		this.temFiltro = temFiltro;
 	}
 
-	public boolean isSetorFiltrado() {
-		return setorFiltrado;
-	}
-
-	public void setSetorFiltrado(boolean setorFiltrado) {
-		this.setorFiltrado = setorFiltrado;
-	}
-
-	public boolean isUsuarioFiltrado() {
-		return usuarioFiltrado;
-	}
-
-	public void setUsuarioFiltrado(boolean usuarioFiltrado) {
-		this.usuarioFiltrado = usuarioFiltrado;
-	}
-
 	public void setDtS(String dtS) {
 		this.dtS = dtS;
 	}
@@ -182,8 +161,7 @@ public class Filtro{
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {		
-		this.usuarioFiltrado = (usuario.equals(null));
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

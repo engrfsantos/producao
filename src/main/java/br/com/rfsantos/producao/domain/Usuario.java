@@ -1,7 +1,13 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name="ts01_usuario")
@@ -10,24 +16,20 @@ public class Usuario implements Serializable {
 
 	@Id	
 	private String re;
-
 	private String local;
-
 	private String nome;
-
 	@Column(columnDefinition = "bpchar", length=1)
 	private String perfil;
-
-	private String senha;
-	
+	private String senha;	
 	@Column(columnDefinition = "bpchar", length=1)
 	private String status;
-
-	private String usuario;
+	@Column(name="usuario")
+	private String login;
 
 	public Usuario() {
+		
 	}
-	
+
 	public Usuario(String re, String local, String nome, String perfil, String senha, String status, String usuario) {
 		super();
 		this.re = re;
@@ -36,65 +38,104 @@ public class Usuario implements Serializable {
 		this.perfil = perfil;
 		this.senha = senha;
 		this.status = status;
-		this.usuario = usuario;
+		this.login = usuario;
 	}
-
 
 
 	public String getRe() {
-		return this.re;
+		return re;
 	}
+
 
 	public void setRe(String re) {
 		this.re = re;
 	}
 
+
 	public String getLocal() {
-		return this.local;
+		return local;
 	}
+
 
 	public void setLocal(String local) {
 		this.local = local;
 	}
 
+
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
+
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+
 	public String getPerfil() {
-		return this.perfil;
+		return perfil;
 	}
+
 
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
 
+
 	public String getSenha() {
-		return this.senha;
+		return senha;
 	}
+
 
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
+
 	public String getStatus() {
-		return this.status;
+		return status;
 	}
+
 
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public String getUsuario() {
-		return this.usuario;
+
+	public String getLogin() {
+		return login;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((re == null) ? 0 : re.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (re == null) {
+			if (other.re != null)
+				return false;
+		} else if (!re.equals(other.re))
+			return false;
+		return true;
+	}
+	
 }
