@@ -18,8 +18,8 @@ public interface ProducaoRepository extends JpaRepository<Producao, Long> {
 	@Query(value = "SELECT u from Producao u WHERE u.id >= ((select Max(id) from Producao u)-2) order by u.dt DESC, u.hr DESC ")
 	List<Producao> producoesHoje();
 
-	@Query(value = "SELECT u from Producao u WHERE u.dt = :dt order by u.dt DESC, u.hr DESC ")
-	List<Producao> producoesData(@Param("dt") Date dt);
+	@Query(value = "SELECT u from Producao u WHERE u.dt = :dt and u.re = :re and u.local = :local and u.identificador = :identificador order by u.dt DESC, u.hr DESC ")
+	List<Producao> producoesData(@Param("dt") Date dt, @Param("re") String re, @Param("local") String local, @Param("identificador") String identificador);
 
 	@Query(value = "SELECT u from Producao u WHERE u.dt <= :dt order by u.dt DESC, u.hr DESC ")	
 	List<Producao> producoesAte(@Param("dt") Date date);
@@ -30,6 +30,4 @@ public interface ProducaoRepository extends JpaRepository<Producao, Long> {
 	@Query(value = "SELECT u from Producao u WHERE u.id = :producaoId order by u.dt DESC, u.hr DESC ")
 	List<Producao> producoesId(@Param("producaoId") Long producaoId);
 	
-	
-
 }

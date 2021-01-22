@@ -82,14 +82,14 @@ public class ProducaoResource {
 				
 				//dtf é nulo - somente dia selecionado				
 				if ((dt!=null)&(dtf==null)) {		
-					modelAndView.addObject("producoes", producoesService.producoesData(filtro.getDt())); }
+					modelAndView.addObject("producoes", producoesService.producoesData(filtro)); }
 				 
 				if ((dt!=null)&(dtf!=null)) {		
 					modelAndView.addObject("producoes", producoesService.producoesPeriodo(filtro.getDt(), filtro.getDtf())); }
 				} 
 
 			if (!filtro.isbPeriodo()) {
-					modelAndView.addObject("producoes", producoesService.producoesData(filtro.getDt())); }
+				modelAndView.addObject("producoes", producoesService.producoesData(filtro));  }
 		}
 	
 		modelAndView.addObject("locais", locais.listar());

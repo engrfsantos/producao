@@ -46,15 +46,16 @@ public class LancamentosResource {
 										@RequestParam(value="local", required = false) String local,
 										@RequestParam(value="re", required = false) String re,
 										@RequestParam(value="identificador", required = false) String identificador,
-										@RequestParam(value="dt", required = false) String dt) throws ParseException {		
+										@RequestParam(value="dt", required = false) String dtS) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("Lancamentos");
-		if (dt!="" & dt!=null)
-			filtro.setDtS(dt);
+		if (dtS!="" & dtS!=null)
+			this.filtro.setDtS(dtS);
 		else
-			filtro.setDt(new Date());
-		filtro.setLocal(local);
-		filtro.setIdentificador(identificador);
-		filtro.setUsuario(usuario);
+			this.filtro.setDt(new Date());
+		
+		this.filtro.setLocal(local);
+		this.filtro.setIdentificador(identificador);
+		this.filtro.setUsuario(usuario);
 		
 		if (id!=null & id!="") { // & !id.isEmpty()) {
 			long producaoIdL = Long.parseLong(id);						
@@ -70,8 +71,8 @@ public class LancamentosResource {
 		
 		
 		//sem filtro dt e dtf são nulos
-		if ((dt!=null)) 
-			modelAndView.addObject("producoes", producoesService.producoesData(filtro.getDt())); 
+		if ((dtS!=null)) 
+			modelAndView.addObject("producoes", producoesService.producoesData(filtro)); 
 		 else 
 			modelAndView.addObject("producoes", producoesService.producoesHoje());
 				

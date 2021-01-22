@@ -28,29 +28,30 @@ xmlns:th="http://www.thymeleaf.org">
 	
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
-			<h1 class="panel-title">Filtros</h1>
-			<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/lancamentos}" style="margin: 20px 0">			
-			<div class="form-group">	
 			
-			<label for="local">Usuario:</label>
-			<input type="text" class="form-control" name="usuario" th:value="${filtro.usuario.nome}">
-  									
-			<label for="local">Local:</label>			
- 			<select id="locais" class="form-control" list="locais" name="local" th:value="${filtro.local}">					
-				<OPTION  th:each="local : ${locais}" th:text="${local.desc}">							
-			</select>	
-						
-			<label for="identificador">Identificador:</label>			
-			<select id="identificadores" class="form-control" name="identificador" th:value="${filtro.identificador}">					
-				<OPTION  th:each="identificador : ${identificadores}"  th:text="${identificador.id}" >  				
-			</select>				
+			<h1 class="panel-title">Filtros</h1>			
+			<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/lancamentos}" style="margin: 20px 0">			
+				<div class="form-group">					
+					<label for="local">Usuario: </label>
+					
+					<input type="text" name="re" th:text="${filtro.usuario.re}" th:value="${filtro.usuario.re}" >
+		  									
+					<label for="local">Local:</label>			
+		 			<select id="locai" class="form-control" name="local" th:value="${filtro.local}">					
+						<OPTION  th:each="local : ${locais}" th:text="${local.desc}">							
+					</select>	
+								
+					<label for="identificador">Identificador:</label>			
+					<select id="identificadore" class="form-control" name="identificador" th:value="${filtro.identificador}">					
+						<OPTION  th:each="identificador : ${identificadores}"  th:text="${identificador.id}" >  				
+					</select>				
+				
+					<label for="dt">Data:</label>
+					<input type="text" name="dt" id="dt" class="form-control" style="width:100px;" th:value="${filtro.dtS}" >						
+				</div>
 		
-			<label for="dt">Data:</label>
-			<input type="text" name="dt" id="dt" class="form-control" style="width:100px;" th:value="${filtro.dtS}">						
-		</div>
-		
-		<button type="submit" class="btn btn-primary" style="background: gray; height: 30px;">Aplicar</button>
-			</form>
+				<button type="submit" class="btn btn-primary" style="background: gray; height: 30px;">Aplicar</button>				
+			</form>			
 		</div>
 	</div>
 
@@ -66,8 +67,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<td> <button type="submit" class="btn btn-primary" style="background: orange; height: 30px;">Retrabalho</button> </td>
 						<td> <button type="submit" class="btn btn-primary" style="background: grey; height: 30px;">Sem Defeito</button> </td>
 					</tr>
-				</table>
-		
+				</table>		
 			</form>
 		</div>		 	
 	</div>

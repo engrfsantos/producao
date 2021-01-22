@@ -141,8 +141,9 @@ public class Filtro{
 		this.temFiltro = temFiltro;
 	}
 
-	public void setDtS(String dtS) {
+	public void setDtS(String dtS) throws ParseException {
 		this.dtS = dtS;
+		this.dt = formatter.parse(String.format(dtS, formatter));
 	}
 
 	public void setDtfS(String dtfS) {

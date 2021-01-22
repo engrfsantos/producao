@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Entity
 @Table(name="ts01_usuario")
 public class Usuario implements Serializable {
@@ -16,21 +14,20 @@ public class Usuario implements Serializable {
 
 	@Id	
 	private String re;
-	private String local;
-	private String nome;
-	@Column(columnDefinition = "bpchar", length=1)
-	private String perfil;
-	private String senha;	
-	@Column(columnDefinition = "bpchar", length=1)
-	private String status;
 	@Column(name="usuario")
 	private String login;
-
+	private String senha;	
+	private String nome;
+	@Column(columnDefinition = "bpchar", length=1)
+	private String status;	
+	@Column(columnDefinition = "bpchar", length=1)
+	private String perfil;
+	private String local;	
 	public Usuario() {
 		
 	}
 
-	public Usuario(String re, String local, String nome, String perfil, String senha, String status, String usuario) {
+	public Usuario(String re, String usuario, String senha, String nome, String status, String perfil, String local) {
 		super();
 		this.re = re;
 		this.local = local;
