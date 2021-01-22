@@ -5,7 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import br.com.rfsantos.producao.domain.Usuario;
 
@@ -16,7 +15,7 @@ public class ProducaoSBApplication   implements CommandLineRunner {
 		SpringApplication.run(ProducaoSBApplication.class, args);
 		
 	}
-
+	@
 	@Autowired
 	private Usuario usuario;
 	
