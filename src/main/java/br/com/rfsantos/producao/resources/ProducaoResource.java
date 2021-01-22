@@ -53,6 +53,7 @@ public class ProducaoResource {
 		filtro.setDtfS(dtf);
 		filtro.setLocal(local);
 		filtro.setIdentificador(identificador);
+		filtro.setUsuario(usuario);
 		
 		if (id!=null & id!="") { // & !id.isEmpty()) {
 			long producaoIdL = Long.parseLong(id);						
