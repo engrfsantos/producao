@@ -1,6 +1,7 @@
 package br.com.rfsantos.producao.resources;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
+import br.com.rfsantos.producao.domain.Produto;
 import br.com.rfsantos.producao.domain.Usuario;
-import br.com.rfsantos.producao.sevices.IdentificadorService;
 import br.com.rfsantos.producao.sevices.LocalService;
+import br.com.rfsantos.producao.sevices.PostoService;
 import br.com.rfsantos.producao.sevices.ProdDefeitoService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
+import br.com.rfsantos.producao.sevices.ProdutoService;
 
 
 @RestController
@@ -34,7 +37,7 @@ public class ProducaoResource {
 	private LocalService locais;	
 	
 	@Autowired
-	private IdentificadorService identificadores;
+	private PostoService postos;
 	
 	@Autowired
 	private Usuario usuario;
@@ -45,21 +48,21 @@ public class ProducaoResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id,
 										@RequestParam(value="local", required = false) String local,
-										@RequestParam(value="identificador", required = false) String identificador,
+										@RequestParam(value="posto", required = false) String posto,
 										@RequestParam(value="dt", required = false) String dt, 
 										@RequestParam(value="dtf", required = false) String dtf) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
 		filtro.setDtS(dt);
 		filtro.setDtfS(dtf);
 		filtro.setLocal(local);
-		filtro.setIdentificador(identificador);
+		filtro.setPosto(posto);
 		filtro.setUsuario(usuario);
 		
 		if (id!=null & id!="") { // & !id.isEmpty()) {
 			long producaoIdL = Long.parseLong(id);						
 			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
 			modelAndView.addObject("locais", locais.listar());
-			modelAndView.addObject("identificadores", identificadores.listar());
+			modelAndView.addObject("postos", postos.listar());
 			modelAndView.addObject("filtro", filtro);
 			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
 			modelAndView.addObject("producao", new Producao());		
@@ -93,7 +96,7 @@ public class ProducaoResource {
 		}
 	
 		modelAndView.addObject("locais", locais.listar());
-		modelAndView.addObject("identificadores", identificadores.listar());
+		modelAndView.addObject("postos", postos.listar());
 		modelAndView.addObject("filtro", filtro);
 		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
 					
@@ -105,6 +108,13 @@ public class ProducaoResource {
 
 	@PostMapping
 	public String salvar(Producao producao) {
+		ProdutoService produto = new ProdutoService();
+		produto.produtoEan(producao.getLeitura());
+		producao.setDt(filtro.getDt());
+		producao.setHr(new Date());
+		producao.setCodigo(producao.getLeitura());
+		
+		
 		this.producoesService.save(producao);
 		return "redirect:/producoes";
 	}

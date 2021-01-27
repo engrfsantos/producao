@@ -38,10 +38,10 @@ xmlns:th="http://www.thymeleaf.org">
 					<OPTION  th:each="local : ${locais}" th:text="${local.desc}">				
 				</datalist>	
 						
-			<label for="identificador">Identificador:</label>
-			<input class="form-control" list="identificadores" name="identificador" th:value="${filtro.identificador}">
-				<DATALIST id="identificadores" >					
-					<OPTION  th:each="identificador : ${identificadores}"  th:text="${identificador.id}" >  				
+			<label for="posto">Posto:</label>
+			<input class="form-control" list="postos" name="posto" th:value="${filtro.posto}">
+				<DATALIST id="postos" >					
+					<OPTION  th:each="posto : ${postos}"  th:text="${posto.id}" >  				
 				</DATALIST>
 				<hr>
 			<div>

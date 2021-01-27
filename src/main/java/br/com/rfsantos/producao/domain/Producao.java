@@ -43,7 +43,7 @@ public class Producao implements Serializable {
 	private Date hr;
 
 	@Column(name="td01_id")
-	private String identificador;
+	private String posto;
 
 	@Column(name="td01_leitura", columnDefinition = "bpchar", length=24)
 	private String leitura;
@@ -75,7 +75,7 @@ public class Producao implements Serializable {
 		this.descricao = descricao;
 		this.dt = dt;
 		this.hr = hr;
-		this.identificador = identificador;
+		this.posto = identificador;
 		this.leitura = leitura;
 		this.local = local;
 		this.re = re;
@@ -123,12 +123,12 @@ public class Producao implements Serializable {
 		this.hr = hr;
 	}
 
-	public String getIdentificador() {
-		return identificador;
+	public String getPosto() {
+		return posto;
 	}
 
-	public void setIdentificador(String identificador) {
-		this.identificador = identificador;
+	public void setPosto(String posto) {
+		this.posto = posto;
 	}
 
 	public String getLeitura() {

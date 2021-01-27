@@ -34,17 +34,19 @@ xmlns:th="http://www.thymeleaf.org">
 				<div class="form-group">					
 					<label for="local">Usuario: </label>
 					
-					<input type="text" name="re" th:text="${filtro.usuario.re}" th:value="${filtro.usuario.re}" >
+					<input id="local" type="text" class="form-control" name="re" th:value="${filtro.usuario.re}" style="width:50px;" >
 		  									
-					<label for="local">Local:</label>			
-		 			<select id="locai" class="form-control" name="local" th:value="${filtro.local}">					
+					<label for="locai">Local:</label>	
+					<input list="locai" name="local" class="form-control"  th:value="${filtro.local}">		
+		 			<datalist id="locai">					
 						<OPTION  th:each="local : ${locais}" th:text="${local.desc}">							
-					</select>	
+					</datalist>	
 								
-					<label for="identificador">Identificador:</label>			
-					<select id="identificadore" class="form-control" name="identificador" th:value="${filtro.identificador}">					
-						<OPTION  th:each="identificador : ${identificadores}"  th:text="${identificador.id}" >  				
-					</select>				
+					<label for="postolist">Identificador:</label>	
+					<input list="postolist" class="form-control" name="posto" th:value="${filtro.posto}">		
+					<datalist id="postolist">					
+						<OPTION  th:each="posto : ${postos}"  th:text="${posto.id}" >  				
+					</datalist>				
 				
 					<label for="dt">Data:</label>
 					<input type="text" name="dt" id="dt" class="form-control" style="width:100px;" th:value="${filtro.dtS}" >						
@@ -95,19 +97,19 @@ xmlns:th="http://www.thymeleaf.org">
 		<tbody>			
 				<tr th:each="producao : ${producoes}">
 				<form id="frmProducao" class="form-inline" method="get" th:object="${proddefeitos}" th:action="@{/lancamentos}"   style="margin: 20px 0">				
-				<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
-				<td> <Input type="text" id="id" name = "id" th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
+					<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
+					<td> <Input type="text" id="id" name = "id" th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
 				</form>														
 				<td th:text="${producao.id}"></td>
 				<td th:text="${producao.descricao}"></td>
 				<td th:text="${producao.dt}"></td>
 				<td th:text="${producao.hr}"></td>
-				<td th:text="${producao.identificador}"></td>
+				<td th:text="${producao.posto}"></td>
 				<td th:text="${producao.leitura}"></td>
 				<td th:text="${producao.local}"></td>
 				<td th:text="${producao.re}"></td>
 				<td th:text="${producao.serie}"></td>
-				<td th:text="${producao.status.descBreve}"></td>							
+				<td th:text="${producao.status}"></td>							
 				</tr>
 		
 		</tbody>

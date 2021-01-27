@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import br.com.rfsantos.producao.Filtro;
@@ -38,7 +37,7 @@ public class ProducaoService {
 	}
 
 	public List<Producao> producoesData(Filtro filtro) {
-		return repo.producoesData(filtro.getDt(), filtro.getUsuario().getRe(), filtro.getLocal(),filtro.getIdentificador() );
+		return repo.producoesData(filtro.getDt(), filtro.getUsuario().getRe(), filtro.getLocal(),filtro.getPosto() );
 	}
 
 	public List<Producao> producoesPeriodo(Date dt, Date dtf) {

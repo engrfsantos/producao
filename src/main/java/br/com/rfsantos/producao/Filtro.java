@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import br.com.rfsantos.producao.domain.Posto;
 import br.com.rfsantos.producao.domain.Usuario;
 
 
@@ -13,7 +14,7 @@ public class Filtro{
 	private String dtS;
 	private String dtfS;
 	private String local;
-	private String identificador;
+	private String posto;
 	private Usuario usuario;
 	boolean temFiltro;
 	boolean periodoFiltrado;	
@@ -166,15 +167,15 @@ public class Filtro{
 		this.usuario = usuario;
 	}
 
-	public void setIdentificador(String identificador) {
-		this.identificador = identificador;		
+	public void setPosto(String posto) {
+		this.posto = posto;		
 	}
 
-	public String getIdentificador() {
-		return this.identificador;
+	public String getPosto() {
+		return this.posto;
 	}
 
-
+	
 
 	
 			

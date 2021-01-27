@@ -14,11 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
+import br.com.rfsantos.producao.domain.Produto;
+import br.com.rfsantos.producao.domain.Status;
 import br.com.rfsantos.producao.domain.Usuario;
-import br.com.rfsantos.producao.sevices.IdentificadorService;
 import br.com.rfsantos.producao.sevices.LocalService;
+import br.com.rfsantos.producao.sevices.PostoService;
 import br.com.rfsantos.producao.sevices.ProdDefeitoService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
+import br.com.rfsantos.producao.sevices.ProdutoService;
 
 
 @RestController
@@ -32,20 +35,20 @@ public class LancamentosResource {
 	@Autowired
 	private LocalService locais;	
 	@Autowired
-	private IdentificadorService identificadores;
-	
+	private PostoService posto;	
 	@Autowired
-	private Usuario usuario;
-	
+	private Usuario usuario;	
 	@Autowired
 	private Filtro filtro;
+	@Autowired
+	private ProdutoService produtos;
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id,
 										@RequestParam(value="local", required = false) String local,
 										@RequestParam(value="re", required = false) String re,
-										@RequestParam(value="identificador", required = false) String identificador,
+										@RequestParam(value="posto", required = false) String posto,
 										@RequestParam(value="dt", required = false) String dtS) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("Lancamentos");
 		if (dtS!="" & dtS!=null)
@@ -54,14 +57,14 @@ public class LancamentosResource {
 			this.filtro.setDt(new Date());
 		
 		this.filtro.setLocal(local);
-		this.filtro.setIdentificador(identificador);
+		this.filtro.setPosto(posto);
 		this.filtro.setUsuario(usuario);
 		
 		if (id!=null & id!="") { // & !id.isEmpty()) {
 			long producaoIdL = Long.parseLong(id);						
 			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
 			modelAndView.addObject("locais", locais.listar());
-			modelAndView.addObject("identificadores", identificadores.listar());
+			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
 			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
 			modelAndView.addObject("producao", new Producao());		
@@ -78,7 +81,7 @@ public class LancamentosResource {
 				
 	
 		modelAndView.addObject("locais", locais.listar());
-		modelAndView.addObject("identificadores", identificadores.listar());
+		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
 					
@@ -88,10 +91,35 @@ public class LancamentosResource {
 		return modelAndView;
 		}
 
-	@PostMapping
-	public String salvar(Producao producao) {
-		this.producoesService.save(producao);
-		return "redirect:/lancamentos";
-	}
+@PostMapping
+public ModelAndView salvar(Producao producao) {
+	ModelAndView modelAndView = new ModelAndView("Lancamentos");
+	
+	Produto produto=produtos.produtoEan(producao.getLeitura());
+	producao.setDt(filtro.getDt());
+	producao.setHr(new Date());
+	producao.setCodigo(produto.getId());
+	producao.setDescricao(produto.getDescricao());
+	producao.setLocal(filtro.getLocal());
+	producao.setRe(filtro.getUsuario().getRe());
+	producao.setSerie(producao.getLeitura().substring(19,24));
+	Status status = new Status();
+	status.setId(1);
+	producao.setStatus(status);
+	producao.setLocal(filtro.getLocal());
+	producao.setPosto(filtro.getPosto());
+	
+	this.producoesService.save(producao);
+	
+	
+	modelAndView.addObject("producoes", producao.getId()); 
+	modelAndView.addObject("locais", locais.listar());
+	modelAndView.addObject("postos", this.posto.listar());
+	modelAndView.addObject("filtro", filtro);
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producao.getId().toString()));
+	modelAndView.addObject("producao", producao);		
+	modelAndView.addObject("proddefeito", new ProdDefeito());	
+	return modelAndView;			
+}
 
 }
