@@ -13,10 +13,17 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository repo;
 	
+	private Produto produto;
+	
 	public Produto produtoEan(String leitura){
 		String ean = leitura.substring(3,16);
-		Produto produto = repo.findEan(ean);
-		return produto;
-		
+		this.produto = repo.findEan(ean);
+		return this.produto;		
 	}
+	
+	public String getId() {
+		return this.produto.getId();
+	}
+	
+	
 }

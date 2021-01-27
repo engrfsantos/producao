@@ -27,7 +27,6 @@ public class ProducaoService {
 		return prod;
 	}	
 	
-	
 	public List<Producao> producoesHoje(){
 		return repo.producoesHoje();	
 	}

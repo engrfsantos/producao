@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.rfsantos.producao.Filtro;
+
 @Entity
 @Table(name="td01_producao")
 public class Producao implements Serializable {
@@ -64,6 +66,10 @@ public class Producao implements Serializable {
 	private Status status;
 
 	public Producao() {
+		
+	}
+	
+	public Producao(Filtro filto, String leitura) {
 		
 	}
 

@@ -107,15 +107,30 @@ public class ProducaoResource {
 		}
 
 	@PostMapping
-	public String salvar(Producao producao) {
+	public ModelAndView salvar(Producao producao) {
+		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
 		ProdutoService produto = new ProdutoService();
 		produto.produtoEan(producao.getLeitura());
+		
+		producao.setId(null);
 		producao.setDt(filtro.getDt());
 		producao.setHr(new Date());
-		producao.setCodigo(producao.getLeitura());
+		producao.setCodigo(produto.getId());
+		producao.setLocal(filtro.getLocal());
 		
 		
 		this.producoesService.save(producao);
-		return "redirect:/producoes";
+		
+		
+		modelAndView.addObject("locais", locais.listar());
+		modelAndView.addObject("postos", postos.listar());
+		modelAndView.addObject("filtro", filtro);
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producao.getId().toString()));
+					
+		modelAndView.addObject("producao", producao);		
+		modelAndView.addObject("proddefeito", new ProdDefeito());
+		
+		
+		return modelAndView;
 	}
 }
