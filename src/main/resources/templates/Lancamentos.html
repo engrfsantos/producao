@@ -85,7 +85,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<th>Descrição</th>
 				<th>Data</th>
 				<th>Hora</th>
-				<th>ID</th>
+				<th>Posto</th>
 				<th>Leitura</th>
 				<th>Local</th>
 				<th>RE</th>
@@ -98,9 +98,9 @@ xmlns:th="http://www.thymeleaf.org">
 				<tr th:each="producao : ${producoes}">
 				<form id="frmProducao" class="form-inline" method="get" th:object="${producoes}" th:action="@{/lancamentos}"   style="margin: 20px 0">				
 					<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
-					<td> <Input type="text" name="producao.id" th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
+					<td> <Input type="text" name="prodid" th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
 				</form>														
-				<td th:text="${producao.id}"></td>
+				<td th:text="${producao.codigo}"></td>
 				<td th:text="${producao.descricao}"></td>
 				<td th:text="${producao.dt}"></td>
 				<td th:text="${producao.hr}"></td>

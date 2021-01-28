@@ -101,6 +101,7 @@ public class Filtro{
 	}	
 	public void setDt(Date dt) {				
 		this.dt = dt;
+		this.dtS =  formatter.format(this.dt);
 	}
 	
 	public Date getDtf() {

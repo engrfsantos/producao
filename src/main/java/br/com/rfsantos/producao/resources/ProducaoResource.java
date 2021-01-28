@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
-import br.com.rfsantos.producao.domain.Produto;
 import br.com.rfsantos.producao.domain.Usuario;
 import br.com.rfsantos.producao.sevices.LocalService;
 import br.com.rfsantos.producao.sevices.PostoService;
@@ -46,7 +45,7 @@ public class ProducaoResource {
 	private Filtro filtro;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id,
+	public ModelAndView listarProducao (@RequestParam(value="prodid", required = false) String prodid,
 										@RequestParam(value="local", required = false) String local,
 										@RequestParam(value="posto", required = false) String posto,
 										@RequestParam(value="dt", required = false) String dt, 
@@ -58,13 +57,13 @@ public class ProducaoResource {
 		filtro.setPosto(posto);
 		filtro.setUsuario(usuario);
 		
-		if (id!=null & id!="") { // & !id.isEmpty()) {
-			long producaoIdL = Long.parseLong(id);						
+		if (prodid!=null & prodid!="") { // & !id.isEmpty()) {
+			long producaoIdL = Long.parseLong(prodid);						
 			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
 			modelAndView.addObject("locais", locais.listar());
 			modelAndView.addObject("postos", postos.listar());
 			modelAndView.addObject("filtro", filtro);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(prodid));
 			modelAndView.addObject("producao", new Producao());		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			return modelAndView;			
@@ -98,7 +97,7 @@ public class ProducaoResource {
 		modelAndView.addObject("locais", locais.listar());
 		modelAndView.addObject("postos", postos.listar());
 		modelAndView.addObject("filtro", filtro);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(prodid));
 					
 		modelAndView.addObject("producao", new Producao());		
 		modelAndView.addObject("proddefeito", new ProdDefeito());
@@ -110,13 +109,15 @@ public class ProducaoResource {
 	public ModelAndView salvar(Producao producao) {
 		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
 		ProdutoService produto = new ProdutoService();
+		Date dt = new Date();
 		produto.produtoEan(producao.getLeitura());
 		
 		producao.setId(null);
-		producao.setDt(filtro.getDt());
-		producao.setHr(new Date());
+		producao.setDt(dt);
+		producao.setHr(dt);
 		producao.setCodigo(produto.getId());
 		producao.setLocal(filtro.getLocal());
+		producao.setPosto(filtro.getPosto());
 		
 		
 		this.producoesService.save(producao);

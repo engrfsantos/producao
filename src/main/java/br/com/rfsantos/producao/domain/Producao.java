@@ -2,6 +2,7 @@ package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -173,8 +174,8 @@ public class Producao implements Serializable {
 		return status;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(Optional<Status> optional) {
+		this.status = optional.orElse(null);
 	}
 
 	@Override

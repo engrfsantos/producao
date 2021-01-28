@@ -15,8 +15,8 @@ import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Produto;
-import br.com.rfsantos.producao.domain.Status;
 import br.com.rfsantos.producao.domain.Usuario;
+import br.com.rfsantos.producao.repositories.StatusRepository;
 import br.com.rfsantos.producao.sevices.LocalService;
 import br.com.rfsantos.producao.sevices.PostoService;
 import br.com.rfsantos.producao.sevices.ProdDefeitoService;
@@ -42,10 +42,11 @@ public class LancamentosResource {
 	private Filtro filtro;
 	@Autowired
 	private ProdutoService produtos;
-	
+	@Autowired
+	private StatusRepository status;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView listarProducao (@RequestParam(value="id", required = false) String id,
+	public ModelAndView listarProducao (@RequestParam(value="prodid", required = false) String prodid,
 										@RequestParam(value="local", required = false) String local,
 										@RequestParam(value="re", required = false) String re,
 										@RequestParam(value="posto", required = false) String posto,
@@ -55,18 +56,21 @@ public class LancamentosResource {
 			this.filtro.setDtS(dtS);
 		else
 			this.filtro.setDt(new Date());
-		
-		this.filtro.setLocal(local);
-		this.filtro.setPosto(posto);
+		if (local!="" & local!=null)
+			this.filtro.setLocal(local);
+		if (posto!="" & posto!=null)
+			this.filtro.setPosto(posto);
+
 		this.filtro.setUsuario(usuario);
 		
-		if (id!=null & id!="") { // & !id.isEmpty()) {
-			long producaoIdL = Long.parseLong(id);						
+		
+		if (prodid!=null & prodid!="") { // & !id.isEmpty()) {
+			long producaoIdL = Long.parseLong(prodid);						
 			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
 			modelAndView.addObject("locais", locais.listar());
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(prodid));
 			modelAndView.addObject("producao", new Producao());		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			return modelAndView;			
@@ -74,7 +78,7 @@ public class LancamentosResource {
 		
 		
 		//sem filtro dt e dtf são nulos
-		if ((dtS!=null)) 
+		if (dtS!=null & dtS!="") 
 			modelAndView.addObject("producoes", producoesService.producoesData(filtro)); 
 		 else 
 			modelAndView.addObject("producoes", producoesService.producoesHoje());
@@ -83,7 +87,7 @@ public class LancamentosResource {
 		modelAndView.addObject("locais", locais.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(id));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(prodid));
 					
 		modelAndView.addObject("producao", new Producao());		
 		modelAndView.addObject("proddefeito", new ProdDefeito());
@@ -103,16 +107,14 @@ public ModelAndView salvar(Producao producao) {
 	producao.setLocal(filtro.getLocal());
 	producao.setRe(filtro.getUsuario().getRe());
 	producao.setSerie(producao.getLeitura().substring(19,24));
-	Status status = new Status();
-	status.setId(1);
-	producao.setStatus(status);
+	producao.setStatus(status.findById(1));
 	producao.setLocal(filtro.getLocal());
 	producao.setPosto(filtro.getPosto());
 	
 	this.producoesService.save(producao);
 	
 	
-	modelAndView.addObject("producoes", producao.getId()); 
+	modelAndView.addObject("producoes", producao); 
 	modelAndView.addObject("locais", locais.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
