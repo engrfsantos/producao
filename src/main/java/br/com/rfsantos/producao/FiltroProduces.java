@@ -19,7 +19,7 @@ public class FiltroProduces {
 		
 	@Bean
 		public Filtro getFiltro() {		
-			return new Filtro("PROD", this.usuario);
+			return new Filtro("PROD", this.usuario, "INSP");
 		}
 
 		

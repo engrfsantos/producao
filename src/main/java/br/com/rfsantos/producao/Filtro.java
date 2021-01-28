@@ -2,14 +2,20 @@ package br.com.rfsantos.producao;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.rfsantos.producao.domain.Usuario;
+import br.com.rfsantos.producao.sevices.UsuarioService;
 
 
 public class Filtro{	
-	private Date dt;	
-	private Date dtf;
+	//private Date dt;	
+	//private Date dtf;
+	private LocalDate dt;	
+	private LocalDate dtf;
+	
 	private String dtS;
 	private String dtfS;
 	private String local;
@@ -18,10 +24,24 @@ public class Filtro{
 	boolean temFiltro;
 	boolean periodoFiltrado;	
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	static private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	//static private DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	public Filtro() {
 	}
+	
+	public Filtro(String local, Usuario usuario, String posto) {
+		if (!usuario.equals(null))
+			this.usuario=usuario;
+		if (!local.equals("") & local!=null)
+			this.local = local;
+		if (!posto.equals("") & (posto!=null))
+			this.posto = posto;
+	}
+	
 	
 	public Filtro(String local, Usuario usuario) {
 		if (!usuario.equals(null))
@@ -42,10 +62,10 @@ public class Filtro{
 			
 	public Filtro(String sDt, String sDtf) throws ParseException {
 		if ((sDt==null | sDt=="") & (sDtf==null | sDtf=="")) {
-			sDt = formatter.format(new Date());
+			sDt = formatter.format(LocalDate.now());
 			this.periodoFiltrado = false;		
 			this.temFiltro = false;
-			this.dt = formatter.parse(String.format(sDt, formatter));
+			this.dt = LocalDate.parse(String.format(sDt, formatter));
 			this.dtf = null;
 			dtTodtS();
 			return;
@@ -54,8 +74,8 @@ public class Filtro{
 		if ((sDt==null | sDt=="") & (sDtf!=null | sDtf!="")) {
 			this.temFiltro = true;
 			this.periodoFiltrado = true;
-			this.dt =  formatter.parse("01/01/1900"); //LocalDate.parse(String.format("01/01/1900", formatter));			
-			this.dtf = formatter.parse(String.format(sDtf, formatter));
+			this.dt =  LocalDate.parse("01/01/1900"); //LocalDate.parse(String.format("01/01/1900", formatter));			
+			this.dtf = LocalDate.parse(String.format(sDtf, formatter));
 			dtTodtS();
 			return;
 		}
@@ -63,7 +83,7 @@ public class Filtro{
 		if ((sDt!=null & sDt!="") & (sDtf==null | sDtf=="")) {
 			this.temFiltro = true;
 			this.periodoFiltrado = false;
-			this.dt = formatter.parse(String.format(sDt, formatter));			
+			this.dt = LocalDate.parse(String.format(sDt, formatter));			
 			this.dtf = this.dt;
 			dtTodtS();			
 			return;
@@ -72,8 +92,8 @@ public class Filtro{
 		if ((sDt!=null & sDt!="") & (sDtf!=null & sDtf!="")) {
 			this.temFiltro = true;
 			this.periodoFiltrado = true;
-			this.dt = formatter.parse(String.format(sDt, formatter));			
-			this.dtf = formatter.parse(String.format(sDtf, formatter));	
+			this.dt = LocalDate.parse(String.format(sDt, formatter));			
+			this.dtf = LocalDate.parse(String.format(sDtf, formatter));	
 			dtTodtS();			
 			return;
 		}
@@ -93,21 +113,21 @@ public class Filtro{
 		
 	}
 	
-	public Date getDt() {		
+	public LocalDate getDt() {		
 		return dt;
 	}	
 	public String getDtS() {		
 		return this.dtS;
 	}	
-	public void setDt(Date dt) {				
+	public void setDt(LocalDate dt) {				
 		this.dt = dt;
 		this.dtS =  formatter.format(this.dt);
 	}
 	
-	public Date getDtf() {
+	public LocalDate getDtf() {
 		return dtf;
 	}
-	public void setDtf(Date dtf) {
+	public void setDtf(LocalDate dtf) {
 		this.dtf = dtf;
 	}
 	public String getDtfS() {		 
@@ -144,7 +164,7 @@ public class Filtro{
 
 	public void setDtS(String dtS) throws ParseException {
 		this.dtS = dtS;
-		this.dt = formatter.parse(String.format(dtS, formatter));
+		this.dt = LocalDate.parse(String.format(dtS, formatter));
 	}
 
 	public void setDtfS(String dtfS) {
@@ -173,6 +193,10 @@ public class Filtro{
 
 	public String getPosto() {
 		return this.posto;
+	}
+
+	public void setUsuarioRe(String re) {
+		this.usuario = usuarioService.findById(re);		
 	}
 
 	

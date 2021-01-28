@@ -1,7 +1,8 @@
 package br.com.rfsantos.producao.resources;
 
 import java.text.ParseException;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -109,12 +110,13 @@ public class ProducaoResource {
 	public ModelAndView salvar(Producao producao) {
 		ModelAndView modelAndView = new ModelAndView("ListaProducoes");
 		ProdutoService produto = new ProdutoService();
-		Date dt = new Date();
+		LocalDate dt =  LocalDate.now();
+		LocalTime tm = LocalTime.now();
 		produto.produtoEan(producao.getLeitura());
 		
 		producao.setId(null);
 		producao.setDt(dt);
-		producao.setHr(dt);
+		producao.setHr(tm);
 		producao.setCodigo(produto.getId());
 		producao.setLocal(filtro.getLocal());
 		producao.setPosto(filtro.getPosto());

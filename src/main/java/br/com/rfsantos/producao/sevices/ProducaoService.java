@@ -1,6 +1,6 @@
 package br.com.rfsantos.producao.sevices;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,15 +31,15 @@ public class ProducaoService {
 		return repo.producoesHoje();	
 	}
 
-	public List<Producao> producoesAte(Date dtf) {
-		return repo.producoesAte(dtf);
+	public List<Producao> producoesAte(LocalDate localDate) {
+		return repo.producoesAte(localDate);
 	}
 
 	public List<Producao> producoesData(Filtro filtro) {
 		return repo.producoesData(filtro.getDt(), filtro.getUsuario().getRe(), filtro.getLocal(),filtro.getPosto() );
 	}
 
-	public List<Producao> producoesPeriodo(Date dt, Date dtf) {
+	public List<Producao> producoesPeriodo(LocalDate dt, LocalDate dtf) {
 		return repo.producoesPeriodo(dt, dtf);
 	}
 

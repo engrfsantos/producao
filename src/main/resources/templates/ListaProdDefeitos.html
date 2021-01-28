@@ -54,22 +54,8 @@ xmlns:th="http://www.thymeleaf.org">
 						<td th:text="${proddefeito.status}" /></td>						
 						<td th:text="${proddefeito.analise}" /></td>
 						<td th:text="${proddefeito.reparo}" /></td>						 
-					</tr>				 	
-				<form class="form-inline" method="GET" th:object="${proddefeito}" th:action="@{/proddefeitos}" style="margin: 1px 0">
-					<tr>						
-						<td><input type="text" name="prodDefeitoId" class="form-control" placeholder="prodDefeitoId" th:value="${proddefeito.prodDefeitoId}"/></td>
-						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${proddefeito.producaoId}"  /> </td>
-						<td><input type="text" name="defeitoId" class="form-control" placeholder="defeitoId" th:value="${proddefeito.defeitoId}"  /></td>						
-						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${proddefeito.dt}" /></td>
-						<td><input type="text" name="hr" class="form-control" placeholder="hr" th:value="${proddefeito.hr}" /></td>						
-						<td><input type="text" name="serie" class="form-control" placeholder="serie" th:value="${proddefeito.serie}" /></td>
-						<td><input type="text" name="status" class="form-control" placeholder="status" th:value="${proddefeito.status}" /></td>						
-						<td><input type="text" name="analise" class="form-control" placeholder="analise" th:value="${proddefeito.analise}" /></td>
-						<td><input type="text" name="reparo" class="form-control" placeholder="reparo" th:value="${proddefeito.reparo}" /></td>										
-					</tr>				
-					<button type="submit" class="btn btn-primary" style="background: green; height: 30px;">Enviar</button>
-					<button type="submit" class="btn btn-primary" style="background: gray; height: 30px;">Limpar</button>
-				</form>  
+					</tr>			 	
+				  
 			</tbody>				
 		</table>
 	</div>

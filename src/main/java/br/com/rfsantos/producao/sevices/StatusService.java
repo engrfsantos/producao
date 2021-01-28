@@ -19,5 +19,9 @@ public class StatusService {
 		return obj;
 	}
 	
-	
+	public Status findById(Integer id){
+		Status status = repo.findById(id).orElse(null);
+		return status;
+	}
+		
 }

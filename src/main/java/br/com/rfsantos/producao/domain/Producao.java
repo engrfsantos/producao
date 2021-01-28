@@ -1,8 +1,8 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,14 +34,16 @@ public class Producao implements Serializable {
 	@Column(name="td01_descricao")
 	private String descricao;
 
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="td01_dt")
-	private Date dt;
+	//private Date dt;
+	private LocalDate dt;
 
-	@Temporal(TemporalType.TIME)
+	//@Temporal(TemporalType.TIME)
 	@Column(name="td01_hr")
-	private Date hr;
+	//private Date hr;
+	private LocalTime hr;
 
 	@Column(name="td01_id")
 	private String posto;
@@ -74,7 +74,10 @@ public class Producao implements Serializable {
 		
 	}
 
-	public Producao(Long id, String codigo, String descricao, Date dt, Date hr, String identificador, String leitura,
+	//public Producao(Long id, String codigo, String descricao, Date dt, Date hr, String identificador, String leitura,
+		//	String local, String re, String serie, Status status) {
+	
+	public Producao(Long id, String codigo, String descricao, LocalDate dt, LocalTime hr, String identificador, String leitura,
 			String local, String re, String serie, Status status) {
 		super();
 		this.id = id;
@@ -114,19 +117,24 @@ public class Producao implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Date getDt() {
+	//public Date getDt() {
+	public LocalDate getDt() {
+	
 		return dt;
 	}
 
-	public void setDt(Date dt) {
+	//public void setDt(Date dt) {
+	public void setDt(LocalDate dt) {
 		this.dt = dt;
 	}
 
-	public Date getHr() {
+	//public Date getHr() {
+	public LocalTime getHr() {
 		return hr;
 	}
 
-	public void setHr(Date hr) {
+	//public void setHr(Date hr) {
+	public void setHr(LocalTime hr) {
 		this.hr = hr;
 	}
 
@@ -174,8 +182,8 @@ public class Producao implements Serializable {
 		return status;
 	}
 
-	public void setStatus(Optional<Status> optional) {
-		this.status = optional.orElse(null);
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override

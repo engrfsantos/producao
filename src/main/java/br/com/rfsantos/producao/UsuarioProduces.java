@@ -9,16 +9,18 @@ import br.com.rfsantos.producao.domain.Usuario;
 public class UsuarioProduces {
 
 	
+	
 	public UsuarioProduces() {
 	}
 		
 		@Bean
-		public Usuario getUsuario() {		
-			//					re,   usuario,      senha, nome, status, perfil, local) {
-			return new Usuario("146", "carlos146", "146", "Cadu", "A",   "O",   "PROD");			
+		public Usuario getUsuario() {
+			return new Usuario("2320", "reginaldo2320", "franco", "Reginaldo", "A",   "A",   "INSP");			
 		}
 
-			
+		public Usuario setUsuario(Usuario usuario) {
+			return new Usuario(usuario);
+		}
 
 		
 		

@@ -39,6 +39,17 @@ public class Usuario implements Serializable {
 	}
 
 
+	public Usuario(Usuario usuario) {
+		super();
+		this.re = usuario.getRe();
+		this.local = usuario.getLocal();
+		this.nome = usuario.getNome();
+		this.perfil = usuario.getPerfil();
+		this.senha = usuario.getSenha();
+		this.status = usuario.getStatus();
+		this.login = usuario.getLogin();
+	}
+
 	public String getRe() {
 		return re;
 	}

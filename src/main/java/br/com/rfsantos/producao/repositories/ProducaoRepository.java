@@ -1,6 +1,6 @@
 package br.com.rfsantos.producao.repositories;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,13 +19,13 @@ public interface ProducaoRepository extends JpaRepository<Producao, Long> {
 	List<Producao> producoesHoje();
 
 	@Query(value = "SELECT u from Producao u WHERE u.dt = :dt and u.re = :re and u.local = :local and u.posto = :posto order by u.dt DESC, u.hr DESC ")
-	List<Producao> producoesData(@Param("dt") Date dt, @Param("re") String re, @Param("local") String local, @Param("posto") String setor);
+	List<Producao> producoesData(@Param("dt") LocalDate localDate, @Param("re") String re, @Param("local") String local, @Param("posto") String setor);
 
 	@Query(value = "SELECT u from Producao u WHERE u.dt <= :dt order by u.dt DESC, u.hr DESC ")	
-	List<Producao> producoesAte(@Param("dt") Date date);
+	List<Producao> producoesAte(@Param("dt") LocalDate localDate);
 
 	@Query(value = "SELECT u from Producao u WHERE u.dt between :dt and :dtf order by u.dt DESC, u.hr DESC ")
-	List<Producao> producoesPeriodo(@Param("dt") Date dt, @Param("dtf") Date dtf);
+	List<Producao> producoesPeriodo(@Param("dt") LocalDate dt, @Param("dtf") LocalDate dtf);
 
 	@Query(value = "SELECT u from Producao u WHERE u.id = :producaoId order by u.dt DESC, u.hr DESC ")
 	List<Producao> producoesId(@Param("producaoId") Long producaoId);
