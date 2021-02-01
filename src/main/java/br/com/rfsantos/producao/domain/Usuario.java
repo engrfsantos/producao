@@ -13,60 +13,60 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id	
-	private String re;
+	private String id;
 	@Column(name="usuario")
 	private String login;
 	private String senha;	
 	private String nome;
 	@Column(columnDefinition = "bpchar", length=1)
-	private String condicao;	
+	private String condicaoId;	
 	@Column(columnDefinition = "bpchar", length=1)
 	private String perfil;
-	private String local;	
+	private String setor_id;	
 	public Usuario() {
 		
 	}
 
 	public Usuario(String re, String usuario, String senha, String nome, String condicao, String perfil, String local) {
 		super();
-		this.re = re;
-		this.local = local;
+		this.id = re;
+		this.setor_id = local;
 		this.nome = nome;
 		this.perfil = perfil;
 		this.senha = senha;
-		this.condicao = condicao;
+		this.condicaoId = condicao;
 		this.login = usuario;
 	}
 
 
 	public Usuario(Usuario usuario) {
 		super();
-		this.re = usuario.getRe();
-		this.local = usuario.getLocal();
+		this.id = usuario.getRe();
+		this.setor_id = usuario.getLocal();
 		this.nome = usuario.getNome();
 		this.perfil = usuario.getPerfil();
 		this.senha = usuario.getSenha();
-		this.condicao = usuario.getCondicao();
+		this.condicaoId = usuario.getCondicao();
 		this.login = usuario.getLogin();
 	}
 
 	public String getRe() {
-		return re;
+		return id;
 	}
 
 
 	public void setRe(String re) {
-		this.re = re;
+		this.id = re;
 	}
 
 
 	public String getLocal() {
-		return local;
+		return setor_id;
 	}
 
 
 	public void setLocal(String local) {
-		this.local = local;
+		this.setor_id = local;
 	}
 
 
@@ -101,12 +101,12 @@ public class Usuario implements Serializable {
 
 
 	public String getCondicao() {
-		return condicao;
+		return condicaoId;
 	}
 
 
 	public void setCondicao(String condicao) {
-		this.condicao = condicao;
+		this.condicaoId = condicao;
 	}
 
 
@@ -124,7 +124,7 @@ public class Usuario implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((re == null) ? 0 : re.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -138,10 +138,10 @@ public class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (re == null) {
-			if (other.re != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!re.equals(other.re))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

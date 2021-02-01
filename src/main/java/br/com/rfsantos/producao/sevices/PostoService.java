@@ -18,4 +18,9 @@ public class PostoService {
 		List<Posto> obj = repo.findAll();
 		return obj;		
 	}	
+	
+	public Posto findById(String id){
+		Posto obj = repo.findById(id).orElse(null);
+		return obj;
+	}
 }

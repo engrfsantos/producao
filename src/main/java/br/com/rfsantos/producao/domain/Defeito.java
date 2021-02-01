@@ -24,11 +24,11 @@ public class Defeito implements Serializable {
 	@Column(name="descricao")
 	private String descricao;
 
-	@Column(name="ean")
-	private String ean;
+	@Column(name="ean_id")
+	private String eanId;
 
-	@Column(name="grupo")
-	private String grupo;
+	@Column(name="grupo_id")
+	private String grupoId;
 
 	public Defeito() {
 	}
@@ -37,8 +37,8 @@ public class Defeito implements Serializable {
 		super();
 		this.id = id;
 		this.descricao = descricao;
-		this.ean = ean;
-		this.grupo = grupo;
+		this.eanId = ean;
+		this.grupoId = grupo;
 	}
 
 	public Long getId() {
@@ -58,19 +58,19 @@ public class Defeito implements Serializable {
 	}
 
 	public String getEan() {
-		return this.ean;
+		return this.eanId;
 	}
 
 	public void setEan(String ean) {
-		this.ean = ean;
+		this.eanId = ean;
 	}
 
 	public String getGrupo() {
-		return this.grupo;
+		return this.grupoId;
 	}
 
 	public void setGrupo(String grupo) {
-		this.grupo = grupo;
+		this.grupoId = grupo;
 	}
 
 	@Override

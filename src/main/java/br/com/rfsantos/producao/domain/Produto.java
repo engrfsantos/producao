@@ -16,8 +16,8 @@ public class Produto implements Serializable {
 	@Column(name="id", columnDefinition = "bpchar", length=15)
 	private String id;
 
-	@Column(name="cod_barras")
-	private String codBarras;
+	@Column(name="ean")
+	private String ean;
 
 	@Column(name="desc_esp")
 	private String descEsp;
@@ -40,7 +40,7 @@ public class Produto implements Serializable {
 	public Produto(String id, String codBarras, String descEsp, String descricao, String grupo, String narrativa,
 			String unidade) {
 		this.id = id;
-		this.codBarras = codBarras;
+		this.ean = codBarras;
 		this.descEsp = descEsp;
 		this.descricao = descricao;
 		this.grupoId = grupo;
@@ -57,11 +57,11 @@ public class Produto implements Serializable {
 	}
 
 	public String getCodBarras() {
-		return codBarras;
+		return ean;
 	}
 
 	public void setCodBarras(String codBarras) {
-		this.codBarras = codBarras;
+		this.ean = codBarras;
 	}
 
 	public String getDescEsp() {

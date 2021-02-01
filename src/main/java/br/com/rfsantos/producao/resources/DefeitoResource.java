@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rfsantos.producao.domain.Producao;
-import br.com.rfsantos.producao.sevices.ProducaoService;
+import br.com.rfsantos.producao.domain.Defeito;
+import br.com.rfsantos.producao.sevices.DefeitoService;
 
 @RestController
-@RequestMapping(value="/producao")	
-public class ProducaoResource {
+@RequestMapping(value="/defeito")	
+public class DefeitoResource {
 	
 	@Autowired
-	private ProducaoService service;	
+	private DefeitoService service;	
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> list(){
-		List<Producao> obj = service.listar();
+		List<Defeito> obj = service.listar();
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Long id){
-		Producao obj = service.findById(id);
+		Defeito obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	

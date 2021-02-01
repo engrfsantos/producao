@@ -18,11 +18,11 @@ public class Posto implements Serializable {
 	@Column(name="descricao")
 	private String descricao;
 
-	@Column(name="setor")
-	private String setor;
+	@Column(name="setor_id")
+	private String setorId;
 
-	@Column(name="condicao")
-	private String condicao;
+	@Column(name="condicao_id")
+	private String condicaoId;
 
 	public Posto() {
 	}
@@ -32,8 +32,8 @@ public class Posto implements Serializable {
 		this.id = id;
 		this.descBreve = descBreve;
 		this.descricao = descricao;
-		this.setor = setor;
-		this.condicao = condicao;
+		this.setorId = setor;
+		this.condicaoId = condicao;
 	}
 
 	public String getId() {
@@ -61,19 +61,19 @@ public class Posto implements Serializable {
 	}
 
 	public String getLocal() {
-		return setor;
+		return setorId;
 	}
 
 	public void setLocal(String local) {
-		this.setor = local;
+		this.setorId = local;
 	}
 
 	public String getStatus() {
-		return condicao;
+		return condicaoId;
 	}
 
 	public void setStatus(String status) {
-		this.condicao = status;
+		this.condicaoId = status;
 	}
 
 	@Override

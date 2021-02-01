@@ -28,8 +28,8 @@ public class Producao implements Serializable {
 	@Column(name="id", columnDefinition = "NUMERIC(19,0)")
 	private Long id;
 
-	@Column(name="cod_produto")
-	private String codigo;
+	@Column(name="produto_id")
+	private String produtoId;
 
 	@Column(name="descricao")
 	private String descricao;
@@ -55,8 +55,8 @@ public class Producao implements Serializable {
 	@Column(name="setor_id")
 	private String setorId;
 
-	@Column(name="re")
-	private String re;
+	@Column(name="usuario_id")
+	private String usuarioId;
 
 	@Column(name="serie")
 	private String serie;
@@ -81,14 +81,14 @@ public class Producao implements Serializable {
 			String setor, String re, String serie, Condicao condicao) {
 		super();
 		this.id = id;
-		this.codigo = codigo;
+		this.produtoId = codigo;
 		this.descricao = descricao;
 		this.dt = dt;
 		this.hr = hr;
 		this.postoId = posto;
 		this.leitura = leitura;
 		this.setorId = setor;
-		this.re = re;
+		this.usuarioId = re;
 		this.serie = serie;
 		this.condicaoId = condicao;
 	}
@@ -102,11 +102,11 @@ public class Producao implements Serializable {
 	}
 
 	public String getCodigo() {
-		return codigo;
+		return produtoId;
 	}
 
 	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+		this.produtoId = codigo;
 	}
 
 	public String getDescricao() {
@@ -163,11 +163,11 @@ public class Producao implements Serializable {
 	}
 
 	public String getRe() {
-		return re;
+		return usuarioId;
 	}
 
 	public void setRe(String re) {
-		this.re = re;
+		this.usuarioId = re;
 	}
 
 	public String getSerie() {

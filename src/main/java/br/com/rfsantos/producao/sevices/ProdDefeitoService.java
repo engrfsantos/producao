@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.rfsantos.producao.domain.Posto;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.repositories.ProdDefeitoRepository;
 
@@ -14,6 +15,16 @@ public class ProdDefeitoService {
 	@Autowired
 	private ProdDefeitoRepository repo;
 
+	public List<ProdDefeito> listar(){
+		List<ProdDefeito> obj = repo.findAll();
+		return obj;		
+	}	
+	
+	public ProdDefeito findById(Long id){
+		ProdDefeito obj = repo.findById(id).orElse(null);
+		return obj;
+	}
+	
 	public List<ProdDefeito> prodDefeitosProducao(Long id) {
 		return repo.prodDefeitosProducaoId(id);
 	}
