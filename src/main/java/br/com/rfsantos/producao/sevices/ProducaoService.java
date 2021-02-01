@@ -36,7 +36,7 @@ public class ProducaoService {
 	}
 
 	public List<Producao> producoesData(Filtro filtro) {
-		return repo.producoesData(filtro.getDt(), filtro.getUsuario().getRe(), filtro.getLocal(),filtro.getPosto() );
+		return repo.producoesData(filtro.getDt(), filtro.getUsuario().getRe(), filtro.getSetor(),filtro.getPosto() );
 	}
 
 	public List<Producao> producoesPeriodo(LocalDate dt, LocalDate dtf) {

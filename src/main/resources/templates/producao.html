@@ -32,10 +32,10 @@ xmlns:th="http://www.thymeleaf.org">
 			<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/producoes}" style="margin: 20px 0">
 			<div class="form-group">	
 			
-			<label for="local">Local:</label>
-			<input class="form-control" list="locais" name="local" th:value="${filtro.local}">
-  				<datalist id="locais">					
-					<OPTION  th:each="local : ${locais}" th:text="${local.desc}">				
+			<label for="setor">Setor:</label>
+			<input class="form-control" list="setores" name="setor" th:value="${filtro.setor}">
+  				<datalist id="setores">					
+					<OPTION  th:each="setor : ${setores}" th:text="${setor.desc}">				
 				</datalist>	
 						
 			<label for="posto">Posto:</label>
@@ -89,10 +89,10 @@ xmlns:th="http://www.thymeleaf.org">
 				<th>Hora</th>
 				<th>ID</th>
 				<th>Leitura</th>
-				<th>Local</th>
+				<th>Setor</th>
 				<th>RE</th>
 				<th>Série</th>
-				<th>Status</th>
+				<th>Condicao</th>
 				
 			</tr>
 		</thead>
@@ -106,14 +106,13 @@ xmlns:th="http://www.thymeleaf.org">
 				<td th:text="${producao.descricao}"></td>
 				<td th:text="${producao.dt}"></td>
 				<td th:text="${producao.hr}"></td>
-				<td th:text="${producao.identificador}"></td>
+				<td th:text="${producao.postoId}"></td>
 				<td th:text="${producao.leitura}"></td>
-				<td th:text="${producao.local}"></td>
+				<td th:text="${producao.setorId}"></td>
 				<td th:text="${producao.re}"></td>
 				<td th:text="${producao.serie}"></td>
-				<td th:text="${producao.status.descBreve}"></td>							
-				</tr>
-		
+				<td th:text="${producao.condicao.descBreve}"></td>							
+				</tr>		
 		</tbody>
 	</table>
 	</div>
@@ -141,7 +140,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<td th:text="${proddefeito.dt}" /></td>
 					<td th:text="${proddefeito.hr}" /></td>						
 					<td  th:text="${proddefeito.serie}" /></td>
-					<td th:text="${proddefeito.status.descBreve}" /></td>						
+					<td th:text="${proddefeito.condicao.descBreve}" /></td>						
 					<td th:text="${proddefeito.analise}" /></td>
 					<td th:text="${proddefeito.reparo}" /></td>						 
 				</tr>	
@@ -153,7 +152,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${proddefeito.dt}" /></td>
 						<td><input type="text" name="hr" class="form-control" placeholder="hr" th:value="${proddefeito.hr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="serie" th:value="${proddefeito.serie}" /></td>
-						<td><input type="text" name="status" class="form-control" placeholder="status" th:value="${proddefeito.status}" /></td>						
+						<td><input type="text" name="status" class="form-control" placeholder="condicao" th:value="${proddefeito.condicaoId}" /></td>						
 						<td><input type="text" name="analise" class="form-control" placeholder="analise" th:value="${proddefeito.analise}" /></td>
 						<td><input type="text" name="reparo" class="form-control" placeholder="reparo" th:value="${proddefeito.reparo}" /></td>										
 					</tr>				

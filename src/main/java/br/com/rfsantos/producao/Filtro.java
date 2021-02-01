@@ -11,16 +11,14 @@ import br.com.rfsantos.producao.sevices.UsuarioService;
 
 
 public class Filtro{	
-	//private Date dt;	
-	//private Date dtf;
 	private LocalDate dt;	
 	private LocalDate dtf;
 	
 	private String dtS;
 	private String dtfS;
-	private String local;
-	private String posto;
-	private Usuario usuario;
+	private String setorId;
+	private String postoId;
+	private Usuario usuarioId;
 	boolean temFiltro;
 	boolean periodoFiltrado;	
 	
@@ -33,31 +31,31 @@ public class Filtro{
 	public Filtro() {
 	}
 	
-	public Filtro(String local, Usuario usuario, String posto) {
+	public Filtro(String setor, Usuario usuario, String posto) {
 		if (!usuario.equals(null))
-			this.usuario=usuario;
-		if (!local.equals("") & local!=null)
-			this.local = local;
+			this.usuarioId=usuario;
+		if (!setor.equals("") & setor!=null)
+			this.setorId = setor;
 		if (!posto.equals("") & (posto!=null))
-			this.posto = posto;
+			this.postoId = posto;
 	}
 	
 	
-	public Filtro(String local, Usuario usuario) {
+	public Filtro(String setor, Usuario usuario) {
 		if (!usuario.equals(null))
-			this.usuario=usuario;
-		if (!local.equals("") & local!=null)
-			this.local = local;
+			this.usuarioId=usuario;
+		if (!setor.equals("") & setor!=null)
+			this.setorId = setor;
 	}
 	
 	public Filtro(Usuario usuario) {
 		if (!usuario.equals(null))
-			this.usuario=usuario;
+			this.usuarioId=usuario;
 	}
 	
-	public Filtro(String local) {
-		if (!local.equals(""))
-			this.local = local;
+	public Filtro(String setor) {
+		if (!setor.equals(""))
+			this.setorId = setor;
 	}
 			
 	public Filtro(String sDt, String sDtf) throws ParseException {
@@ -171,32 +169,32 @@ public class Filtro{
 		this.dtfS = dtfS;
 	}
 
-	public String getLocal() {
-		return local;
+	public String getSetor() {
+		return setorId;
 	}
 
-	public void setLocal(String local) {
-		this.local = local;
+	public void setSetor(String setor) {
+		this.setorId = setor;
 	}
 
 	public Usuario getUsuario() {
-		return usuario;
+		return usuarioId;
 	}
 
 	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+		this.usuarioId = usuario;
 	}
 
 	public void setPosto(String posto) {
-		this.posto = posto;		
+		this.postoId = posto;		
 	}
 
 	public String getPosto() {
-		return this.posto;
+		return this.postoId;
 	}
 
 	public void setUsuarioRe(String re) {
-		this.usuario = usuarioService.findById(re);		
+		this.usuarioId = usuarioService.findById(re);		
 	}
 
 	

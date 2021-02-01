@@ -1,12 +1,10 @@
 package br.com.rfsantos.producao.resources;
 
-import java.text.ParseException;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,12 +18,11 @@ public class ProdDefeitoResource {
 	@Autowired
 	private ProdDefeitoService prodDefeitoService;
 
-	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView listarProducao (@RequestParam(value="producaoId", required = false) String producaoId)
-										throws ParseException {		
+	@RequestMapping(value="/{producaoId}", method=RequestMethod.GET)
+	public ModelAndView listarProducao (@PathVariable Long producaoId) {		
 		ModelAndView modelAndView = new ModelAndView("ListaProdDefeitos");
 		
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producaoId));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producaoId));
 		
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		

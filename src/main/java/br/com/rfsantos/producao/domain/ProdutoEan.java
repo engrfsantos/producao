@@ -6,7 +6,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="ts01_produto_ean")
+@Table(name="produto_ean")
 @NamedQuery(name="ProdutoEan.findAll", query="SELECT p FROM ProdutoEan p")
 public class ProdutoEan implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -13,47 +13,78 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="ts01_grupo")
+@Table(name="grupo")
 public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name="ts01_grupo")
-	private String ts01Grupo;
+	@Column(name="id")
+	private String id;
 
-	@Column(name="ts01_descbrevgrupo")
-	private String ts01Descbrevgrupo;
+	@Column(name="desc_breve")
+	private String descBreve;
 
-	@Column(name="ts01_descgrupo")
-	private String ts01Descgrupo;
+	@Column(name="descricao")
+	private String descricao;
 
 	public Grupo() {
 	}
-
-	public String getTs01Grupo() {
-		return this.ts01Grupo;
+	
+	public Grupo(String id, String descBreve, String descricao) {
+		super();
+		this.id = id;
+		this.descBreve = descBreve;
+		this.descricao = descricao;
 	}
 
-	public void setTs01Grupo(String ts01Grupo) {
-		this.ts01Grupo = ts01Grupo;
+	public String getId() {
+		return this.id;
 	}
 
-	public String getTs01Descbrevgrupo() {
-		return this.ts01Descbrevgrupo;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public void setTs01Descbrevgrupo(String ts01Descbrevgrupo) {
-		this.ts01Descbrevgrupo = ts01Descbrevgrupo;
+	public String getDescBreve() {
+		return this.descBreve;
 	}
 
-	public String getTs01Descgrupo() {
-		return this.ts01Descgrupo;
+	public void setDescBreve(String descBreve) {
+		this.descBreve = descBreve;
 	}
 
-	public void setTs01Descgrupo(String ts01Descgrupo) {
-		this.ts01Descgrupo = ts01Descgrupo;
+	public String getDescricao() {
+		return this.descricao;
 	}
 
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Grupo other = (Grupo) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}	
 }

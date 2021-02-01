@@ -11,65 +11,73 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="td01_defeito")
+@Table(name="defeito")
 public class Defeito implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name="td01_defeito_id")
-	private Long td01DefeitoId;
+	@Column(name="id")
+	private Long id;
 
-	@Column(name="td01_descricao")
-	private String td01Descricao;
+	@Column(name="descricao")
+	private String descricao;
 
-	@Column(name="td01_ean")
-	private String td01Ean;
+	@Column(name="ean")
+	private String ean;
 
-	@Column(name="td01_grupo")
-	private String td01Grupo;
+	@Column(name="grupo")
+	private String grupo;
 
 	public Defeito() {
 	}
-
-	public Long getTd01DefeitoId() {
-		return this.td01DefeitoId;
+	
+	public Defeito(Long id, String descricao, String ean, String grupo) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.ean = ean;
+		this.grupo = grupo;
 	}
 
-	public void setTd01DefeitoId(Long td01DefeitoId) {
-		this.td01DefeitoId = td01DefeitoId;
+	public Long getId() {
+		return this.id;
 	}
 
-	public String getTd01Descricao() {
-		return this.td01Descricao;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setTd01Descricao(String td01Descricao) {
-		this.td01Descricao = td01Descricao;
+	public String getDescricao() {
+		return this.descricao;
 	}
 
-	public String getTd01Ean() {
-		return this.td01Ean;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public void setTd01Ean(String td01Ean) {
-		this.td01Ean = td01Ean;
+	public String getEan() {
+		return this.ean;
 	}
 
-	public String getTd01Grupo() {
-		return this.td01Grupo;
+	public void setEan(String ean) {
+		this.ean = ean;
 	}
 
-	public void setTd01Grupo(String td01Grupo) {
-		this.td01Grupo = td01Grupo;
+	public String getGrupo() {
+		return this.grupo;
+	}
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((td01DefeitoId == null) ? 0 : td01DefeitoId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -82,10 +90,10 @@ public class Defeito implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Defeito other = (Defeito) obj;
-		if (td01DefeitoId == null) {
-			if (other.td01DefeitoId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!td01DefeitoId.equals(other.td01DefeitoId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

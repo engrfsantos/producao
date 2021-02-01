@@ -11,15 +11,15 @@ import br.com.rfsantos.producao.domain.Producao;
 
 public interface ProducaoRepository extends JpaRepository<Producao, Long> {
 	
-	@Query(value = "SELECT u from Producao u WHERE u.id >= ((select Max(id) from Producao u)-2) and u.re = :re and u.local = :local and u.posto = :posto order by u.dt DESC, u.hr DESC ")
-	List<Producao> producoesUsuario(@Param("re") String re, @Param("local") String local, @Param("posto") String setor);
+	@Query(value = "SELECT u from Producao u WHERE u.id >= ((select Max(id) from Producao u)-2) and u.re = :re and u.setorId = :setor and u.postoId = :posto order by u.dt DESC, u.hr DESC ")
+	List<Producao> producoesUsuario(@Param("re") String re, @Param("setor") String setor, @Param("posto") String posto);
 
 	
 	@Query(value = "SELECT u from Producao u WHERE u.id >= ((select Max(id) from Producao u)-2) order by u.dt DESC, u.hr DESC ")
 	List<Producao> producoesHoje();
 
-	@Query(value = "SELECT u from Producao u WHERE u.dt = :dt and u.re = :re and u.local = :local and u.posto = :posto order by u.dt DESC, u.hr DESC ")
-	List<Producao> producoesData(@Param("dt") LocalDate localDate, @Param("re") String re, @Param("local") String local, @Param("posto") String setor);
+	@Query(value = "SELECT u from Producao u WHERE u.dt = :dt and u.re = :re and u.setorId = :setor and u.postoId = :posto order by u.dt DESC, u.hr DESC ")
+	List<Producao> producoesData(@Param("dt") LocalDate localDate, @Param("re") String re, @Param("setor") String setor, @Param("posto") String posto);
 
 	@Query(value = "SELECT u from Producao u WHERE u.dt <= :dt order by u.dt DESC, u.hr DESC ")	
 	List<Producao> producoesAte(@Param("dt") LocalDate localDate);

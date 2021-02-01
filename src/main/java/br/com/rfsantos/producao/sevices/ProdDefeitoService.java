@@ -14,13 +14,8 @@ public class ProdDefeitoService {
 	@Autowired
 	private ProdDefeitoRepository repo;
 
-	public List<ProdDefeito> prodDefeitosProducaoS(String id) {
-		long idL;
-		if(id!=null & id!="") 
-			idL = Long.parseLong(id);
-		else
-			idL = 0;
-		return repo.prodDefeitosProducaoId(idL);
+	public List<ProdDefeito> prodDefeitosProducao(Long id) {
+		return repo.prodDefeitosProducaoId(id);
 	}
 
 	public List<ProdDefeito> prodDefeitosProducao() {

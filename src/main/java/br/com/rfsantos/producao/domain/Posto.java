@@ -4,36 +4,36 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="td01_identificador")
+@Table(name="posto")
 public class Posto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="td01_id")
+	@Column(name="id")
 	private String id;
 
-	@Column(name="td01_desc_breve")
+	@Column(name="desc_breve")
 	private String descBreve;
 
-	@Column(name="td01_descricao")
+	@Column(name="descricao")
 	private String descricao;
 
-	@Column(name="td01_local")
-	private String local;
+	@Column(name="setor")
+	private String setor;
 
-	@Column(name="td01_status")
-	private String status;
+	@Column(name="condicao")
+	private String condicao;
 
 	public Posto() {
 	}
 
-	public Posto(String id, String descBreve, String descricao, String local, String status) {
+	public Posto(String id, String descBreve, String descricao, String setor, String condicao) {
 		super();
 		this.id = id;
 		this.descBreve = descBreve;
 		this.descricao = descricao;
-		this.local = local;
-		this.status = status;
+		this.setor = setor;
+		this.condicao = condicao;
 	}
 
 	public String getId() {
@@ -61,19 +61,19 @@ public class Posto implements Serializable {
 	}
 
 	public String getLocal() {
-		return local;
+		return setor;
 	}
 
 	public void setLocal(String local) {
-		this.local = local;
+		this.setor = local;
 	}
 
 	public String getStatus() {
-		return status;
+		return condicao;
 	}
 
 	public void setStatus(String status) {
-		this.status = status;
+		this.condicao = status;
 	}
 
 	@Override
@@ -100,7 +100,5 @@ public class Posto implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 
 }

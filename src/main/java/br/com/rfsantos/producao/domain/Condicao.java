@@ -7,24 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name="ts01_status")
-public class Status implements Serializable {
+@Table(name="condicao")
+public class Condicao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ts01_status")
+	@Column(name="id")
 	private Integer id;
 
-	@Column(name="ts01_desc_breve")
+	@Column(name="desc_breve")
 	private String descBreve;
 
-	@Column(name="ts01_descricao")
+	@Column(name="descricao")
 	private String descricao;
 
-	public Status() {
+	public Condicao() {
 	}
 		
-	public Status(Integer id, String descBreve, String descricao) {
+	public Condicao(Integer id, String descBreve, String descricao) {
 		this.id = id;
 		this.descBreve = descBreve;
 		this.descricao = descricao;
@@ -70,7 +70,7 @@ public class Status implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Status other = (Status) obj;
+		Condicao other = (Condicao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

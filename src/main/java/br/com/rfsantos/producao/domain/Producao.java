@@ -18,53 +18,53 @@ import org.springframework.format.annotation.DateTimeFormat;
 import br.com.rfsantos.producao.Filtro;
 
 @Entity
-@Table(name="td01_producao")
+@Table(name="producao")
 public class Producao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")	
-	@Column(name="td01_producao_id", columnDefinition = "NUMERIC(19,0)")
+	@Column(name="id", columnDefinition = "NUMERIC(19,0)")
 	private Long id;
 
-	@Column(name="td01_cod_produto")
+	@Column(name="cod_produto")
 	private String codigo;
 
-	@Column(name="td01_descricao")
+	@Column(name="descricao")
 	private String descricao;
 
 	//@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name="td01_dt")
+	@Column(name="dt")
 	//private Date dt;
 	private LocalDate dt;
 
 	//@Temporal(TemporalType.TIME)
-	@Column(name="td01_hr")
+	@Column(name="hr")
 	//private Date hr;
 	private LocalTime hr;
 
-	@Column(name="td01_id")
-	private String posto;
+	@Column(name="posto_id")
+	private String postoId;
 
-	@Column(name="td01_leitura", columnDefinition = "bpchar", length=24)
+	@Column(name="leitura", columnDefinition = "bpchar", length=24)
 	private String leitura;
 
 	//@ManyToOne
-	@Column(name="td01_local")
-	private String local;
+	@Column(name="setor_id")
+	private String setorId;
 
-	@Column(name="td01_re")
+	@Column(name="re")
 	private String re;
 
-	@Column(name="td01_serie")
+	@Column(name="serie")
 	private String serie;
 	
 	@ManyToOne
-	@JoinColumn(name="td01_status")
+	@JoinColumn(name="condicao_id")
 	//@Column(name="td01_status")
-	private Status status;
+	private Condicao condicaoId;
 
 	public Producao() {
 		
@@ -77,20 +77,20 @@ public class Producao implements Serializable {
 	//public Producao(Long id, String codigo, String descricao, Date dt, Date hr, String identificador, String leitura,
 		//	String local, String re, String serie, Status status) {
 	
-	public Producao(Long id, String codigo, String descricao, LocalDate dt, LocalTime hr, String identificador, String leitura,
-			String local, String re, String serie, Status status) {
+	public Producao(Long id, String codigo, String descricao, LocalDate dt, LocalTime hr, String posto, String leitura,
+			String setor, String re, String serie, Condicao condicao) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.dt = dt;
 		this.hr = hr;
-		this.posto = identificador;
+		this.postoId = posto;
 		this.leitura = leitura;
-		this.local = local;
+		this.setorId = setor;
 		this.re = re;
 		this.serie = serie;
-		this.status = status;
+		this.condicaoId = condicao;
 	}
 
 	public Long getId() {
@@ -139,11 +139,11 @@ public class Producao implements Serializable {
 	}
 
 	public String getPosto() {
-		return posto;
+		return postoId;
 	}
 
 	public void setPosto(String posto) {
-		this.posto = posto;
+		this.postoId = posto;
 	}
 
 	public String getLeitura() {
@@ -154,12 +154,12 @@ public class Producao implements Serializable {
 		this.leitura = leitura;
 	}
 
-	public String getLocal() {
-		return local;
+	public String getSetor() {
+		return setorId;
 	}
 
-	public void setLocal(String local) {
-		this.local = local;
+	public void setSetor(String setor) {
+		this.setorId = setor;
 	}
 
 	public String getRe() {
@@ -178,12 +178,12 @@ public class Producao implements Serializable {
 		this.serie = serie;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Condicao getCondicao() {
+		return condicaoId;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(Condicao condicao) {
+		this.condicaoId = condicao;
 	}
 
 	@Override

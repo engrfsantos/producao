@@ -17,53 +17,53 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="td01_prod_defeito")
+@Table(name="prod_defeito")
 public class ProdDefeito implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name="td01_prod_defeito_id", columnDefinition = "NUMERIC(19,0)")
+	@Column(name="id", columnDefinition = "NUMERIC(19,0)")
 	private Long id;
 
 	//@ManyToOne
 	//@JoinColumn(name="td01_producao_id") //, columnDefinition = "NUMERIC(19,0)"
-	@Column(name="td01_producao_id", columnDefinition = "NUMERIC(19,0)")
+	@Column(name="producao_id", columnDefinition = "NUMERIC(19,0)")
 	private Long producaoId;
 
 	
-	@Column(name="td01_defeito_id", columnDefinition = "NUMERIC(19,0)")
+	@Column(name="defeito_id", columnDefinition = "NUMERIC(19,0)")
 	private Long defeitoId;
 		
-	@Column(name="td01_analise")
+	@Column(name="analise")
 	private String analise;
 
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="td01_dt")	
+	@Column(name="dt")	
 	private Date dt;
 
-	@Column(name="td01_hr")
+	@Column(name="hr")
 	private Time hr;
 
 	
-	@Column(name="td01_reparo")
+	@Column(name="reparo")
 	private String reparo;
 
-	@Column(name="td01_serie")
+	@Column(name="serie")
 	private String serie;
 
 	@ManyToOne	
-	@JoinColumn(name="td01_status")
+	@JoinColumn(name="condicao_id")
 	//@Column(name="td01_status")
-	private Status status;
+	private Condicao condicaoId;
 
 	public ProdDefeito() {
 	}
 
 	public ProdDefeito(Long id, Long producaoId, Long defeitoId, String analise, Date dt, Time hr,
-			String reparo, String serie, Status status) {
+			String reparo, String serie, Condicao condicao) {
 		this.id = id;
 		this.producaoId = producaoId;
 		this.defeitoId = defeitoId;
@@ -72,7 +72,7 @@ public class ProdDefeito implements Serializable {
 		this.hr = hr;
 		this.reparo = reparo;
 		this.serie = serie;
-		this.status = status;
+		this.condicaoId = condicao;
 	}
 
 	public Long getId() {
@@ -139,12 +139,12 @@ public class ProdDefeito implements Serializable {
 		this.serie = serie;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Condicao getCondicao() {
+		return this.condicaoId;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(Condicao condicao) {
+		this.condicaoId = condicao;
 	}
 
 

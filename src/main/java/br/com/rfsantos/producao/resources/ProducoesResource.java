@@ -19,17 +19,17 @@ import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Produto;
 import br.com.rfsantos.producao.domain.Usuario;
-import br.com.rfsantos.producao.sevices.LocalService;
+import br.com.rfsantos.producao.sevices.SetorService;
 import br.com.rfsantos.producao.sevices.PostoService;
 import br.com.rfsantos.producao.sevices.ProdDefeitoService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
 import br.com.rfsantos.producao.sevices.ProdutoService;
-import br.com.rfsantos.producao.sevices.StatusService;
+import br.com.rfsantos.producao.sevices.CondicaoService;
 
 
 @RestController
-@RequestMapping("/lancamentos")
-public class LancamentosResource {
+@RequestMapping("/producoes")
+public class ProducoesResource {
 
 	static private DateFormat formatterDt = new SimpleDateFormat("yyyy-MM-dd");
 	//static private DateFormat formatterHr = new SimpleDateFormat("hh:mm:ss");
@@ -39,7 +39,7 @@ public class LancamentosResource {
 	@Autowired
 	private ProdDefeitoService prodDefeitoService;
 	@Autowired
-	private LocalService locais;	
+	private SetorService setores;	
 	@Autowired
 	private PostoService posto;	
 	@Autowired
@@ -49,21 +49,23 @@ public class LancamentosResource {
 	@Autowired
 	private ProdutoService produtos;
 	@Autowired
-	private StatusService status;
+	private CondicaoService status;
+	
+	private long producaoIdL=0;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listarProducao (@RequestParam(value="prodid", required = false) String prodid,
-										@RequestParam(value="local", required = false) String local,
+										@RequestParam(value="setor", required = false) String setor,
 										@RequestParam(value="re", required = false) String re,
 										@RequestParam(value="posto", required = false) String posto,										
 										@RequestParam(value="dt", required = false) String dtS) throws ParseException {		
-		ModelAndView modelAndView = new ModelAndView("Lancamentos");
+		ModelAndView modelAndView = new ModelAndView("Producoes");
 		if (dtS!="" & dtS!=null)
 			this.filtro.setDtS(dtS);
 		else
 			this.filtro.setDtS(formatterDt.format(new Date()));
-		if (local!="" & local!=null)
-			this.filtro.setLocal(local);
+		if (setor!="" & setor!=null)
+			this.filtro.setSetor(setor);
 		if (posto!="" & posto!=null)
 			this.filtro.setPosto(posto);
 		if (re=="" | re==null)
@@ -73,12 +75,12 @@ public class LancamentosResource {
 		
 		
 		if (prodid!=null & prodid!="") { // & !id.isEmpty()) {
-			long producaoIdL = Long.parseLong(prodid);						
+			producaoIdL = Long.parseLong(prodid);						
 			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
-			modelAndView.addObject("locais", locais.listar());
+			modelAndView.addObject("locais", setores.listar());
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(prodid));
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producaoIdL));
 			modelAndView.addObject("producao", new Producao());		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			return modelAndView;			
@@ -92,10 +94,10 @@ public class LancamentosResource {
 			modelAndView.addObject("producoes", producoesService.producoesHoje());
 				
 	
-		modelAndView.addObject("locais", locais.listar());
+		modelAndView.addObject("locais", setores.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(prodid));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producaoIdL));
 					
 		modelAndView.addObject("producao", new Producao());		
 		modelAndView.addObject("proddefeito", new ProdDefeito());
@@ -104,32 +106,32 @@ public class LancamentosResource {
 		}
 
 @PostMapping
-public ModelAndView salvar(Producao producao, @RequestParam(value="status", required = true) String status) {
+public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", required = true) String condicao) {
 	
 	
-	ModelAndView modelAndView = new ModelAndView("Lancamentos");
-	
-	Produto produto=produtos.produtoEan(producao.getLeitura());
+	ModelAndView modelAndView = new ModelAndView("Producoes");
+	String leitura = producao.getLeitura();
+	Produto produto = produtos.produtoEan(leitura);
 	
 	producao.setDt(filtro.getDt());
 	producao.setHr(LocalTime.now());
 	producao.setCodigo(produto.getId());
 	producao.setDescricao(produto.getDescricao());
-	producao.setLocal(filtro.getLocal());
+	producao.setSetor(filtro.getSetor());
 	producao.setRe(filtro.getUsuario().getRe());
 	producao.setSerie(producao.getLeitura().substring(18,24));
-	producao.setStatus(this.status.findById(Integer.parseInt(status)));
-	producao.setLocal(filtro.getLocal());
+	producao.setStatus(this.status.findById(Integer.parseInt(condicao)));
+	producao.setSetor(filtro.getSetor());
 	producao.setPosto(filtro.getPosto());
 	
 	this.producoesService.save(producao);
 	
 	
 	modelAndView.addObject("producoes", producao); 
-	modelAndView.addObject("locais", locais.listar());
+	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoS(producao.getId().toString()));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao.getId()));
 	modelAndView.addObject("producao", producao);		
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	return modelAndView;			

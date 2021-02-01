@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ts01_usuario")
+@Table(name="usuario")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class Usuario implements Serializable {
 	private String senha;	
 	private String nome;
 	@Column(columnDefinition = "bpchar", length=1)
-	private String status;	
+	private String condicao;	
 	@Column(columnDefinition = "bpchar", length=1)
 	private String perfil;
 	private String local;	
@@ -27,14 +27,14 @@ public class Usuario implements Serializable {
 		
 	}
 
-	public Usuario(String re, String usuario, String senha, String nome, String status, String perfil, String local) {
+	public Usuario(String re, String usuario, String senha, String nome, String condicao, String perfil, String local) {
 		super();
 		this.re = re;
 		this.local = local;
 		this.nome = nome;
 		this.perfil = perfil;
 		this.senha = senha;
-		this.status = status;
+		this.condicao = condicao;
 		this.login = usuario;
 	}
 
@@ -46,7 +46,7 @@ public class Usuario implements Serializable {
 		this.nome = usuario.getNome();
 		this.perfil = usuario.getPerfil();
 		this.senha = usuario.getSenha();
-		this.status = usuario.getStatus();
+		this.condicao = usuario.getCondicao();
 		this.login = usuario.getLogin();
 	}
 
@@ -100,13 +100,13 @@ public class Usuario implements Serializable {
 	}
 
 
-	public String getStatus() {
-		return status;
+	public String getCondicao() {
+		return condicao;
 	}
 
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setCondicao(String condicao) {
+		this.condicao = condicao;
 	}
 
 

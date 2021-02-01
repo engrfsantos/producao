@@ -8,30 +8,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ts01_produto")
+@Table(name="produto")
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ts01_codigo", columnDefinition = "bpchar", length=15)
+	@Column(name="id", columnDefinition = "bpchar", length=15)
 	private String id;
 
-	@Column(name="ts01_cod_barras")
+	@Column(name="cod_barras")
 	private String codBarras;
 
-	@Column(name="ts01_desc_esp")
+	@Column(name="desc_esp")
 	private String descEsp;
 
-	@Column(name="ts01_descricao")
+	@Column(name="descricao")
 	private String descricao;
 
-	@Column(name="ts01_grupo")
-	private String grupo;
+	@Column(name="grupo_id")
+	private String grupoId;
 
-	@Column(name="ts01_narrativa")
+	@Column(name="narrativa")
 	private String narrativa;
 
-	@Column(name="ts01_unidade")
+	@Column(name="unidade")
 	private String unidade;
 
 	public Produto() {
@@ -43,7 +43,7 @@ public class Produto implements Serializable {
 		this.codBarras = codBarras;
 		this.descEsp = descEsp;
 		this.descricao = descricao;
-		this.grupo = grupo;
+		this.grupoId = grupo;
 		this.narrativa = narrativa;
 		this.unidade = unidade;
 	}
@@ -81,11 +81,11 @@ public class Produto implements Serializable {
 	}
 
 	public String getGrupo() {
-		return grupo;
+		return grupoId;
 	}
 
 	public void setGrupo(String grupo) {
-		this.grupo = grupo;
+		this.grupoId = grupo;
 	}
 
 	public String getNarrativa() {
