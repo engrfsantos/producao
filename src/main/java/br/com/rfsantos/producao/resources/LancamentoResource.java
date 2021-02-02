@@ -56,10 +56,10 @@ public class LancamentoResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView listarProducao (@RequestParam(value="prodid", required = false) String prodid,
 										@RequestParam(value="setor", required = false) String setor,
-										@RequestParam(value="re", required = false) String re,
+										@RequestParam(value="nomeAcesso", required = false) String nomeAcesso,
 										@RequestParam(value="posto", required = false) String posto,										
 										@RequestParam(value="dt", required = false) String dtS) throws ParseException {		
-		ModelAndView modelAndView = new ModelAndView("Producoes");
+		ModelAndView modelAndView = new ModelAndView("Lancamento");
 		if (dtS!="" & dtS!=null)
 			this.filtro.setDtS(dtS);
 		else
@@ -68,10 +68,10 @@ public class LancamentoResource {
 			this.filtro.setSetor(setor);
 		if (posto!="" & posto!=null)
 			this.filtro.setPosto(posto);
-		if (re=="" | re==null)
+		if (nomeAcesso=="" | nomeAcesso==null)
 			this.filtro.setUsuario(usuario);
 		else
-			this.filtro.setUsuarioRe(re);
+			this.filtro.setUsuarioRe(nomeAcesso);
 		
 		
 		if (prodid!=null & prodid!="") { // & !id.isEmpty()) {
@@ -106,22 +106,24 @@ public class LancamentoResource {
 		}
 
 @PostMapping
+@RequestMapping(method=RequestMethod.POST)
 public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", required = true) String condicao) {	
 	
-	ModelAndView modelAndView = new ModelAndView("Producoes");
+	ModelAndView modelAndView = new ModelAndView("Lancamento");
 	String leitura = producao.getLeitura();
 	Produto produto = produtos.produtoEan(leitura);
 	
 	producao.setDt(filtro.getDt());
 	producao.setHr(LocalTime.now());
-	producao.setCodigo(produto.getId());
+	producao.setProdutoId(produto.getId());
 	producao.setDescricao(produto.getDescricao());
-	producao.setSetor(filtro.getSetor());
-	producao.setRe(filtro.getUsuario().getNomeAcesso());
-	producao.setSerie(producao.getLeitura().substring(18,24));
-	producao.setStatus(this.status.findById(Integer.parseInt(condicao)));
-	producao.setSetor(filtro.getSetor());
-	producao.setPosto(filtro.getPosto());
+	producao.setSetorId(filtro.getSetor());
+	producao.setUsuarioId(filtro.getUsuario().getId());
+	String serie = producao.getLeitura().substring(18,24);
+	producao.setSerie(serie);
+	producao.setCondicaoId(this.status.findById(Integer.parseInt(condicao)));
+	producao.setSetorId(filtro.getSetor());
+	producao.setPostoId(filtro.getPosto());
 	
 	this.producoesService.save(producao);	
 	

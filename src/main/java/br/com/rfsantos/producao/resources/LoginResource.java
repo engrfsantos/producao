@@ -17,15 +17,13 @@ public class LoginResource {
 	@Autowired
 	private Usuario usuario;
 	@Autowired
-	private UsuarioService usuarioService;
-	
+	private UsuarioService usuarioService;	
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView("login");
 		modelAndView.addObject("usuario", usuario);
-		return modelAndView;
-		
+		return modelAndView;		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)

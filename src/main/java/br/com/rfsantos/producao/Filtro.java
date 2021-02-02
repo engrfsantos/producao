@@ -18,7 +18,7 @@ public class Filtro{
 	private String dtfS;
 	private String setorId;
 	private String postoId;
-	private Usuario usuarioId;
+	private Usuario usuario;
 	boolean temFiltro;
 	boolean periodoFiltrado;	
 	
@@ -33,7 +33,7 @@ public class Filtro{
 	
 	public Filtro(String setor, Usuario usuario, String posto) {
 		if (!usuario.equals(null))
-			this.usuarioId=usuario;
+			this.usuario=usuario;
 		if (!setor.equals("") & setor!=null)
 			this.setorId = setor;
 		if (!posto.equals("") & (posto!=null))
@@ -43,14 +43,14 @@ public class Filtro{
 	
 	public Filtro(String setor, Usuario usuario) {
 		if (!usuario.equals(null))
-			this.usuarioId=usuario;
+			this.usuario=usuario;
 		if (!setor.equals("") & setor!=null)
 			this.setorId = setor;
 	}
 	
 	public Filtro(Usuario usuario) {
 		if (!usuario.equals(null))
-			this.usuarioId=usuario;
+			this.usuario=usuario;
 	}
 	
 	public Filtro(String setor) {
@@ -178,11 +178,11 @@ public class Filtro{
 	}
 
 	public Usuario getUsuario() {
-		return usuarioId;
+		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
-		this.usuarioId = usuario;
+		this.usuario = usuario;
 	}
 
 	public void setPosto(String posto) {
@@ -194,7 +194,7 @@ public class Filtro{
 	}
 
 	public void setUsuarioRe(String re) {
-		this.usuarioId = usuarioService.findById(re);		
+		this.usuario = usuarioService.findById(re);		
 	}
 
 	

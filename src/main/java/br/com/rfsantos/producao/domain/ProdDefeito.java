@@ -1,8 +1,8 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="prod_defeito")
@@ -39,13 +40,12 @@ public class ProdDefeito implements Serializable {
 	@Column(name="analise")
 	private String analise;
 
-	
-	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="dt")	
-	private Date dt;
+	private LocalDate dt;
 
 	@Column(name="hr")
-	private Time hr;
+	private LocalTime hr;
 
 	
 	@Column(name="reparo")
@@ -56,13 +56,12 @@ public class ProdDefeito implements Serializable {
 
 	@ManyToOne	
 	@JoinColumn(name="condicao_id")
-	//@Column(name="td01_status")
 	private Condicao condicaoId;
 
 	public ProdDefeito() {
 	}
 
-	public ProdDefeito(Long id, Long producaoId, Long defeitoId, String analise, Date dt, Time hr,
+	public ProdDefeito(Long id, Long producaoId, Long defeitoId, String analise, LocalDate dt, LocalTime hr,
 			String reparo, String serie, Condicao condicao) {
 		this.id = id;
 		this.producaoId = producaoId;
@@ -107,19 +106,19 @@ public class ProdDefeito implements Serializable {
 		this.analise = analise;
 	}
 
-	public Date getDt() {
+	public LocalDate getDt() {
 		return dt;
 	}
 
-	public void setDt(Date dt) {
+	public void setDt(LocalDate dt) {
 		this.dt = dt;
 	}
 
-	public Time getHr() {
+	public LocalTime getHr() {
 		return hr;
 	}
 
-	public void setHr(Time hr) {
+	public void setHr(LocalTime hr) {
 		this.hr = hr;
 	}
 

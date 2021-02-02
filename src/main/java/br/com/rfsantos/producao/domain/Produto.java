@@ -37,13 +37,13 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public Produto(String id, String codBarras, String descEsp, String descricao, String grupo, String narrativa,
+	public Produto(String id, String ean, String descEsp, String descricao, String grupoId, String narrativa,
 			String unidade) {
 		this.id = id;
-		this.ean = codBarras;
+		this.ean = ean;
 		this.descEsp = descEsp;
 		this.descricao = descricao;
-		this.grupoId = grupo;
+		this.grupoId = grupoId;
 		this.narrativa = narrativa;
 		this.unidade = unidade;
 	}
@@ -56,12 +56,12 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	public String getCodBarras() {
+	public String getEan() {
 		return ean;
 	}
 
-	public void setCodBarras(String codBarras) {
-		this.ean = codBarras;
+	public void setEan(String ean) {
+		this.ean = ean;
 	}
 
 	public String getDescEsp() {

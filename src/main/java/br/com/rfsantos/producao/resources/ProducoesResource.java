@@ -115,14 +115,14 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	
 	producao.setDt(filtro.getDt());
 	producao.setHr(LocalTime.now());
-	producao.setCodigo(produto.getId());
+	producao.setProdutoId(produto.getId());
 	producao.setDescricao(produto.getDescricao());
-	producao.setSetor(filtro.getSetor());
-	producao.setRe(filtro.getUsuario().getNomeAcesso());
+	producao.setSetorId(filtro.getSetor());
+	producao.setUsuarioId(filtro.getUsuario().getNomeAcesso());
 	producao.setSerie(producao.getLeitura().substring(18,24));
-	producao.setStatus(this.status.findById(Integer.parseInt(condicao)));
-	producao.setSetor(filtro.getSetor());
-	producao.setPosto(filtro.getPosto());
+	producao.setCondicaoId(this.status.findById(Integer.parseInt(condicao)));
+	producao.setSetorId(filtro.getSetor());
+	producao.setPostoId(filtro.getPosto());
 	
 	this.producoesService.save(producao);
 	

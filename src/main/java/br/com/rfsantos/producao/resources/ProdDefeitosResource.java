@@ -30,9 +30,10 @@ public class ProdDefeitosResource {
 		}
 
 	@PostMapping
+	@RequestMapping(method=RequestMethod.POST)
 	public String salvar(ProdDefeito prodDefeito) {
 		this.prodDefeitoService.save(prodDefeito);
-		return "redirect:/proddefeitos";
+		return "redirect:/lancamento";
 	}
 	
 

@@ -1,11 +1,12 @@
 package br.com.rfsantos.producao.sevices;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.rfsantos.producao.domain.Posto;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.repositories.ProdDefeitoRepository;
 
@@ -35,6 +36,9 @@ public class ProdDefeitoService {
 	}
 
 	public void save(ProdDefeito prodDefeito) {
+		prodDefeito.setDt(LocalDate.now());
+		prodDefeito.setHr(LocalTime.now());
+		
 		repo.save(prodDefeito);
 		return;
 	}

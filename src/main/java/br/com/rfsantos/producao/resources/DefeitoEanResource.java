@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rfsantos.producao.domain.ProdDefeito;
-import br.com.rfsantos.producao.sevices.ProdDefeitoService;
+import br.com.rfsantos.producao.domain.Defeito;
+import br.com.rfsantos.producao.sevices.DefeitoService;
 
 @RestController
-@RequestMapping(value="/proddefeito")	
-public class ProdDefeitoResource {
+@RequestMapping(value="/defeito/ean")	
+public class DefeitoEanResource {
 	
 	@Autowired
-	private ProdDefeitoService service;	
+	private DefeitoService service;	
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> list(){
-		List<ProdDefeito> obj = service.listar();
+		List<Defeito> obj = service.listar();
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Long id){
-		ProdDefeito obj = service.findById(id);
+	@RequestMapping(value="/{ean}", method=RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable String ean){
+		Defeito obj = service.findByEan(ean);
 		return ResponseEntity.ok().body(obj);
 	}
 	

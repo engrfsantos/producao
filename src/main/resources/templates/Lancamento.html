@@ -34,7 +34,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<div class="form-group">					
 					<label for="setor">Usuario: </label>
 					
-					<input id="setor" type="text" class="form-control" name="re" th:value="${filtro.usuario.id}" style="width:80px;" >
+					<input id="setor" type="text" class="form-control" name="nomeAcesso" th:value="${filtro.usuario.id}" style="width:120px;" >
 		  									
 					<label for="setorl">Local:</label>	
 					<input list="setorl" name="local" class="form-control"  th:value="${filtro.setor}">		
@@ -100,16 +100,16 @@ xmlns:th="http://www.thymeleaf.org">
 					<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
 					<td> <Input type="text" name="prodid" th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
 				</form>														
-				<td th:text="${producao.codigo}"></td>
+				<td th:text="${producao.produtoId}"></td>
 				<td th:text="${producao.descricao}"></td>
 				<td th:text="${producao.dt}"></td>
 				<td th:text="${producao.hr}"></td>
-				<td th:text="${producao.posto}"></td>
+				<td th:text="${producao.postoId}"></td>
 				<td th:text="${producao.leitura}"></td>
-				<td th:text="${producao.setor}"></td>
-				<td th:text="${producao.id}"></td>
+				<td th:text="${producao.setorId}"></td>
+				<td th:text="${producao.Id}"></td>
 				<td th:text="${producao.serie}"></td>
-				<td th:text="${producao.condicao.descBreve}"></td>							
+				<td th:text="${producao.condicaoId.descBreve}"></td>							
 				</tr>
 		
 		</tbody>
@@ -143,14 +143,14 @@ xmlns:th="http://www.thymeleaf.org">
 					<td th:text="${proddefeito.analise}" /></td>
 					<td th:text="${proddefeito.reparo}" /></td>						 
 				</tr>	
-				<form class="form-inline" method="PUT" th:object="${proddefeito}" th:action="@{/proddefeitos}" style="margin: 1px 0">
+				<form class="form-inline" method="POST" th:object="${proddefeito}" th:action="@{/proddefeitos}" style="margin: 1px 0">
 					<tr>						
 						<td><input type="text" name="id" class="form-control" placeholder="id" th:value="${proddefeito.id}"/></td>
 						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${producao.id}"  /> </td>
 						<td><input type="text" name="defeitoId" class="form-control" placeholder="defeitoId" th:value="${proddefeito.defeitoId}"  /></td>						
-						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${producao.dt}" /></td>
-						<td><input type="text" name="hr" class="form-control" placeholder="hr" th:value="${producao.hr}" /></td>						
-						<td><input type="text" name="serie" class="form-control" placeholder="serie" th:value="${producao.serie}" /></td>
+						<td><input type="text" name="dt" class="form-control" placeholder="dt" th:value="${proddefeito.dt}" /></td>
+						<td><input type="text" name="hr" class="form-control" placeholder="hr" th:value="${proddefeito.hr}" /></td>						
+						<td><input type="text" name="serie" class="form-control" placeholder="serie" th:value="${proddefeito.serie}" /></td>
 						<td><input type="text" name="condicao" class="form-control" placeholder="condicao" th:value="${proddefeito.condicao}" /></td>						
 						<td><input type="text" name="analise" class="form-control" placeholder="analise" th:value="${proddefeito.analise}" /></td>
 						<td><input type="text" name="reparo" class="form-control" placeholder="reparo" th:value="${proddefeito.reparo}" /></td>										

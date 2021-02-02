@@ -34,15 +34,12 @@ public class Producao implements Serializable {
 	@Column(name="descricao")
 	private String descricao;
 
-	//@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="dt")
-	//private Date dt;
 	private LocalDate dt;
 
-	//@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "hh:mm:ss")
 	@Column(name="hr")
-	//private Date hr;
 	private LocalTime hr;
 
 	@Column(name="posto_id")
@@ -63,34 +60,29 @@ public class Producao implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="condicao_id")
-	//@Column(name="td01_status")
 	private Condicao condicaoId;
 
 	public Producao() {
 		
 	}
 	
-	public Producao(Filtro filto, String leitura) {
-		
+	public Producao(Filtro filto, String leitura) {		
 	}
-
-	//public Producao(Long id, String codigo, String descricao, Date dt, Date hr, String identificador, String leitura,
-		//	String local, String re, String serie, Status status) {
 	
-	public Producao(Long id, String codigo, String descricao, LocalDate dt, LocalTime hr, String posto, String leitura,
-			String setor, String re, String serie, Condicao condicao) {
+	public Producao(Long id, String produtoId, String descricao, LocalDate dt, LocalTime hr, String postoId, String leitura,
+			String setorId, String usuarioId, String serie, Condicao condicaoId) {
 		super();
 		this.id = id;
-		this.produtoId = codigo;
+		this.produtoId = produtoId;
 		this.descricao = descricao;
 		this.dt = dt;
 		this.hr = hr;
-		this.postoId = posto;
+		this.postoId = postoId;
 		this.leitura = leitura;
-		this.setorId = setor;
-		this.usuarioId = re;
+		this.setorId = setorId;
+		this.usuarioId = usuarioId;
 		this.serie = serie;
-		this.condicaoId = condicao;
+		this.condicaoId = condicaoId;
 	}
 
 	public Long getId() {
@@ -101,12 +93,12 @@ public class Producao implements Serializable {
 		this.id = id;
 	}
 
-	public String getCodigo() {
+	public String getProdutoId() {
 		return produtoId;
 	}
 
-	public void setCodigo(String codigo) {
-		this.produtoId = codigo;
+	public void setProdutoId(String produtoId) {
+		this.produtoId = produtoId;
 	}
 
 	public String getDescricao() {
@@ -117,33 +109,28 @@ public class Producao implements Serializable {
 		this.descricao = descricao;
 	}
 
-	//public Date getDt() {
 	public LocalDate getDt() {
-	
 		return dt;
 	}
 
-	//public void setDt(Date dt) {
 	public void setDt(LocalDate dt) {
 		this.dt = dt;
 	}
 
-	//public Date getHr() {
 	public LocalTime getHr() {
 		return hr;
 	}
 
-	//public void setHr(Date hr) {
 	public void setHr(LocalTime hr) {
 		this.hr = hr;
 	}
 
-	public String getPosto() {
+	public String getPostoId() {
 		return postoId;
 	}
 
-	public void setPosto(String posto) {
-		this.postoId = posto;
+	public void setPostoId(String postoId) {
+		this.postoId = postoId;
 	}
 
 	public String getLeitura() {
@@ -154,20 +141,20 @@ public class Producao implements Serializable {
 		this.leitura = leitura;
 	}
 
-	public String getSetor() {
+	public String getSetorId() {
 		return setorId;
 	}
 
-	public void setSetor(String setor) {
-		this.setorId = setor;
+	public void setSetorId(String setorId) {
+		this.setorId = setorId;
 	}
 
-	public String getRe() {
+	public String getUsuarioId() {
 		return usuarioId;
 	}
 
-	public void setRe(String re) {
-		this.usuarioId = re;
+	public void setUsuarioId(String usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 
 	public String getSerie() {
@@ -178,12 +165,12 @@ public class Producao implements Serializable {
 		this.serie = serie;
 	}
 
-	public Condicao getCondicao() {
+	public Condicao getCondicaoId() {
 		return condicaoId;
 	}
 
-	public void setStatus(Condicao condicao) {
-		this.condicaoId = condicao;
+	public void setCondicaoId(Condicao condicaoId) {
+		this.condicaoId = condicaoId;
 	}
 
 	@Override
@@ -210,6 +197,7 @@ public class Producao implements Serializable {
 			return false;
 		return true;
 	}
+
 	
 	
 }
