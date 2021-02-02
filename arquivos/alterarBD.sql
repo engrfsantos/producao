@@ -81,9 +81,10 @@ ALTER TABLE tabelas RENAME ts01_tipo TO tipo;
 
 --td01_usuario
 ALTER TABLE ts01_usuario RENAME TO usuario;
-ALTER TABLE usuario RENAME re TO idd;
+ALTER TABLE usuario RENAME re TO id;
 ALTER TABLE usuario RENAME status TO condicao_id;
 ALTER TABLE usuario RENAME local TO setor_id;
+ALTER TABLE usuario RENAME usuario TO nome_acesso;
 
 
 
