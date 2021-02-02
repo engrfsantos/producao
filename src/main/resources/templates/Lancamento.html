@@ -30,11 +30,11 @@ xmlns:th="http://www.thymeleaf.org">
 		<div class="panel-heading">
 			
 			<h1 class="panel-title">Filtros</h1>			
-			<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/producoes}" style="margin: 20px 0">			
+			<form class="form-inline" method="GET" th:object="${producao}" th:action="@{/lancamento}" style="margin: 20px 0">			
 				<div class="form-group">					
 					<label for="setor">Usuario: </label>
 					
-					<input id="setor" type="text" class="form-control" name="re" th:value="${filtro.usuario.re}" style="width:80px;" >
+					<input id="setor" type="text" class="form-control" name="re" th:value="${filtro.usuario.id}" style="width:80px;" >
 		  									
 					<label for="setorl">Local:</label>	
 					<input list="setorl" name="local" class="form-control"  th:value="${filtro.setor}">		
@@ -59,7 +59,7 @@ xmlns:th="http://www.thymeleaf.org">
 
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
-			<form class="form-inline" method="POST" th:object="${producao}" th:action="@{/producoes}"   style="margin: 20px 0">
+			<form class="form-inline" method="POST" th:object="${producao}" th:action="@{/lancamento}"   style="margin: 20px 0">
 				<table>
 					<tr>
 						<td><input id="inputLeitura" type="text" class="form-control" placeholder="Leitura" th:field="*{leitura}" style="width: 250px; "/></td>
@@ -96,7 +96,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</thead>
 		<tbody>			
 				<tr th:each="producao : ${producoes}">
-				<form id="frmProducao" class="form-inline" method="get" th:object="${producao}" th:action="@{/producoes}"   style="margin: 20px 0">				
+				<form id="frmProducao" class="form-inline" method="get" th:object="${producao}" th:action="@{/lancamento}"   style="margin: 20px 0">				
 					<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
 					<td> <Input type="text" name="prodid" th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
 				</form>														
@@ -107,7 +107,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<td th:text="${producao.posto}"></td>
 				<td th:text="${producao.leitura}"></td>
 				<td th:text="${producao.setor}"></td>
-				<td th:text="${producao.re}"></td>
+				<td th:text="${producao.id}"></td>
 				<td th:text="${producao.serie}"></td>
 				<td th:text="${producao.condicao.descBreve}"></td>							
 				</tr>

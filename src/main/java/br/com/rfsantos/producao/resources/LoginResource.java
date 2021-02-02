@@ -29,12 +29,12 @@ public class LoginResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public Usuario login(@RequestParam(value="login", required = true) String login,
+	public Usuario login(@RequestParam(value="nomeAcesso", required = true) String nomeAcesso,
 							 @RequestParam(value="senha", required = true) String senha) {
 				
-		Usuario usuario = usuarioService.findByLogin(login);
+		Usuario usuario = usuarioService.findByNomeAcesso(nomeAcesso);
 		if (!usuario.equals(null))
-			if(usuarioService.setAutenticao(login,senha))
+			if(usuarioService.setAutenticao(nomeAcesso,senha))
 				this.usuario = usuario;
 			else
 				this.usuario = null;

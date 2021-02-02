@@ -27,13 +27,13 @@ public class UsuarioService {
 		return obj.orElse(null);	
 	}
 	
-	public Usuario findByLogin(String login) {
-		Usuario obj = repo.findByLogin(login);
+	public Usuario findByNomeAcesso(String nomeAcesso) {
+		Usuario obj = repo.findByNomeAcesso(nomeAcesso);
 		return obj;
 	}
 	
-	public boolean setAutenticao(String login, String senha) {
-		Usuario us = findByLogin(login);
+	public boolean setAutenticao(String nomeAcesso, String senha) {
+		Usuario us = findByNomeAcesso(nomeAcesso);
 		if (!us.equals(null)) {
 			if (us.getSenha().equals(senha))
 				this.autenticado = true;

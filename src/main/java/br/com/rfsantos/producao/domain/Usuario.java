@@ -14,8 +14,8 @@ public class Usuario implements Serializable {
 
 	@Id	
 	private String id;
-	@Column(name="usuario")
-	private String login;
+	@Column(name="nome_acesso")
+	private String nomeAcesso;
 	private String senha;	
 	private String nome;
 	@Column(columnDefinition = "bpchar", length=1)
@@ -27,46 +27,46 @@ public class Usuario implements Serializable {
 		
 	}
 
-	public Usuario(String re, String usuario, String senha, String nome, String condicao, String perfil, String local) {
+	public Usuario(String id, String nomeAcesso, String senha, String nome, String condicao, String perfil, String local) {
 		super();
-		this.id = re;
+		this.id = id;
 		this.setor_id = local;
 		this.nome = nome;
 		this.perfil = perfil;
 		this.senha = senha;
 		this.condicaoId = condicao;
-		this.login = usuario;
+		this.nomeAcesso = nomeAcesso;
 	}
 
 
 	public Usuario(Usuario usuario) {
 		super();
-		this.id = usuario.getRe();
-		this.setor_id = usuario.getLocal();
+		this.id = usuario.getId();
+		this.setor_id = usuario.getSetor();
 		this.nome = usuario.getNome();
 		this.perfil = usuario.getPerfil();
 		this.senha = usuario.getSenha();
 		this.condicaoId = usuario.getCondicao();
-		this.login = usuario.getLogin();
+		this.nomeAcesso = usuario.getNomeAcesso();
 	}
 
-	public String getRe() {
+	public String getId() {
 		return id;
 	}
 
 
-	public void setRe(String re) {
-		this.id = re;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 
-	public String getLocal() {
+	public String getSetor() {
 		return setor_id;
 	}
 
 
-	public void setLocal(String local) {
-		this.setor_id = local;
+	public void setSetor(String setor) {
+		this.setor_id = setor;
 	}
 
 
@@ -110,13 +110,13 @@ public class Usuario implements Serializable {
 	}
 
 
-	public String getLogin() {
-		return login;
+	public String getNomeAcesso() {
+		return nomeAcesso;
 	}
 
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setNomeAcesso(String nomeAcesso) {
+		this.nomeAcesso = nomeAcesso;
 	}
 
 
