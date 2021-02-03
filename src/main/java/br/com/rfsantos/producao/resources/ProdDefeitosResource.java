@@ -32,7 +32,7 @@ public class ProdDefeitosResource {
 	public ModelAndView listarProducao (@PathVariable Long producaoId) {		
 		ModelAndView modelAndView = new ModelAndView("ListaProdDefeitos");
 		
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producaoId));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producaoId));
 		
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		

@@ -35,7 +35,7 @@ public class LancamentoResource {
 	//static private DateFormat formatterHr = new SimpleDateFormat("hh:mm:ss");
 	
 	@Autowired
-	private ProducaoService producoesService;
+	private ProducaoService producaoService;
 	@Autowired
 	private ProdDefeitoService prodDefeitoService;
 	@Autowired
@@ -76,11 +76,11 @@ public class LancamentoResource {
 		
 		if (prodid!=null & prodid!="") { // & !id.isEmpty()) {
 			producaoIdL = Long.parseLong(prodid);						
-			modelAndView.addObject("producoes", producoesService.producoesId(producaoIdL)); 
+			modelAndView.addObject("producoes", producaoService.producoesId(producaoIdL)); 
 			modelAndView.addObject("locais", setores.listar());
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producaoIdL));
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producaoIdL));
 			modelAndView.addObject("producao", new Producao());		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			return modelAndView;			
@@ -89,15 +89,15 @@ public class LancamentoResource {
 		
 		//sem filtro dt e dtf são nulos
 		if (dtS!=null & dtS!="") 
-			modelAndView.addObject("producoes", producoesService.producoesData(filtro)); 
+			modelAndView.addObject("producoes", producaoService.producoesData(filtro)); 
 		 else 
-			modelAndView.addObject("producoes", producoesService.producoesHoje());
+			modelAndView.addObject("producoes", producaoService.producoesHoje());
 				
 	
 		modelAndView.addObject("locais", setores.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producaoIdL));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producaoIdL));
 					
 		modelAndView.addObject("producao", new Producao());		
 		modelAndView.addObject("proddefeito", new ProdDefeito());
@@ -125,13 +125,13 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	producao.setSetorId(filtro.getSetor());
 	producao.setPostoId(filtro.getPosto());
 	
-	this.producoesService.save(producao);	
+	this.producaoService.save(producao);	
 	
 	modelAndView.addObject("producoes", producao); 
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao.getId()));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
 	modelAndView.addObject("producao", producao);		
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	return modelAndView;			
@@ -142,12 +142,11 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 public ModelAndView salvar(ProdDefeito prodDefeito) {	
 	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
-	modelAndView.addObject("producoes", producao); 
+	modelAndView.addObject("producoes",  producaoService.findById(prodDefeito.getProducaoId())); 
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("proddefeitos", prodDefeito.getId());
-	modelAndView.addObject("producao", producao);		
+	modelAndView.addObject("producao",  prodDefeitoService.prodDefeitosProducaoId(prodDefeito.getId()));		
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	this.prodDefeitoService.save(prodDefeito);
 	return modelAndView;
