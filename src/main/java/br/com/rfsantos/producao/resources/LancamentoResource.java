@@ -137,4 +137,20 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	return modelAndView;			
 }
 
+@PostMapping
+@RequestMapping(value="/proddefeito",method=RequestMethod.POST)
+public ModelAndView salvar(ProdDefeito prodDefeito) {	
+	
+	ModelAndView modelAndView = new ModelAndView("Lancamento");
+	modelAndView.addObject("producoes", producao); 
+	modelAndView.addObject("locais", setores.listar());
+	modelAndView.addObject("postos", this.posto.listar());
+	modelAndView.addObject("filtro", filtro);
+	modelAndView.addObject("proddefeitos", prodDefeito.getId());
+	modelAndView.addObject("producao", producao);		
+	modelAndView.addObject("proddefeito", new ProdDefeito());	
+	this.prodDefeitoService.save(prodDefeito);
+	return modelAndView;
+	}
+
 }

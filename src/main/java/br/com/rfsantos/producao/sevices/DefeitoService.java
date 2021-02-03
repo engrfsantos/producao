@@ -25,7 +25,7 @@ public class DefeitoService {
 	}
 
 	public Defeito findByEan(String ean) {
-		Defeito obj = repo.findByEan(ean).orElse(null);
+		Defeito obj = repo.findByEan(ean);
 		return obj;
 	}
 		

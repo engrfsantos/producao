@@ -25,7 +25,7 @@ public class Defeito implements Serializable {
 	private String descricao;
 
 	@Column(name="ean_id")
-	private String eanId;
+	private String ean;
 
 	@Column(name="grupo_id")
 	private String grupoId;
@@ -37,7 +37,7 @@ public class Defeito implements Serializable {
 		super();
 		this.id = id;
 		this.descricao = descricao;
-		this.eanId = ean;
+		this.ean = ean;
 		this.grupoId = grupo;
 	}
 
@@ -58,11 +58,11 @@ public class Defeito implements Serializable {
 	}
 
 	public String getEan() {
-		return this.eanId;
+		return this.ean;
 	}
 
 	public void setEan(String ean) {
-		this.eanId = ean;
+		this.ean = ean;
 	}
 
 	public String getGrupo() {
