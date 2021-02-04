@@ -27,7 +27,7 @@ public class ProdDefeito implements Serializable {
 	private Long id;
 
 	//@ManyToOne
-	//@JoinColumn(name="td01_producao_id") //, columnDefinition = "NUMERIC(19,0)"
+	//@JoinColumn(name="id") 
 	@Column(name="producao_id", columnDefinition = "NUMERIC(19,0)")
 	private Long producaoId;
 

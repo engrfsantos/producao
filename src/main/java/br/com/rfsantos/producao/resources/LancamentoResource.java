@@ -127,7 +127,7 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	
 	this.producaoService.save(producao);	
 	
-	modelAndView.addObject("producoes", producao); 
+	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId())); 
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
@@ -146,7 +146,7 @@ public ModelAndView salvar(ProdDefeito prodDefeito) {
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("producao",  prodDefeitoService.prodDefeitosProducaoId(prodDefeito.getId()));		
+	modelAndView.addObject("p",  prodDefeitoService.prodDefeitosProducaoId(prodDefeito.getId()));		
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	this.prodDefeitoService.save(prodDefeito);
 	return modelAndView;
