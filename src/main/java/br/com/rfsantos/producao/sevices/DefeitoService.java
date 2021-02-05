@@ -24,9 +24,14 @@ public class DefeitoService {
 		return obj;
 	}
 
-	public Defeito findByEan(String ean) {
-		Defeito obj = repo.findByEan(ean);
-		return obj;
+	public List<Defeito> findByEan(String ean) {		
+		
+		return repo.findByEan(ean);
+	}
+
+	public List<Defeito> FindByLeitura(String leitura) {
+		
+		return findByEan(leitura.substring(2,14));
 	}
 		
 }

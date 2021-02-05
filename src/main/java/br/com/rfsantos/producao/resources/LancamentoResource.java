@@ -15,16 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
+import br.com.rfsantos.producao.domain.Defeito;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Produto;
 import br.com.rfsantos.producao.domain.Usuario;
-import br.com.rfsantos.producao.sevices.SetorService;
+import br.com.rfsantos.producao.sevices.CondicaoService;
+import br.com.rfsantos.producao.sevices.DefeitoService;
 import br.com.rfsantos.producao.sevices.PostoService;
 import br.com.rfsantos.producao.sevices.ProdDefeitoService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
 import br.com.rfsantos.producao.sevices.ProdutoService;
-import br.com.rfsantos.producao.sevices.CondicaoService;
+import br.com.rfsantos.producao.sevices.SetorService;
 
 
 @RestController
@@ -50,6 +52,9 @@ public class LancamentoResource {
 	private ProdutoService produtos;
 	@Autowired
 	private CondicaoService status;
+	@Autowired
+	private DefeitoService defeitoService;
+	
 	
 	private long producaoIdL=0;
 	
@@ -98,8 +103,10 @@ public class LancamentoResource {
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producaoIdL));
-					
-		modelAndView.addObject("producao", new Producao());		
+				
+		Producao producao = new Producao();
+		modelAndView.addObject("producao", producao);
+		modelAndView.addObject("defeitos",  new Defeito());
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
 		return modelAndView;
@@ -132,21 +139,27 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
 	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
-	modelAndView.addObject("producao", producao);		
-	modelAndView.addObject("proddefeito", new ProdDefeito());	
+	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
+	
+	modelAndView.addObject("producao", producao);
+	modelAndView.addObject("proddefeito", new ProdDefeito());
+	
 	return modelAndView;			
 }
 
 @PostMapping
 @RequestMapping(value="/proddefeito",method=RequestMethod.POST)
-public ModelAndView salvar(ProdDefeito prodDefeito) {	
+public ModelAndView salvar(@Autowired Producao producao, ProdDefeito prodDefeito) {	
 	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
 	modelAndView.addObject("producoes",  producaoService.findById(prodDefeito.getProducaoId())); 
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("p",  prodDefeitoService.prodDefeitosProducaoId(prodDefeito.getId()));		
+	modelAndView.addObject("producao",  producao);		
+	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
+		
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	this.prodDefeitoService.save(prodDefeito);
 	return modelAndView;

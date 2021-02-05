@@ -197,7 +197,5 @@ public class Producao implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 	
 }

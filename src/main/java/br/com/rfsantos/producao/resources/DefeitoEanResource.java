@@ -27,7 +27,7 @@ public class DefeitoEanResource {
 	
 	@RequestMapping(value="/{ean}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable String ean){
-		Defeito obj = service.findByEan(ean);
+		List<Defeito> obj = service.findByEan(ean);
 		return ResponseEntity.ok().body(obj);
 	}
 	
