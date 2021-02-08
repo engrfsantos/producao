@@ -1,10 +1,7 @@
 package br.com.rfsantos.producao.resources;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
-import br.com.rfsantos.producao.domain.Defeito;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Produto;
@@ -33,7 +29,7 @@ import br.com.rfsantos.producao.sevices.SetorService;
 @RequestMapping("/lancamento")
 public class LancamentoResource {
 
-	static private DateFormat formatterDt = new SimpleDateFormat("yyyy-MM-dd");
+	//static private DateFormat formatterDt = new SimpleDateFormat("yyyy-MM-dd");
 	//static private DateFormat formatterHr = new SimpleDateFormat("hh:mm:ss");
 	
 	@Autowired
@@ -68,7 +64,7 @@ public class LancamentoResource {
 		if (dtS!="" & dtS!=null)
 			this.filtro.setDtS(dtS);
 		else
-			this.filtro.setDtS(formatterDt.format(new Date()));
+			this.filtro.setDtS(LocalDate.now().toString());
 		if (setor!="" & setor!=null)
 			this.filtro.setSetor(setor);
 		if (posto!="" & posto!=null)
@@ -85,9 +81,15 @@ public class LancamentoResource {
 			modelAndView.addObject("locais", setores.listar());
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producaoIdL));
-			modelAndView.addObject("producao", new Producao());		
+			
+			Producao producao = new Producao();
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));			
+			modelAndView.addObject("producao", producao);		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
+			
+			modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
+
+			
 			return modelAndView;			
 		}
 		
@@ -102,11 +104,11 @@ public class LancamentoResource {
 		modelAndView.addObject("locais", setores.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producaoIdL));
-				
+		
 		Producao producao = new Producao();
 		modelAndView.addObject("producao", producao);
-		modelAndView.addObject("defeitos",  new Defeito());
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId() ));
+		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
 		return modelAndView;
@@ -120,8 +122,8 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	String leitura = producao.getLeitura();
 	Produto produto = produtos.produtoEan(leitura);
 	
-	producao.setDt(filtro.getDt());
-	producao.setHr(LocalTime.now());
+	//producao.setDt(filtro.getDt());
+	//producao.setHr(LocalTime.now());
 	producao.setProdutoId(produto.getId());
 	producao.setDescricao(produto.getDescricao());
 	producao.setSetorId(filtro.getSetor());
@@ -152,7 +154,7 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 public ModelAndView salvar(@Autowired Producao producao, ProdDefeito prodDefeito) {	
 	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
-	modelAndView.addObject("producoes",  producaoService.findById(prodDefeito.getProducaoId())); 
+	modelAndView.addObject("producoes",  producaoService.findById(producao.getId())); 
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);

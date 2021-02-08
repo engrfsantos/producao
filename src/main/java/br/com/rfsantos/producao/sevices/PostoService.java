@@ -1,6 +1,7 @@
 package br.com.rfsantos.producao.sevices;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class PostoService {
 	}	
 	
 	public Posto findById(String id){
-		Posto obj = repo.findById(id).orElse(null);
-		return obj;
+		Optional<Posto> obj = repo.findById(id);
+		return obj.orElse(null);
 	}
 }

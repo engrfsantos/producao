@@ -17,11 +17,6 @@ public class ProducaoService {
 	@Autowired
 	ProducaoRepository repo;
 	
-	public Producao buscar(Long id) {
-		Optional <Producao> obj = repo.findById(id);
-		return obj.orElse(null);				
-	}
-	
 	public Producao findById(Long id) {
 		Optional<Producao> obj = repo.findById(id);
 		return obj.orElse(null);

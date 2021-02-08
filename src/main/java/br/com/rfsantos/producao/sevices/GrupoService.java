@@ -1,6 +1,7 @@
 package br.com.rfsantos.producao.sevices;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class GrupoService {
 	}
 	
 	public Grupo findById(String id){
-		Grupo obj = repo.findById(id).orElse(null);
-		return obj;
+		Optional<Grupo> obj = repo.findById(id);
+		return obj.orElse(null);
 	}
 		
 }

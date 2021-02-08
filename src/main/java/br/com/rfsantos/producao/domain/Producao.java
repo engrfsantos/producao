@@ -3,6 +3,8 @@ package br.com.rfsantos.producao.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -34,11 +37,13 @@ public class Producao implements Serializable {
 	@Column(name="descricao")
 	private String descricao;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	//@JsonFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="dt")
 	private LocalDate dt;
 
-	@DateTimeFormat(pattern = "hh:mm:ss")
+	//@JsonFormat(pattern="HH:mm")
+	@DateTimeFormat(pattern = "HH:mm")
 	@Column(name="hr")
 	private LocalTime hr;
 
@@ -61,8 +66,14 @@ public class Producao implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="condicao_id")
 	private Condicao condicaoId;
+	
+	@OneToMany(mappedBy="id")
+	private List<ProdDefeito> prodDefeitos = new ArrayList();
 
 	public Producao() {
+		this.leitura = "000000000000000000000000";
+		this.dt = LocalDate.now();
+		this.hr = LocalTime.now();
 		
 	}
 	

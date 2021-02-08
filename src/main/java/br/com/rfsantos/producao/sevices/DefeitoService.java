@@ -1,6 +1,7 @@
 package br.com.rfsantos.producao.sevices;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class DefeitoService {
 	}
 	
 	public Defeito findById(Long id){
-		Defeito obj = repo.findById(id).orElse(null);
-		return obj;
+		Optional<Defeito> obj = repo.findById(id);
+		return obj.orElse(null);
 	}
 
 	public List<Defeito> findByEan(String ean) {		
@@ -31,7 +32,7 @@ public class DefeitoService {
 
 	public List<Defeito> FindByLeitura(String leitura) {
 		
-		return findByEan(leitura.substring(2,14));
+		return listar();
 	}
 		
 }

@@ -26,22 +26,27 @@ public class ProdDefeito implements Serializable {
 	@Column(name="id", columnDefinition = "NUMERIC(19,0)")
 	private Long id;
 
-	//@ManyToOne
-	//@JoinColumn(name="id") 
-	@Column(name="producao_id", columnDefinition = "NUMERIC(19,0)")
-	private Long producaoId;
-
+	@ManyToOne
+	//@Column(name="producao_id", columnDefinition = "NUMERIC(19,0)")
 	
-	@Column(name="defeito_id", columnDefinition = "NUMERIC(19,0)")
-	private Long defeitoId;
+	//@Column(columnDefinition = "NUMERIC(19,0)")
+	@JoinColumn(name="producao_id")
+	private Producao producaoId;
+
+	@ManyToOne
+	@JoinColumn(name="defeito_id")  //,columnDefinition = "BIGINT"
+	private Defeito defeitoId;
 		
 	@Column(name="analise")
 	private String analise;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//@JsonFormat(pattern="yyyy-HH-dd")
 	@Column(name="dt")	
 	private LocalDate dt;
 
+	@DateTimeFormat(pattern = "HH:mm")
+	//@JsonFormat(pattern="HH:mm")
 	@Column(name="hr")
 	private LocalTime hr;
 
@@ -57,9 +62,11 @@ public class ProdDefeito implements Serializable {
 	private Condicao condicaoId;
 
 	public ProdDefeito() {
+		this.dt = LocalDate.now();
+		this.hr = LocalTime.now();
 	}
 
-	public ProdDefeito(Long id, Long producaoId, Long defeitoId, String analise, LocalDate dt, LocalTime hr,
+	public ProdDefeito(Long id, Producao producaoId, Defeito defeitoId, String analise, LocalDate dt, LocalTime hr,
 			String reparo, String serie, Condicao condicao) {
 		this.id = id;
 		this.producaoId = producaoId;
@@ -81,18 +88,18 @@ public class ProdDefeito implements Serializable {
 	}
 
 	public Long getProducaoId() {
-		return producaoId;
+		return producaoId.getId();
 	}
 
-	public void setProducaoId(Long producaoId) {
+	public void setProducaoId(Producao producaoId) {
 		this.producaoId = producaoId;
 	}
 
-	public Long getDefeitoId() {
+	public Defeito getDefeitoId() {
 		return defeitoId;
 	}
 
-	public void setDefeitoId(Long defeitoId) {
+	public void setDefeitoId(Defeito defeitoId) {
 		this.defeitoId = defeitoId;
 	}
 

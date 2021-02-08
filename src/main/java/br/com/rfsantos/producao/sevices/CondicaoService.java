@@ -1,6 +1,7 @@
 package br.com.rfsantos.producao.sevices;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class CondicaoService {
 	}
 	
 	public Condicao findById(Integer id){
-		Condicao condicao = repo.findById(id).orElse(null);
-		return condicao;
+		Optional<Condicao> obj = repo.findById(id);
+		return obj.orElse(null);
 	}
 		
 }

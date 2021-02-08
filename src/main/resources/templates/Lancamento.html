@@ -134,7 +134,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<td th:text= "${proddefeito.defeitoId}" /></td>						
 					<td th:text="${proddefeito.dt}"  /></td>
 					<td th:text="${proddefeito.hr}" /></td>						
-					<td  th:text="${proddefeito.serie}" /></td>
+					<td th:text="${proddefeito.serie}" /></td>
 					<td th:text="${proddefeito.condicao}" /></td>						
 					<td th:text="${proddefeito.analise}" /></td>
 					<td th:text="${proddefeito.reparo}" /></td>						 
@@ -146,15 +146,13 @@ xmlns:th="http://www.thymeleaf.org">
 						
 						<td>							
 							<input list="defeitol" name="defeito" class="form-control"  placeholder="defeito" th:value="${defeito}">
-							<!--  input type="text" name="defeitoId" class="form-control"  /-->		
-		 					<datalist id="defeitol">					
-								<OPTION  th:each="defeito : ${defeitos}" th:text="${defeito}">							
+		 					<datalist id="defeitolist">					
+								<OPTION  th:each="defeito : ${defeitos}" th:text="${defeito.descricao}">							
 							</datalist>	
 						</td>
-						
 												
-						<td><input type="text" name="dt" class="form-control"  /></td>
-						<td><input type="text" name="hr" class="form-control"   /></td>						
+						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
+						<td><name="hr" class="form-control"  th:text="${proddefeito.hr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
 						<td><input type="text" name="condicaoId" class="form-control"  /></td>						
 						<td><input type="text" name="analise" class="form-control"  /></td>

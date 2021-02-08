@@ -18,7 +18,7 @@ public class Defeito implements Serializable {
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name="id")
+	@Column(name="id", columnDefinition = "NUMERIC(19,0)")
 	private Long id;
 
 	@Column(name="descricao")
