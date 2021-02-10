@@ -92,7 +92,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</thead>
 		<tbody>			
 				<tr th:each="producao : ${producoes}">
-				<form id="frmProducao" class="form-inline" method="get" th:object="${producao}" th:action="@{/lancamento}"   style="margin: 20px 0">				
+				<form id="frmProducao" class="form-inline" method="get" th:object="${producao}" th:action="@{/lancamento/producao}"   style="margin: 20px 0">				
 					<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
 					<td> <Input type="text" name="prodid" th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
 				</form>														
