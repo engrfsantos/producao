@@ -142,15 +142,13 @@ xmlns:th="http://www.thymeleaf.org">
 				<form class="form-inline" method="POST" th:object="${proddefeito}" th:action="@{/lancamento/proddefeito}" style="margin: 1px 0">
 					<tr>						
 						<td><input type="text" name="id" class="form-control"/></td>
-						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${producao.id}"  /> </td>
-						
+						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${producao.id}"  /> </td>						
 						<td>							
-							<input list="defeitol" name="defeito" class="form-control"  placeholder="defeito" th:value="${defeito}">
+							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" th:value="${defeito}">
 		 					<datalist id="defeitolist">					
 								<OPTION  th:each="defeito : ${defeitos}" th:text="${defeito.descricao}">							
 							</datalist>	
-						</td>
-												
+						</td>												
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
 						<td><name="hr" class="form-control"  th:text="${proddefeito.hr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>

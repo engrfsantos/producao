@@ -82,7 +82,7 @@ public class LancamentoResource {
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
 			
-			Producao producao = new Producao();
+			Producao producao = producaoService.findById(producaoIdL);
 			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));			
 			modelAndView.addObject("producao", producao);		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
@@ -121,9 +121,7 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
 	String leitura = producao.getLeitura();
 	Produto produto = produtos.produtoEan(leitura);
-	
-	//producao.setDt(filtro.getDt());
-	//producao.setHr(LocalTime.now());
+
 	producao.setProdutoId(produto.getId());
 	producao.setDescricao(produto.getDescricao());
 	producao.setSetorId(filtro.getSetor());
@@ -151,17 +149,18 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 
 @PostMapping
 @RequestMapping(value="/proddefeito",method=RequestMethod.POST)
-public ModelAndView salvar(@Autowired Producao producao, ProdDefeito prodDefeito) {	
+public ModelAndView salvar( ProdDefeito prodDefeito) {	
 	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
-	modelAndView.addObject("producoes",  producaoService.findById(producao.getId())); 
+	Producao producao = producaoService.findById(prodDefeito.getProducaoId());
+	modelAndView.addObject("producoes",  producaoService.findById(prodDefeito.getProducaoId())); 
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
 	modelAndView.addObject("producao",  producao);		
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
 		
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(prodDefeito.getProducaoId()));
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	this.prodDefeitoService.save(prodDefeito);
 	return modelAndView;
