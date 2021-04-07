@@ -1,7 +1,5 @@
 package br.com.rfsantos.producao.sevices;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rfsantos.producao.domain.ProdDefeito;
+import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.repositories.ProdDefeitoRepository;
 
 @Service
@@ -28,6 +27,12 @@ public class ProdDefeitoService {
 	}
 	
 	public List<ProdDefeito> prodDefeitosProducaoId(Long id) {
+		Producao obj = new Producao();
+		obj.setId(id);
+		return repo.prodDefeitosProducaoId(obj);
+	}
+	
+	public List<ProdDefeito> prodDefeitosProducaoId(Producao id) {
 		return repo.prodDefeitosProducaoId(id);
 	}
 

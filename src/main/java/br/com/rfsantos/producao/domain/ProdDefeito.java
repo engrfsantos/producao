@@ -3,6 +3,7 @@ package br.com.rfsantos.producao.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,7 +50,6 @@ public class ProdDefeito implements Serializable {
 	//@JsonFormat(pattern="HH:mm")
 	@Column(name="hr")
 	private LocalTime hr;
-
 	
 	@Column(name="reparo")
 	private String reparo;
@@ -59,6 +59,7 @@ public class ProdDefeito implements Serializable {
 
 	@ManyToOne	
 	@JoinColumn(name="condicao_id")
+	//@Column(name="condicao_id")
 	private Condicao condicaoId;
 
 	public ProdDefeito() {
@@ -90,9 +91,9 @@ public class ProdDefeito implements Serializable {
 	public Long getProducaoId() {
 		return producaoId.getId();
 	}
-
-	public void setProducaoId(Producao producaoId) {
-		this.producaoId = producaoId;
+	
+	public void setProducaoId(Long producaoId) {
+		this.producaoId.setId(producaoId);
 	}
 
 	public Defeito getDefeitoId() {
@@ -122,6 +123,10 @@ public class ProdDefeito implements Serializable {
 	public LocalTime getHr() {
 		return hr;
 	}
+	
+	public String getHrStr() {
+		return hr.format( DateTimeFormatter.ofPattern("HH:mm"));
+	}
 
 	public void setHr(LocalTime hr) {
 		this.hr = hr;
@@ -143,12 +148,12 @@ public class ProdDefeito implements Serializable {
 		this.serie = serie;
 	}
 
-	public Condicao getCondicao() {
-		return this.condicaoId;
+	public Integer getCondicao() {
+		return this.condicaoId.getId();
 	}
 
-	public void setStatus(Condicao condicao) {
-		this.condicaoId = condicao;
+	public void setCondicao(Integer condicao) {
+		this.condicaoId.setId(condicao);
 	}
 
 

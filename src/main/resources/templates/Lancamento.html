@@ -75,7 +75,6 @@ xmlns:th="http://www.thymeleaf.org">
 	<table class="table">
 		<thead>
 			<tr id="linha-producao" onblur="AtualizarDefeitos">
-				<th>Def</th>
 				<th>ProduçãoID</th> <!-- style="visibility:hidden;" -->				
 				<th>Código</th>
 				<th>Descrição</th>
@@ -92,18 +91,15 @@ xmlns:th="http://www.thymeleaf.org">
 		</thead>
 		<tbody>			
 				<tr th:each="producao : ${producoes}">
-				<form id="frmProducao" class="form-inline" method="get" th:object="${producao}" th:action="@{/lancamento/producao}"   style="margin: 20px 0">				
-					<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
-					<td> <Input type="text"  th:value="${producao.id}"  style="border:0; width: 50px;"><!-- style="visibility:hidden;"-->  </td>
-				</form>														
+				<td><a th:href="@{'/lancamento/producao/' + ${producao.id}}" th:text="${producao.id}"></a></td>
 				<td th:text="${producao.produtoId}"></td>
 				<td th:text="${producao.descricao}"></td>
 				<td th:text="${producao.dt}"></td>
-				<td th:text="${producao.hr}"></td>
+				<td th:text="${producao.HrStr}"></td>
 				<td th:text="${producao.postoId}"></td>
 				<td th:text="${producao.leitura}"></td>
 				<td th:text="${producao.setorId}"></td>
-				<td th:text="${producao.Id}"></td>
+				<td th:text="${producao.usuarioId}"></td>
 				<td th:text="${producao.serie}"></td>
 				<td th:text="${producao.condicaoId.descBreve}"></td>							
 				</tr>
@@ -119,8 +115,8 @@ xmlns:th="http://www.thymeleaf.org">
 					<th>ProdDefID</th>
 					<th>ProdID</th>
 					<th>Defeito</th>					
-					<th>Dt</th>
-					<th>Hr</th>					
+					<th>Data</th>
+					<th>Hora</th>					
 					<th>Bipagem/Cód/PN</th>
 					<th>Condicao</th>
 					<th>Análise</th>
@@ -133,7 +129,7 @@ xmlns:th="http://www.thymeleaf.org">
 					<td th:text="${proddefeito.producaoId}"  /></td>
 					<td th:text= "${proddefeito.defeitoId}" /></td>						
 					<td th:text="${proddefeito.dt}"  /></td>
-					<td th:text="${proddefeito.hr}" /></td>						
+					<td th:text="${proddefeito.HrStr}" /></td>						
 					<td th:text="${proddefeito.serie}" /></td>
 					<td th:text="${proddefeito.condicao}" /></td>						
 					<td th:text="${proddefeito.analise}" /></td>
@@ -150,7 +146,7 @@ xmlns:th="http://www.thymeleaf.org">
 							</datalist>	
 						</td>												
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
-						<td><name="hr" class="form-control"  th:text="${proddefeito.hr}" /></td>						
+						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
 						<td><input type="text" name="condicaoId" class="form-control"  /></td>						
 						<td><input type="text" name="analise" class="form-control"  /></td>

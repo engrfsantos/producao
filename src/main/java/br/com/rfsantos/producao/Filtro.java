@@ -3,6 +3,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,8 +26,8 @@ public class Filtro{
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	static private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-	//static private DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	static private DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+	static private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm");
 	
 	public Filtro() {
 	}
@@ -60,10 +61,10 @@ public class Filtro{
 			
 	public Filtro(String sDt, String sDtf) throws ParseException {
 		if ((sDt==null | sDt=="") & (sDtf==null | sDtf=="")) {
-			sDt = formatter.format(LocalDate.now());
+			sDt = formatDate.format(LocalDate.now());
 			this.periodoFiltrado = false;		
 			this.temFiltro = false;
-			this.dt = LocalDate.parse(String.format(sDt, formatter));
+			this.dt = LocalDate.parse(String.format(sDt, formatDate));
 			this.dtf = null;
 			dtTodtS();
 			return;
@@ -73,7 +74,7 @@ public class Filtro{
 			this.temFiltro = true;
 			this.periodoFiltrado = true;
 			this.dt =  LocalDate.parse("01/01/1900"); //LocalDate.parse(String.format("01/01/1900", formatter));			
-			this.dtf = LocalDate.parse(String.format(sDtf, formatter));
+			this.dtf = LocalDate.parse(String.format(sDtf, formatDate));
 			dtTodtS();
 			return;
 		}
@@ -81,7 +82,7 @@ public class Filtro{
 		if ((sDt!=null & sDt!="") & (sDtf==null | sDtf=="")) {
 			this.temFiltro = true;
 			this.periodoFiltrado = false;
-			this.dt = LocalDate.parse(String.format(sDt, formatter));			
+			this.dt = LocalDate.parse(String.format(sDt, formatDate));			
 			this.dtf = this.dt;
 			dtTodtS();			
 			return;
@@ -90,8 +91,8 @@ public class Filtro{
 		if ((sDt!=null & sDt!="") & (sDtf!=null & sDtf!="")) {
 			this.temFiltro = true;
 			this.periodoFiltrado = true;
-			this.dt = LocalDate.parse(String.format(sDt, formatter));			
-			this.dtf = LocalDate.parse(String.format(sDtf, formatter));	
+			this.dt = LocalDate.parse(String.format(sDt, formatDate));			
+			this.dtf = LocalDate.parse(String.format(sDtf, formatDate));	
 			dtTodtS();			
 			return;
 		}
@@ -100,12 +101,12 @@ public class Filtro{
 	
 		private void dtTodtS() {
 		if (dt!=null)
-			this.dtS = formatter.format(this.dt);
+			this.dtS = formatDate.format(this.dt);
 		else
 			this.dtS = "";
 		
 		if (dtf!=null)
-			this.dtfS = formatter.format(this.dtf);
+			this.dtfS = formatDate.format(this.dtf);
 		else
 			this.dtfS = "";
 		
@@ -119,7 +120,7 @@ public class Filtro{
 	}	
 	public void setDt(LocalDate dt) {				
 		this.dt = dt;
-		this.dtS =  formatter.format(this.dt);
+		this.dtS =  formatDate.format(this.dt);
 	}
 	
 	public LocalDate getDtf() {
@@ -162,7 +163,7 @@ public class Filtro{
 
 	public void setDtS(String dtS) throws ParseException {
 		this.dtS = dtS;
-		this.dt = LocalDate.parse(String.format(dtS, formatter));
+		this.dt = LocalDate.parse(String.format(dtS, formatDate));
 	}
 
 	public void setDtfS(String dtfS) {

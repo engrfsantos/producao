@@ -3,6 +3,7 @@ package br.com.rfsantos.producao.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,6 +133,10 @@ public class Producao implements Serializable {
 		return hr;
 	}
 
+	public String getHrStr() {
+		return hr.format( DateTimeFormatter.ofPattern("HH:mm"));
+	}
+	
 	public void setHr(LocalTime hr) {
 		this.hr = hr;
 	}
