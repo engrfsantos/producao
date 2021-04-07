@@ -12,10 +12,13 @@ xmlns:th="http://www.thymeleaf.org">
 	 
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 	
+	
+	
 	<script th:src="@{http://code.jquery.com/jquery-1.8.3.js}"></script>
     <script th:src="@{http://code.jquery.com/ui/1.9.2/jquery-ui.js}"></script>	
 	
 	<script src="js/producao.js"></script>
+	<link rel="stylesheet" href="css/lancamento.css" />
 	
 	<script type="text/javascript">	</script>
 </head>
@@ -75,7 +78,8 @@ xmlns:th="http://www.thymeleaf.org">
 	<table class="table">
 		<thead>
 			<tr id="linha-producao" onblur="AtualizarDefeitos">
-				<th>ProduçãoID</th> <!-- style="visibility:hidden;" -->				
+				<th>Def</th>
+				<th class="id">ID</th> <!-- style="visibility:hidden;" -->				
 				<th>Código</th>
 				<th>Descrição</th>
 				<th>Data</th>
@@ -91,15 +95,18 @@ xmlns:th="http://www.thymeleaf.org">
 		</thead>
 		<tbody>			
 				<tr th:each="producao : ${producoes}">
-				<td><a th:href="@{'/lancamento/producao/' + ${producao.id}}" th:text="${producao.id}"></a></td>
+				<form id="frmProducao" class="form-inline" method="get" th:object="${producao}" th:action="@{/lancamento/producao/id}}"   style="margin: 20px 0">				
+					<td> <button type="submit" id="verdefeito" style="width: 20px; height: 20px;"></BUTTON></td>								
+					<td class="id" > <Input type="text"  class="id" th:value="${producao.id}" ><!-- style="visibility:hidden;"-->  </td>
+				</form>														
 				<td th:text="${producao.produtoId}"></td>
 				<td th:text="${producao.descricao}"></td>
 				<td th:text="${producao.dt}"></td>
-				<td th:text="${producao.HrStr}"></td>
+				<td th:text="${producao.hr}"></td>
 				<td th:text="${producao.postoId}"></td>
 				<td th:text="${producao.leitura}"></td>
 				<td th:text="${producao.setorId}"></td>
-				<td th:text="${producao.usuarioId}"></td>
+				<td th:text="${producao.Id}"></td>
 				<td th:text="${producao.serie}"></td>
 				<td th:text="${producao.condicaoId.descBreve}"></td>							
 				</tr>
@@ -112,11 +119,11 @@ xmlns:th="http://www.thymeleaf.org">
 		<table class="table">
 			<thead>
 				<tr>
-					<th>ProdDefID</th>
-					<th>ProdID</th>
+					<th class="id">ID</th>
+					<th class="id">PID</th>
 					<th>Defeito</th>					
-					<th>Data</th>
-					<th>Hora</th>					
+					<th>Dt</th>
+					<th>Hr</th>					
 					<th>Bipagem/Cód/PN</th>
 					<th>Condicao</th>
 					<th>Análise</th>
@@ -125,11 +132,11 @@ xmlns:th="http://www.thymeleaf.org">
 			</thead>
 			<tbody>				
 				<tr th:each="proddefeito : ${proddefeitos}">						
-					<td th:text="${proddefeito.id}"/></td>
-					<td th:text="${proddefeito.producaoId}"  /></td>
+					<td class="id" th:text="${proddefeito.id}"/></td>
+					<td class="id" th:text="${proddefeito.producaoId}"  /></td>
 					<td th:text= "${proddefeito.defeitoId}" /></td>						
 					<td th:text="${proddefeito.dt}"  /></td>
-					<td th:text="${proddefeito.HrStr}" /></td>						
+					<td th:text="${proddefeito.hr}" /></td>						
 					<td th:text="${proddefeito.serie}" /></td>
 					<td th:text="${proddefeito.condicao}" /></td>						
 					<td th:text="${proddefeito.analise}" /></td>
@@ -140,13 +147,13 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><input type="text" name="id" class="form-control"/></td>
 						<td><input type="text" name="producaoId" class="form-control" placeholder="producaoId" th:value="${producao.id}"  /> </td>						
 						<td>							
-							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" th:value="${defeito}">
+							<input list="defeitolist" name="defeito" class="form-control" placeholder="defeito" th:value="${defeito}">
 		 					<datalist id="defeitolist">					
 								<OPTION  th:each="defeito : ${defeitos}" th:text="${defeito.descricao}">							
 							</datalist>	
 						</td>												
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
-						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
+						<td><name="hr" class="form-control"  th:text="${proddefeito.hr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
 						<td><input type="text" name="condicaoId" class="form-control"  /></td>						
 						<td><input type="text" name="analise" class="form-control"  /></td>

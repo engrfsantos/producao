@@ -72,10 +72,10 @@ public class Producao implements Serializable {
 	private List<ProdDefeito> prodDefeitos = new ArrayList();
 
 	public Producao() {
+		super();
 		this.leitura = "000000000000000000000000";
 		this.dt = LocalDate.now();
-		this.hr = LocalTime.now();
-		
+		this.hr = LocalTime.now();		
 	}
 	
 	public Producao(Filtro filto, String leitura) {		

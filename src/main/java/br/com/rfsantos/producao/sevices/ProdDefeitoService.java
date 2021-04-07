@@ -27,15 +27,9 @@ public class ProdDefeitoService {
 	}
 	
 	public List<ProdDefeito> prodDefeitosProducaoId(Long id) {
-		Producao obj = new Producao();
-		obj.setId(id);
-		return repo.prodDefeitosProducaoId(obj);
-	}
-	
-	public List<ProdDefeito> prodDefeitosProducaoId(Producao id) {
 		return repo.prodDefeitosProducaoId(id);
-	}
-
+	}	
+	
 	public List<ProdDefeito> prodDefeitosProducao() {
 		List<ProdDefeito> lst = repo.findAll();
 		return lst;	
