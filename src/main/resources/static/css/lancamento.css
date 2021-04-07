@@ -1,0 +1,9 @@
+.id{	
+	diplay:none;
+	width:80px;
+	border:1px;
+}
+
+.form-control#descricao{
+	width:350px;	
+}

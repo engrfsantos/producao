@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Controle de Produção</title>
+</head>
+<body>
+	<h1>Controle de Produção</h1>
+	<div>
+		<div>
+			<h3>Menu</h3>
+				<hr>				
+				<a href="/lancamento">Lançamento</a><br>
+				<a href="/login">Login </a><br>
+				<a href="/altsenha">Alterar Senha </a><br>
+				<a href="/usuarios">Gerenciar Usuários </a><br>
+				<a href="/cadprodutos">Cad. Produtos </a><br>
+		</div>
+		<div>
+			<h4>Login</h4>
+			<form class="form-inline" method="post" th:object="${usuario}" th:action="@{/login}" style="margin: 1px 0" >
+				<p>Usuario:</p>
+				<input type="text" name="nomeAcesso"></input>
+				<p>Senha:</p>
+				<input type="password" name="senha"></input>
+				<button type="submit" class="btn btn-primary" style="height: 30px;">Entrar</button>	
+			</form>
+		
+		</div>
+		
+	</div>
+</body>
+</html>
