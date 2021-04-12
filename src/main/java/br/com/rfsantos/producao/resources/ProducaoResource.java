@@ -83,7 +83,7 @@ public class ProducaoResource {
 			modelAndView.addObject("filtro", filtro);
 			
 			Producao producao = producaoService.findById(producaoIdL);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));			
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
 			modelAndView.addObject("producao", producao);		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			
@@ -107,7 +107,7 @@ public class ProducaoResource {
 		
 		Producao producao = new Producao();
 		modelAndView.addObject("producao", producao);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId() ));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao ));
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
@@ -138,7 +138,7 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 	
 	modelAndView.addObject("producao", producao);
@@ -160,7 +160,7 @@ public ModelAndView salvar( ProdDefeito prodDefeito) {
 	modelAndView.addObject("producao",  producao);		
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
 		
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(prodDefeito.getProducaoId()));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	this.prodDefeitoService.save(prodDefeito);
 	return modelAndView;

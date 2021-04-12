@@ -8,21 +8,27 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.domain.ProdDefeito;
+import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.sevices.ProdDefeitoService;
+import br.com.rfsantos.producao.sevices.ProducaoService;
+
 
 @RestController
 @RequestMapping(value="/proddefeitos")
 public class ProdDefeitosResource {
-	
+		
 	@Autowired
 	private ProdDefeitoService prodDefeitoService;
+	
+	@Autowired
+	private ProducaoService producaoService;
+
 
 	@RequestMapping(value="/{producaoId}", method=RequestMethod.GET)
 	public ModelAndView listarProducao (@PathVariable Long producaoId) {		
 		ModelAndView modelAndView = new ModelAndView("ListaProdDefeitos");
-		
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producaoId));
-		
+		Producao producao = producaoService.findById(producaoId);
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));		
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
 		return modelAndView;

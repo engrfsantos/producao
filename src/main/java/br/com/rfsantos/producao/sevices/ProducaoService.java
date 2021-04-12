@@ -22,6 +22,11 @@ public class ProducaoService {
 		return obj.orElse(null);
 	}
 
+	public Producao findById(String sId) {
+		long id = Long.valueOf(sId);
+		Optional<Producao> obj = repo.findById(id);
+		return obj.orElse(null);
+	}
 	
 	public List<Producao> listar(){
 		List<Producao> obj = repo.findAll(); 

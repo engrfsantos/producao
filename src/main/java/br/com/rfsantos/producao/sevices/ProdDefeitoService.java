@@ -26,8 +26,8 @@ public class ProdDefeitoService {
 		return obj.orElse(null);
 	}
 	
-	public List<ProdDefeito> prodDefeitosProducaoId(Long id) {
-		return repo.prodDefeitosProducaoId(id);
+	public List<ProdDefeito> prodDefeitosProducaoId(Producao producaoId) {
+		return repo.prodDefeitosProducaoId(producaoId);
 	}	
 	
 	public List<ProdDefeito> prodDefeitosProducao() {
