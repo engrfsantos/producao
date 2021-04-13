@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -150,12 +148,12 @@ public class ProdDefeito implements Serializable {
 		this.serie = serie;
 	}
 
-	public Integer getCondicao() {
-		return this.condicaoId.getId();
+	public Condicao getCondicaoId() {
+		return this.condicaoId;
 	}
 
-	public void setCondicao(Integer condicao) {
-		this.condicaoId.setId(condicao);
+	public void setCondicaoId(Condicao condicao) {
+		this.condicaoId = condicao;
 	}
 
 

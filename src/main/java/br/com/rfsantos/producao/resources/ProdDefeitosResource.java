@@ -28,7 +28,7 @@ public class ProdDefeitosResource {
 	public ModelAndView listarProducao (@PathVariable Long producaoId) {		
 		ModelAndView modelAndView = new ModelAndView("ListaProdDefeitos");
 		Producao producao = producaoService.findById(producaoId);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));		
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao));		
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
 		return modelAndView;

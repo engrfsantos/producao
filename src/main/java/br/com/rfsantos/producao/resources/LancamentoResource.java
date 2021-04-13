@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
-import br.com.rfsantos.producao.domain.Defeito;
+
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Produto;
@@ -79,7 +79,7 @@ public class LancamentoResource {
 	@RequestMapping(value="/producao/{id}", method=RequestMethod.GET)
 	public ModelAndView lancamentoId (@PathVariable String id) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("Lancamento");			
-		List<Producao> producoes = new ArrayList();
+		List<Producao> producoes = new ArrayList<Producao>();
 		Producao producao = null;
 		
 		if (!id.isEmpty()) 		{		
@@ -95,7 +95,7 @@ public class LancamentoResource {
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 				
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao));			
 		modelAndView.addObject("producao", producao);		
 		modelAndView.addObject("proddefeito", new ProdDefeito());	
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
@@ -139,7 +139,7 @@ public class LancamentoResource {
 			modelAndView.addObject("filtro", filtro);
 			
 			Producao producao = new Producao();
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao));			
 			modelAndView.addObject("producao", producao);		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			
@@ -159,6 +159,8 @@ public class LancamentoResource {
 										@RequestParam(value="posto", required = false) String posto,										
 										@RequestParam(value="dt", required = false) String dtS) throws ParseException {		
 		ModelAndView modelAndView = new ModelAndView("Lancamento");
+		List<Producao> producoes = new ArrayList<Producao>();
+		
 		if (dtS!="" & dtS!=null)
 			this.filtro.setDtS(dtS);
 		else
@@ -181,7 +183,7 @@ public class LancamentoResource {
 			modelAndView.addObject("filtro", filtro);
 			
 			Producao producao = producaoService.findById(producaoIdL);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao));			
 			modelAndView.addObject("producao", producao);		
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			
@@ -192,20 +194,26 @@ public class LancamentoResource {
 		}
 		
 		
+		
+		
+		
+		
+		
 		//sem filtro dt e dtf são nulos
-		if (dtS!=null & dtS!="") 
-			modelAndView.addObject("producoes", producaoService.producoesData(filtro)); 
-		 else 
-			modelAndView.addObject("producoes", producaoService.producoesHoje());
-				
-	
+		if (dtS!=null & dtS!="")
+			producoes.addAll(producaoService.producoesData(filtro));	 
+		else 
+			producoes.addAll(producaoService.producoesHoje());
+			
+		Producao producao = producoes.get(0);
+		
+		modelAndView.addObject("producoes", producoes);
 		modelAndView.addObject("locais", setores.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 		
-		Producao producao = new Producao();
 		modelAndView.addObject("producao", producao);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao));
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
@@ -237,7 +245,7 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao));
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 	
 	modelAndView.addObject("producao", producao);
@@ -259,7 +267,7 @@ public ModelAndView salvar( ProdDefeito prodDefeito) {
 	modelAndView.addObject("producao",  producao);		
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
 		
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducao(producao));
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	this.prodDefeitoService.save(prodDefeito);
 	return modelAndView;

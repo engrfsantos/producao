@@ -15,6 +15,8 @@ public interface ProdDefeitoRepository extends JpaRepository<ProdDefeito, Long> 
 	List<ProdDefeito> listar();
 	
 	@Query(value = "SELECT u from ProdDefeito u WHERE u.producaoId = :producaoId")	
-	List<ProdDefeito> prodDefeitosProducaoId(@Param("producaoId") Producao producaoId);
-		
+	List<ProdDefeito> prodDefeitosProducaoId(@Param("producaoId") Long producaoId);
+
+	@Query(value = "SELECT u from ProdDefeito u WHERE u.producaoId = :producaoId")
+	List<ProdDefeito> prodDefeitosProducao(Producao producaoId);	
 }

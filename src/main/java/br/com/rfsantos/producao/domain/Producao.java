@@ -69,7 +69,7 @@ public class Producao implements Serializable {
 	private Condicao condicaoId;
 	
 	@OneToMany(mappedBy="id")
-	private List<ProdDefeito> prodDefeitos = new ArrayList();
+	private List<ProdDefeito> prodDefeitos = new ArrayList<ProdDefeito>();
 
 	public Producao() {
 		super();
