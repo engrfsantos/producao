@@ -3,7 +3,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,7 +27,7 @@ public class Filtro{
 	private UsuarioService usuarioService;
 	
 	static private DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-	static private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm");
+	//static private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm");
 	
 	public Filtro() {
 	}

@@ -27,13 +27,13 @@ public class ProdDefeitoService {
 	}
 	
 	public List<ProdDefeito> prodDefeitosProducaoId(Long id) {
-		Producao obj = new Producao();
-		obj.setId(id);
-		return repo.prodDefeitosProducaoId(obj);
+		//Producao obj = new Producao();
+		//obj.setId(id);
+		return repo.prodDefeitosProducaoId(id);
 	}
 	
-	public List<ProdDefeito> prodDefeitosProducaoId(Producao id) {
-		return repo.prodDefeitosProducaoId(id);
+	public List<ProdDefeito> prodDefeitosProducaoId(Producao producao) {
+		return repo.prodDefeitosProducaoId(producao);
 	}
 
 	public List<ProdDefeito> prodDefeitosProducao() {

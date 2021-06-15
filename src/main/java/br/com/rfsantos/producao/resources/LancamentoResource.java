@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
-import br.com.rfsantos.producao.domain.Defeito;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Produto;
@@ -71,7 +69,7 @@ public class LancamentoResource {
 		modelAndView.addObject("filtro", filtro);
 		
 		Producao producao = producaoService.findById(id);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));			
 		modelAndView.addObject("producao", producao);		
 		modelAndView.addObject("proddefeito", new ProdDefeito());	
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
@@ -173,7 +171,7 @@ public class LancamentoResource {
 		
 		Producao producao = new Producao();
 		modelAndView.addObject("producao", producao);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
@@ -205,7 +203,7 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 	
 	modelAndView.addObject("producao", producao);
@@ -227,7 +225,7 @@ public ModelAndView salvar( ProdDefeito prodDefeito) {
 	modelAndView.addObject("producao",  producao);		
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
 		
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
 	modelAndView.addObject("proddefeito", new ProdDefeito());	
 	this.prodDefeitoService.save(prodDefeito);
 	return modelAndView;

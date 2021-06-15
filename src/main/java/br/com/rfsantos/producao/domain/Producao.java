@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -68,8 +69,8 @@ public class Producao implements Serializable {
 	@JoinColumn(name="condicao_id")
 	private Condicao condicaoId;
 	
-	@OneToMany(mappedBy="id")
-	private List<ProdDefeito> prodDefeitos = new ArrayList();
+	@OneToMany(mappedBy="id", cascade = {CascadeType.ALL})
+	private List<ProdDefeito> prodDefeitos = new ArrayList<ProdDefeito>();
 
 	public Producao() {
 		this.leitura = "000000000000000000000000";
