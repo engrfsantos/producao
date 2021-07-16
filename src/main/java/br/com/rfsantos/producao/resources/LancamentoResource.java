@@ -38,7 +38,7 @@ public class LancamentoResource {
 	@Autowired
 	private ProdDefeitoService prodDefeitoService;
 	@Autowired
-	private SetorService setores;	
+	private SetorService setor;	
 	@Autowired
 	private PostoService posto;	
 	@Autowired
@@ -48,7 +48,7 @@ public class LancamentoResource {
 	@Autowired
 	private ProdutoService produtos;
 	@Autowired
-	private CondicaoService status;
+	private CondicaoService condicao;
 	@Autowired
 	private DefeitoService defeitoService;
 	
@@ -64,16 +64,16 @@ public class LancamentoResource {
 	//	else
 		//	modelAndView.addObject("producoes", producaoService.producoesHoje());
 		
-		modelAndView.addObject("locais", setores.listar());
+		modelAndView.addObject("locais", setor.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 		
 		Producao producao = producaoService.findById(id);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));			
+		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
 		modelAndView.addObject("producao", producao);		
 		modelAndView.addObject("proddefeito", new ProdDefeito());	
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
-		modelAndView.addObject("locais", setores.listar());
+		modelAndView.addObject("locais", setor.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 		
@@ -100,7 +100,7 @@ public class LancamentoResource {
 			this.filtro.setUsuarioRe(nomeAcesso);
 		
 			modelAndView.addObject("producoes", producaoService.producoesHoje());
-			modelAndView.addObject("locais", setores.listar());
+			modelAndView.addObject("locais", this.setor.listar());
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
 			
@@ -142,7 +142,7 @@ public class LancamentoResource {
 		if (prodid!=null & prodid!="") { // & !id.isEmpty()) {
 			producaoIdL = Long.parseLong(prodid);						
 			modelAndView.addObject("producoes", producaoService.producoesId(producaoIdL)); 
-			modelAndView.addObject("locais", setores.listar());
+			modelAndView.addObject("locais", this.setor.listar());
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
 			
@@ -165,7 +165,7 @@ public class LancamentoResource {
 			modelAndView.addObject("producoes", producaoService.producoesHoje());
 				
 	
-		modelAndView.addObject("locais", setores.listar());
+		modelAndView.addObject("locais", this.setor.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 		
@@ -193,18 +193,19 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	producao.setUsuarioId(filtro.getUsuario().getId());
 	String serie = producao.getLeitura().substring(18,24);
 	producao.setSerie(serie);
-	producao.setCondicaoId(this.status.findById(Integer.parseInt(condicao)));
+	producao.setCondicaoId(this.condicao.findById(Integer.parseInt(condicao)));
 	producao.setSetorId(filtro.getSetor());
 	producao.setPostoId(filtro.getPosto());
 	
 	this.producaoService.save(producao);	
 	
 	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId())); 
-	modelAndView.addObject("locais", setores.listar());
+	modelAndView.addObject("locais", setor.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
+	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
+	modelAndView.addObject("condicoes", this.condicao.listar());
 	
 	modelAndView.addObject("producao", producao);
 	modelAndView.addObject("proddefeito", new ProdDefeito());
@@ -219,8 +220,9 @@ public ModelAndView salvar( ProdDefeito prodDefeito) {
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
 	Producao producao = producaoService.findById(prodDefeito.getProducaoId());
 	modelAndView.addObject("producoes",  producaoService.findById(prodDefeito.getProducaoId())); 
-	modelAndView.addObject("locais", setores.listar());
+	modelAndView.addObject("locais", setor.listar());
 	modelAndView.addObject("postos", this.posto.listar());
+	modelAndView.addObject("condicoes", this.condicao.listar());
 	modelAndView.addObject("filtro", filtro);
 	modelAndView.addObject("producao",  producao);		
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
