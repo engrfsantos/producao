@@ -148,7 +148,12 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
 						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
-						<td><input type="text" name="condicaoId" class="form-control"  /></td>						
+						<td>
+							<input list="condicaolist" name="condicao" class="form-control" placeholder="condicao" th:value="${condicao}">
+							<datalist id="condicaolist">
+								<option th:each="condicao : ${condicoes}" th:text="${condicao.descricao}">
+							</datalist>
+						</td>						
 						<td><input type="text" name="analise" class="form-control"  /></td>
 						<td><input type="text" name="reparo" class="form-control"  /></td>										
 					</tr>				
