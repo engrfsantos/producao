@@ -24,5 +24,9 @@ public class CondicaoService {
 		Optional<Condicao> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
-		
+	
+	public Condicao findByDescricao(String descricao){
+		Optional<Condicao> obj = repo.findByDescricao(descricao);
+		return obj.orElse(null);
+	}
 }

@@ -74,8 +74,11 @@ public class LancamentoResource {
 		modelAndView.addObject("proddefeito", new ProdDefeito());	
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
 		modelAndView.addObject("locais", setor.listar());
+		
+		modelAndView.addObject("condicoes", this.condicao.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
+		
 		
 		return modelAndView;
 		}
@@ -107,8 +110,8 @@ public class LancamentoResource {
 			Producao producao = new Producao();
 			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
 			modelAndView.addObject("producao", producao);		
+			modelAndView.addObject("condicoes", this.condicao.listar());
 			modelAndView.addObject("proddefeito", new ProdDefeito());	
-			
 			modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 
 			
@@ -149,8 +152,9 @@ public class LancamentoResource {
 			Producao producao = producaoService.findById(producaoIdL);
 			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
 			modelAndView.addObject("producao", producao);		
-			modelAndView.addObject("proddefeito", new ProdDefeito());	
 			
+			modelAndView.addObject("condicoes", this.condicao.listar());
+			modelAndView.addObject("proddefeito", new ProdDefeito());				
 			modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 
 			
@@ -172,9 +176,10 @@ public class LancamentoResource {
 		Producao producao = new Producao();
 		modelAndView.addObject("producao", producao);
 		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
-		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
-		modelAndView.addObject("proddefeito", new ProdDefeito());
 		
+		modelAndView.addObject("condicoes", this.condicao.listar());
+		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
+		modelAndView.addObject("proddefeito", new ProdDefeito());		
 		return modelAndView;
 		}
 
@@ -205,8 +210,8 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	modelAndView.addObject("filtro", filtro);
 	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
-	modelAndView.addObject("condicoes", this.condicao.listar());
 	
+	modelAndView.addObject("condicoes", this.condicao.listar());	
 	modelAndView.addObject("producao", producao);
 	modelAndView.addObject("proddefeito", new ProdDefeito());
 	

@@ -127,7 +127,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<tr th:each="proddefeito : ${proddefeitos}">						
 					<td th:text="${proddefeito.id}"/></td>
 					<td th:text="${proddefeito.producaoId}"  /></td>
-					<td th:text= "${proddefeito.defeitoId}" /></td>						
+					<td th:text="${proddefeito.defeitoId}" /></td>						
 					<td th:text="${proddefeito.dt}"  /></td>
 					<td th:text="${proddefeito.HrStr}" /></td>						
 					<td th:text="${proddefeito.serie}" /></td>
@@ -142,7 +142,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<td>							
 							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" th:value="${defeito}">
 		 					<datalist id="defeitolist">					
-								<OPTION  th:each="defeito : ${defeitos}" th:text="${defeito.descricao}">							
+								<option  th:each="defeito : ${defeitos}" th:text="${defeito.descricao}">							
 							</datalist>	
 						</td>												
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>

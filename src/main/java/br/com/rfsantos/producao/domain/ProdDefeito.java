@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -155,7 +156,6 @@ public class ProdDefeito implements Serializable {
 	public void setCondicao(Integer condicao) {
 		this.condicaoId.setId(condicao);
 	}
-
 
 	@Override
 	public int hashCode() {
