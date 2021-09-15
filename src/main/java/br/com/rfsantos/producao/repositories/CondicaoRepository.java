@@ -12,5 +12,6 @@ public interface CondicaoRepository extends JpaRepository<Condicao, Integer> {
 
 	@Query(value = "SELECT u from Condicao u WHERE u.descricao = :descricao")	
 	Optional<Condicao> findByDescricao(@Param("descricao") String descricao);
+
 	
 }

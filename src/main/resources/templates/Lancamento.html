@@ -126,12 +126,12 @@ xmlns:th="http://www.thymeleaf.org">
 			<tbody>				
 				<tr th:each="proddefeito : ${proddefeitos}">						
 					<td th:text="${proddefeito.id}"/></td>
-					<td th:text="${proddefeito.producaoId}"  /></td>
+					<td th:text="${proddefeito.producaoId.getId()}"  /></td>
 					<td th:text="${proddefeito.defeitoId}" /></td>						
 					<td th:text="${proddefeito.dt}"  /></td>
 					<td th:text="${proddefeito.HrStr}" /></td>						
 					<td th:text="${proddefeito.serie}" /></td>
-					<td th:text="${proddefeito.condicao}" /></td>						
+					<td th:text="${proddefeito.condicaoId}" /></td>						
 					<td th:text="${proddefeito.analise}" /></td>
 					<td th:text="${proddefeito.reparo}" /></td>						 
 				</tr>	

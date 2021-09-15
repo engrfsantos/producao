@@ -183,7 +183,7 @@ public class LancamentoResource {
 		return modelAndView;
 		}
 
-	
+/*	
 @PostMapping
 @RequestMapping(method=RequestMethod.POST)
 public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", required = true) String condicao) {	
@@ -217,14 +217,15 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	
 	return modelAndView;			
 }
+*/
 
 @PostMapping
 @RequestMapping(value="/proddefeito",method=RequestMethod.POST)
-public ModelAndView salvar( ProdDefeito prodDefeito) {	
+public ModelAndView salvar(ProdDefeito prodDefeito) {	
 	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
-	Producao producao = producaoService.findById(prodDefeito.getProducaoId());
-	modelAndView.addObject("producoes",  producaoService.findById(prodDefeito.getProducaoId())); 
+	Producao producao = prodDefeito.getProducaoId();
+	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId())); 
 	modelAndView.addObject("locais", setor.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("condicoes", this.condicao.listar());
@@ -233,7 +234,7 @@ public ModelAndView salvar( ProdDefeito prodDefeito) {
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
 		
 	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
-	modelAndView.addObject("proddefeito", new ProdDefeito());	
+	//modelAndView.addObject("proddefeito", new ProdDefeito());	
 	this.prodDefeitoService.save(prodDefeito);
 	return modelAndView;
 	}

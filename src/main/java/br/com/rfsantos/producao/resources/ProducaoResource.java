@@ -152,8 +152,8 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 public ModelAndView salvar( ProdDefeito prodDefeito) {	
 	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
-	Producao producao = producaoService.findById(prodDefeito.getProducaoId());
-	modelAndView.addObject("producoes",  producaoService.findById(prodDefeito.getProducaoId())); 
+	Producao producao = prodDefeito.getProducaoId();
+	modelAndView.addObject("producoes",  prodDefeito.getProducaoId()); 
 	modelAndView.addObject("locais", setores.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);

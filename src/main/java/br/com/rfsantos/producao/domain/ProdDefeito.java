@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -69,7 +68,7 @@ public class ProdDefeito implements Serializable {
 	}
 
 	public ProdDefeito(Long id, Producao producaoId, Defeito defeitoId, String analise, LocalDate dt, LocalTime hr,
-			String reparo, String serie, Condicao condicao) {
+			String reparo, String serie, Condicao condicaoId) {
 		this.id = id;
 		this.producaoId = producaoId;
 		this.defeitoId = defeitoId;
@@ -78,7 +77,7 @@ public class ProdDefeito implements Serializable {
 		this.hr = hr;
 		this.reparo = reparo;
 		this.serie = serie;
-		this.condicaoId = condicao;
+		this.condicaoId = condicaoId;
 	}
 
 	public Long getId() {
@@ -89,12 +88,12 @@ public class ProdDefeito implements Serializable {
 		this.id = id;
 	}
 
-	public Long getProducaoId() {
-		return producaoId.getId();
+	public Producao getProducaoId() {
+		return producaoId;
 	}
 	
-	public void setProducaoId(Long producaoId) {
-		this.producaoId.setId(producaoId);
+	public void setProducaoId(Producao producaoId) {
+		this.producaoId = producaoId;
 	}
 
 	public Defeito getDefeitoId() {
@@ -149,12 +148,12 @@ public class ProdDefeito implements Serializable {
 		this.serie = serie;
 	}
 
-	public Integer getCondicao() {
-		return this.condicaoId.getId();
+	public Condicao getCondicaoId() {
+		return this.condicaoId;
 	}
-
-	public void setCondicao(Integer condicao) {
-		this.condicaoId.setId(condicao);
+	
+	public void setCondicaoId(Condicao condicaoId) {
+		this.condicaoId = condicaoId;
 	}
 
 	@Override
