@@ -62,9 +62,11 @@ public class ProdDefeito implements Serializable {
 	//@Column(name="condicao_id")
 	private Condicao condicaoId;
 
+	
+	
 	public ProdDefeito() {
-		this.dt = LocalDate.now();
-		this.hr = LocalTime.now();
+		//this.dt = LocalDate.now();
+		//this.hr = LocalTime.now();
 	}
 
 	public ProdDefeito(Long id, Producao producaoId, Defeito defeitoId, String analise, LocalDate dt, LocalTime hr,
@@ -95,7 +97,7 @@ public class ProdDefeito implements Serializable {
 	public void setProducaoId(Producao producaoId) {
 		this.producaoId = producaoId;
 	}
-
+	
 	public Defeito getDefeitoId() {
 		return defeitoId;
 	}

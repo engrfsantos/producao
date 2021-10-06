@@ -73,17 +73,19 @@ public class Producao implements Serializable {
 	private List<ProdDefeito> prodDefeitos = new ArrayList<ProdDefeito>();
 
 	public Producao() {
-		this.leitura = "000000000000000000000000";
-		this.dt = LocalDate.now();
-		this.hr = LocalTime.now();
+		//this.leitura = "000000000000000000000000";
+		//this.dt = LocalDate.now();
+		//this.hr = LocalTime.now();
 		
 	}
 	
 	public Producao(Filtro filto, String leitura) {		
 	}
 	
-	public Producao(Long id, String produtoId, String descricao, LocalDate dt, LocalTime hr, String postoId, String leitura,
-			String setorId, String usuarioId, String serie, Condicao condicaoId) {
+	
+
+	public Producao(Long id, String produtoId, String descricao, LocalDate dt, LocalTime hr, String postoId,
+			String leitura, String setorId, String usuarioId, String serie, Condicao condicaoId) {
 		super();
 		this.id = id;
 		this.produtoId = produtoId;
