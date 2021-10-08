@@ -138,7 +138,7 @@ xmlns:th="http://www.thymeleaf.org">
 				<form class="form-inline" method="POST" th:object="${proddefeito}" th:action="@{/lancamento/proddefeito}" style="margin: 1px 0">
 					<tr>						
 						<td><input type="text" name="id" class="form-control"/></td>
-						<td><input type="text" name="producaoId" class="form-control" placeholder="producao" th:value="${producao}"/> </td>						
+						<td><input type="text" name="producaoId" class="form-control" placeholder="producao" th:value="${producao.id}"/> </td>						
 						<td>							
 							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" th:value="${defeito}">
 		 					<datalist id="defeitolist">					
@@ -149,9 +149,9 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
 						<td>
-							<input list="condicaolist" name="condicao" class="form-control" placeholder="condicao" >
+							<input list="condicaolist" name="condicao" class="form-control" placeholder="condicao" th:value="${condicao}" >
 							<datalist id="condicaolist">
-								<option th:each="condicao : ${condicoes}" th:text="${condicao.descricao}" th:value="${condicao}" >
+								<option th:each="condicao : ${condicoes}" th:text="${condicao.descricao}"  >
 							</datalist>
 						</td>						
 						<td><input type="text" name="analise" class="form-control"  /></td>

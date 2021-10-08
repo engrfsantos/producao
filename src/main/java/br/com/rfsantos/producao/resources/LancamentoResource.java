@@ -15,14 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
-import br.com.rfsantos.producao.domain.Produto;
 import br.com.rfsantos.producao.domain.Usuario;
 import br.com.rfsantos.producao.sevices.CondicaoService;
 import br.com.rfsantos.producao.sevices.DefeitoService;
 import br.com.rfsantos.producao.sevices.PostoService;
 import br.com.rfsantos.producao.sevices.ProdDefeitoService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
-import br.com.rfsantos.producao.sevices.ProdutoService;
 import br.com.rfsantos.producao.sevices.SetorService;
 
 
@@ -45,8 +43,6 @@ public class LancamentoResource {
 	private Usuario usuario;	
 	@Autowired
 	private Filtro filtro;
-	@Autowired
-	private ProdutoService produtos;
 	@Autowired
 	private CondicaoService condicao;
 	@Autowired

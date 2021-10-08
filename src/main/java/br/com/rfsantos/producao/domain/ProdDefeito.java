@@ -65,8 +65,8 @@ public class ProdDefeito implements Serializable {
 	
 	
 	public ProdDefeito() {
-		//this.dt = LocalDate.now();
-		//this.hr = LocalTime.now();
+		this.dt = LocalDate.now();
+		this.hr = LocalTime.now();
 	}
 
 	public ProdDefeito(Long id, Producao producaoId, Defeito defeitoId, String analise, LocalDate dt, LocalTime hr,
