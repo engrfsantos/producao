@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -28,16 +29,13 @@ public class ProdDefeito implements Serializable {
 	private Long id;
 
 	@ManyToOne
-	//@Column(name="producao_id", columnDefinition = "NUMERIC(19,0)")
-	
-	//@Column(columnDefinition = "NUMERIC(19,0)")
 	@JoinColumn(name="producao_id")
-	private Producao producaoId;
-
+	private Producao producao;
+	
 	@ManyToOne
-	@JoinColumn(name="defeito_id")  //,columnDefinition = "BIGINT"
-	private Defeito defeitoId;
-		
+	@JoinColumn(name="defeito_id")
+	private Defeito defeito;
+	
 	@Column(name="analise")
 	private String analise;
 
@@ -57,29 +55,25 @@ public class ProdDefeito implements Serializable {
 	@Column(name="serie")
 	private String serie;
 
-	@ManyToOne	
-	@JoinColumn(name="condicao_id")
-	//@Column(name="condicao_id")
-	private Condicao condicaoId;
-
-	
+	@OneToOne
+	private Condicao condicao;
 	
 	public ProdDefeito() {
 		this.dt = LocalDate.now();
 		this.hr = LocalTime.now();
 	}
 
-	public ProdDefeito(Long id, Producao producaoId, Defeito defeitoId, String analise, LocalDate dt, LocalTime hr,
-			String reparo, String serie, Condicao condicaoId) {
+	public ProdDefeito(Long id, Producao producao, Defeito defeito, String analise, LocalDate dt, LocalTime hr,
+			String reparo, String serie, Condicao condicao) {
 		this.id = id;
-		this.producaoId = producaoId;
-		this.defeitoId = defeitoId;
+		this.producao = producao;
+		this.defeito = defeito;
 		this.analise = analise;
 		this.dt = dt;
 		this.hr = hr;
 		this.reparo = reparo;
 		this.serie = serie;
-		this.condicaoId = condicaoId;
+		this.condicao = condicao;
 	}
 
 	public Long getId() {
@@ -90,20 +84,20 @@ public class ProdDefeito implements Serializable {
 		this.id = id;
 	}
 
-	public Producao getProducaoId() {
-		return producaoId;
+	public Producao getProducao() {
+		return producao;
 	}
 	
-	public void setProducaoId(Producao producaoId) {
-		this.producaoId = producaoId;
+	public void setProducaoId(Producao producao) {
+		this.producao = producao;
 	}
 	
-	public Defeito getDefeitoId() {
-		return defeitoId;
+	public Defeito getDefeito() {
+		return defeito;
 	}
 
-	public void setDefeitoId(Defeito defeitoId) {
-		this.defeitoId = defeitoId;
+	public void setDefeito(Defeito defeito) {
+		this.defeito = defeito;
 	}
 
 	public String getAnalise() {
@@ -150,12 +144,12 @@ public class ProdDefeito implements Serializable {
 		this.serie = serie;
 	}
 
-	public Condicao getCondicaoId() {
-		return this.condicaoId;
+	public Condicao getCondicao() {
+		return this.condicao;
 	}
 	
-	public void setCondicaoId(Condicao condicaoId) {
-		this.condicaoId = condicaoId;
+	public void setCondicao(Condicao condicao) {
+		this.condicao = condicao;
 	}
 
 	@Override

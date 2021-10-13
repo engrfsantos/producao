@@ -7,14 +7,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -65,11 +63,10 @@ public class Producao implements Serializable {
 	@Column(name="serie")
 	private String serie;
 	
-	@ManyToOne
-	@JoinColumn(name="condicao_id")
-	private Condicao condicaoId;
-	
-	@OneToMany(mappedBy="id", cascade = {CascadeType.ALL})
+	@OneToOne
+	private Condicao condicao;
+
+	@OneToMany(mappedBy="id")  
 	private List<ProdDefeito> prodDefeitos = new ArrayList<ProdDefeito>();
 
 	public Producao() {
@@ -84,7 +81,7 @@ public class Producao implements Serializable {
 	
 
 	public Producao(Long id, String produtoId, String descricao, LocalDate dt, LocalTime hr, String postoId,
-			String leitura, String setorId, String usuarioId, String serie, Condicao condicaoId) {
+			String leitura, String setorId, String usuarioId, String serie, Condicao condicao) {
 		super();
 		this.id = id;
 		this.produtoId = produtoId;
@@ -96,7 +93,7 @@ public class Producao implements Serializable {
 		this.setorId = setorId;
 		this.usuarioId = usuarioId;
 		this.serie = serie;
-		this.condicaoId = condicaoId;
+		this.condicao = condicao;
 	}
 
 	public Long getId() {
@@ -183,12 +180,20 @@ public class Producao implements Serializable {
 		this.serie = serie;
 	}
 
-	public Condicao getCondicaoId() {
-		return condicaoId;
+	public Condicao getCondicao() {
+		return condicao;
 	}
 
-	public void setCondicaoId(Condicao condicaoId) {
-		this.condicaoId = condicaoId;
+	public void setCondicao(Condicao condicao) {
+		this.condicao = condicao;
+	}
+		
+	public List<ProdDefeito> getProdDefeitos() {
+		return prodDefeitos;
+	}
+
+	public void setProdDefeitos(List<ProdDefeito> prodDefeitos) {
+		this.prodDefeitos = prodDefeitos;
 	}
 
 	@Override
