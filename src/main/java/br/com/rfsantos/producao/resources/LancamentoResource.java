@@ -15,12 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.rfsantos.producao.Filtro;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
+import br.com.rfsantos.producao.domain.Produto;
 import br.com.rfsantos.producao.domain.Usuario;
 import br.com.rfsantos.producao.sevices.CondicaoService;
 import br.com.rfsantos.producao.sevices.DefeitoService;
 import br.com.rfsantos.producao.sevices.PostoService;
 import br.com.rfsantos.producao.sevices.ProdDefeitoService;
 import br.com.rfsantos.producao.sevices.ProducaoService;
+import br.com.rfsantos.producao.sevices.ProdutoService;
 import br.com.rfsantos.producao.sevices.SetorService;
 
 
@@ -47,7 +49,8 @@ public class LancamentoResource {
 	private CondicaoService condicao;
 	@Autowired
 	private DefeitoService defeitoService;
-	
+	@Autowired
+	private ProdutoService produtoService;
 	
 	private long producaoIdL=0;
 		
@@ -179,14 +182,14 @@ public class LancamentoResource {
 		return modelAndView;
 		}
 
-/*	
+	
 @PostMapping
 @RequestMapping(method=RequestMethod.POST)
 public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", required = true) String condicao) {	
 	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
 	String leitura = producao.getLeitura();
-	Produto produto = produtos.produtoEan(leitura);
+	Produto produto = produtoService.produtoEan(leitura);
 
 	producao.setProdutoId(produto.getId());
 	producao.setDescricao(produto.getDescricao());
@@ -194,7 +197,7 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	producao.setUsuarioId(filtro.getUsuario().getId());
 	String serie = producao.getLeitura().substring(18,24);
 	producao.setSerie(serie);
-	producao.setCondicaoId(this.condicao.findById(Integer.parseInt(condicao)));
+	producao.setCondicao(this.condicao.findById(Integer.parseInt(condicao)));
 	producao.setSetorId(filtro.getSetor());
 	producao.setPostoId(filtro.getPosto());
 	
@@ -213,7 +216,7 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	
 	return modelAndView;			
 }
-*/
+
 
 @PostMapping
 @RequestMapping(value="/proddefeito",method=RequestMethod.POST)
