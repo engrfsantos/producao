@@ -17,6 +17,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
 @Entity
 @Table(name="prod_defeito")
 public class ProdDefeito implements Serializable {
@@ -28,6 +31,7 @@ public class ProdDefeito implements Serializable {
 	@Column(name="id", columnDefinition = "NUMERIC(19,0)")
 	private Long id;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="producao_id")
 	private Producao producao;
@@ -42,12 +46,12 @@ public class ProdDefeito implements Serializable {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	//@JsonFormat(pattern="yyyy-HH-dd")
 	@Column(name="dt")	
-	private LocalDate dt;
+	private LocalDate dt = LocalDate.now();
 
 	@DateTimeFormat(pattern = "HH:mm")
 	//@JsonFormat(pattern="HH:mm")
-	@Column(name="hr")
-	private LocalTime hr;
+	@Column(name="hr")	
+	private LocalTime hr = LocalTime.now();
 	
 	@Column(name="reparo")
 	private String reparo;
@@ -58,23 +62,33 @@ public class ProdDefeito implements Serializable {
 	@OneToOne
 	private Condicao condicao;
 	
-	public ProdDefeito() {
-		this.dt = LocalDate.now();
-		this.hr = LocalTime.now();
+	public ProdDefeito() {	
 	}
 
-	public ProdDefeito(Long id, Producao producao, Defeito defeito, String analise, LocalDate dt, LocalTime hr,
-			String reparo, String serie, Condicao condicao) {
-		this.id = id;
+	public ProdDefeito(Producao producao, Defeito defeito, String analise, String reparo, String serie, Condicao condicao) {
+		this.id = null;
 		this.producao = producao;
 		this.defeito = defeito;
 		this.analise = analise;
-		this.dt = dt;
-		this.hr = hr;
+		this.dt = LocalDate.now();
+		this.hr = LocalTime.now();
 		this.reparo = reparo;
 		this.serie = serie;
 		this.condicao = condicao;
 	}
+	
+	public ProdDefeito(Producao producao, String defeito, String analise, String reparo, String serie, String condicao) {
+		this.id = null;
+		this.producao = producao;
+		this.defeito.setDescricao(condicao);
+		this.analise = analise;
+		this.dt = LocalDate.now();
+		this.hr = LocalTime.now();
+		this.reparo = reparo;
+		this.serie = serie;
+		this.condicao.setDescBreve(condicao);
+	}
+	
 
 	public Long getId() {
 		return id;
@@ -88,9 +102,18 @@ public class ProdDefeito implements Serializable {
 		return producao;
 	}
 	
-	public void setProducaoId(Producao producao) {
+	public void setProducao(Producao producao) {
 		this.producao = producao;
 	}
+	
+	public Producao getProducao(String ProducaoId) {
+		
+		return producao;
+	}
+	
+	
+	
+	
 	
 	public Defeito getDefeito() {
 		return defeito;

@@ -52,6 +52,10 @@ public class LancamentoResource {
 	@Autowired
 	private ProdutoService produtoService;
 	
+	//@Autowired
+	//private ProdDefeito prodDefeito;
+	
+	
 	private long producaoIdL=0;
 		
 	@RequestMapping(value="/producao/{id}", method=RequestMethod.GET)
@@ -221,7 +225,6 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 @PostMapping
 @RequestMapping(value="/proddefeito",method=RequestMethod.POST)
 public ModelAndView salvar(ProdDefeito prodDefeito) {	
-	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
 	Producao producao = prodDefeito.getProducao();
 	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId())); 

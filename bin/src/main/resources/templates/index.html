@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Spring Boot Session Example</title>
+<title>Controle de Produção</title>
 </head>
 <body>
+	<h1>Controle de Produção</h1>
 	<div>
-		<form th:action="@{/persistMessage}" method="post">
-			<textarea name="msg" cols="40" rows="2"></textarea>
-			<br> <input type="submit" value="Save Message" />
-		</form>
-	</div>
-	<div>
-		<h2>Messages</h2>
-		<ul th:each="message : ${sessionMessages}">
-			<li th:text="">msg</li>
-		</ul>
-	</div>
-	<div>
-		<form th:action="@{/destroy}" method="post">
-			<input type="submit" value="Destroy Session" />
-		</form>
+		<div>
+			<h2>Menu Principal</h2>
+				<hr>				
+				<a href="/lancamento">Lançamento</a><br>
+				<a href="/producoes">Producoes</a><br>
+				<a href="/login">Login </a><br>
+				<a href="/altsenha">Alterar Senha </a><br>
+				<a href="/usuarios">Gerenciar Usuários </a><br>
+				<a href="/cadprodutos">Cad. Produtos </a><br>
+		</div>
+		<div>
+		
+		</div>
+		
 	</div>
 </body>
 </html>

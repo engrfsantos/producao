@@ -124,34 +124,32 @@ xmlns:th="http://www.thymeleaf.org">
 				</tr>
 			</thead>
 			<tbody>				
-				<tr th:each="proddefeito : ${proddefeitos}">						
-					<td th:text="${proddefeito.id}"/></td>
-					<td th:text="${proddefeito.producao.id}"  /></td>
-					<td th:text="${proddefeito.defeito.descricao}" /></td>						
-					<td th:text="${proddefeito.dt}"  /></td>
-					<td th:text="${proddefeito.HrStr}" /></td>						
-					<td th:text="${proddefeito.serie}" /></td>
-					<td th:text="${proddefeito.condicao.descricao}" /></td>						
-					<td th:text="${proddefeito.analise}" /></td>
-					<td th:text="${proddefeito.reparo}" /></td>						 
+				<tr th:each="proddefeitoL : ${proddefeitos}">						
+					<td th:text="${proddefeitoL.id}"/></td>
+					<td th:text="${proddefeitoL.producao.id}"  /></td>
+					<td th:text="${proddefeitoL.defeito.descricao}" /></td>						
+					<td th:text="${proddefeitoL.dt}"  /></td>
+					<td th:text="${proddefeitoL.HrStr}" /></td>						
+					<td th:text="${proddefeitoL.serie}" /></td>
+					<td th:text="${proddefeitoL.condicao.descricao}" /></td>						
+					<td th:text="${proddefeitoL.analise}" /></td>
+					<td th:text="${proddefeitoL.reparo}" /></td>						 
 				</tr>	
 				<form class="form-inline" method="POST" th:object="${proddefeito}" th:action="@{/lancamento/proddefeito}" style="margin: 1px 0">
 					<tr>						
 						<td><input type="text" name="id" class="form-control"/></td>
 						<td><input type="text" name="producao" class="form-control" placeholder="producao" th:value="${producao.id}"/> </td>						
-						<td>							
-							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" th:value="${defeito}">
+						<td><input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" >
 		 					<datalist id="defeitolist">					
-								<option  th:each="defeito : ${defeitos}" th:text="${defeito.descricao}">							
+								<option  th:each="defeito : ${defeitos}" th:text="${defeito.descricao}" th:value="${defeito.id}">							
 							</datalist>	
 						</td>												
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
 						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
-						<td>
-							<input list="condicaolist" name="condicao" class="form-control" placeholder="condicao" >
+						<td><input list="condicaolist" name="condicao" class="form-control" placeholder="condicao"  >
 							<datalist id="condicaolist">
-								<option th:each="condicao : ${condicoes}" th:text="${condicao.descricao}"  th:value="${condicao}">
+								<option th:each="condicao : ${condicoes}" th:text="${condicao.descricao}" th:value="${condicao.id}">
 							</datalist>
 						</td>						
 						<td><input type="text" name="analise" class="form-control"  /></td>
