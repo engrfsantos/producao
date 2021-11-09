@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="prod_defeito")
 public class ProdDefeito implements Serializable {
@@ -28,9 +30,11 @@ public class ProdDefeito implements Serializable {
 	@Column(name="id", columnDefinition = "NUMERIC(19,0)")
 	private Long id;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="producao_id")
 	private Producao producao;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="defeito_id")
@@ -42,12 +46,12 @@ public class ProdDefeito implements Serializable {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	//@JsonFormat(pattern="yyyy-HH-dd")
 	@Column(name="dt")	
-	private LocalDate dt;
+	private LocalDate dt = LocalDate.now();
 
 	@DateTimeFormat(pattern = "HH:mm")
 	//@JsonFormat(pattern="HH:mm")
 	@Column(name="hr")
-	private LocalTime hr;
+	private LocalTime hr = LocalTime.now();
 	
 	@Column(name="reparo")
 	private String reparo;
@@ -59,8 +63,6 @@ public class ProdDefeito implements Serializable {
 	private Condicao condicao;
 	
 	public ProdDefeito() {
-		this.dt = LocalDate.now();
-		this.hr = LocalTime.now();
 	}
 
 	public ProdDefeito(Long id, Producao producao, Defeito defeito, String analise, LocalDate dt, LocalTime hr,

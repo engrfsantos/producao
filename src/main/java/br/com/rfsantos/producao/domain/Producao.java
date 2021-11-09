@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.rfsantos.producao.Filtro;
 
 @Entity
@@ -37,23 +39,20 @@ public class Producao implements Serializable {
 	@Column(name="descricao")
 	private String descricao;
 
-	//@JsonFormat(pattern="yyyy-MM-dd")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="dt")
-	private LocalDate dt;
+	private LocalDate dt = LocalDate.now();
 
-	//@JsonFormat(pattern="HH:mm")
 	@DateTimeFormat(pattern = "HH:mm")
 	@Column(name="hr")
-	private LocalTime hr;
-
+	private LocalTime hr = LocalTime.now();
+ 
 	@Column(name="posto_id")
 	private String postoId;
 
 	@Column(name="leitura", columnDefinition = "bpchar", length=24)
 	private String leitura;
 
-	//@ManyToOne
 	@Column(name="setor_id")
 	private String setorId;
 
@@ -66,13 +65,12 @@ public class Producao implements Serializable {
 	@OneToOne
 	private Condicao condicao;
 
-	@OneToMany(mappedBy="id")  
-	private List<ProdDefeito> prodDefeitos = new ArrayList<ProdDefeito>();
-
+	@JsonManagedReference
+	@OneToMany(mappedBy="producao")  
+	private List<ProdDefeito> prodDefeitos = new ArrayList<>();
+		
+	
 	public Producao() {
-		this.leitura = "000000000000000000000000";
-		this.dt = LocalDate.now();
-		this.hr = LocalTime.now();		
 	}
 	
 	public Producao(Filtro filto, String leitura) {		
@@ -80,14 +78,12 @@ public class Producao implements Serializable {
 	
 	
 
-	public Producao(Long id, String produtoId, String descricao, LocalDate dt, LocalTime hr, String postoId,
+	public Producao(String produtoId, String descricao, String postoId,
 			String leitura, String setorId, String usuarioId, String serie, Condicao condicao) {
 		super();
-		this.id = id;
+		this.id = null;
 		this.produtoId = produtoId;
 		this.descricao = descricao;
-		this.dt = dt;
-		this.hr = hr;
 		this.postoId = postoId;
 		this.leitura = leitura;
 		this.setorId = setorId;

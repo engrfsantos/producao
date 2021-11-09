@@ -140,9 +140,9 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><input type="text" name="id" class="form-control"/></td>
 						<td><input type="text" name="producao" class="form-control" placeholder="producao" th:value="${producao.id}"/> </td>						
 						<td>							
-							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" th:value="${defeito}">
+							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito">
 		 					<datalist id="defeitolist">					
-								<option  th:each="defeito : ${defeitos}" th:text="${defeito.descricao}">							
+								<option  th:each="defeito : ${defeitos}" th:value="${defeito.id}">							
 							</datalist>	
 						</td>												
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
@@ -151,7 +151,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<td>
 							<input list="condicaolist" name="condicao" class="form-control" placeholder="condicao" >
 							<datalist id="condicaolist">
-								<option th:each="condicao : ${condicoes}" th:text="${condicao.descricao}"  th:value="${condicao}">
+								<option th:each="condicao : ${condicoes}" th:value="${condicao.id}">
 							</datalist>
 						</td>						
 						<td><input type="text" name="analise" class="form-control"  /></td>
