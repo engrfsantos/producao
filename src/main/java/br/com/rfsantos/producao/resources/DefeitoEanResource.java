@@ -13,23 +13,23 @@ import br.com.rfsantos.producao.domain.Defeito;
 import br.com.rfsantos.producao.sevices.DefeitoService;
 
 @RestController
-@RequestMapping(value="/defeito/ean")	
+@RequestMapping(value="/defeito/ean")
 public class DefeitoEanResource {
-	
+
 	@Autowired
-	private DefeitoService service;	
+	private DefeitoService service;
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> list(){
 		List<Defeito> obj = service.listar();
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@RequestMapping(value="/{ean}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable String ean){
 		List<Defeito> obj = service.findByEan(ean);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	
+
+
 }

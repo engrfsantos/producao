@@ -1,15 +1,17 @@
 package br.com.rfsantos.producao.domain;
 
-import javax.persistence.*;
-
 import java.util.Date;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 //@Entity
 //@Table(name="vw_total")
 //@NamedQuery(name="VwTotal.findAll", query="SELECT v FROM VwTotal v")
 public class VwTotal {
-	//private static final long serialVersionUID = 1L;		
-	
-	private String anadef;	
+	//private static final long serialVersionUID = 1L;
+
+	private String anadef;
 	private String codbarras;
 	private String codbarrasrep;
 	private String codigo;

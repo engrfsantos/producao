@@ -29,7 +29,7 @@ public class Producao implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")	
+	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name="id", columnDefinition = "NUMERIC(19,0)")
 	private Long id;
 
@@ -46,12 +46,12 @@ public class Producao implements Serializable {
 	@DateTimeFormat(pattern = "HH:mm")
 	@Column(name="hr")
 	private LocalTime hr = LocalTime.now();
- 
+
 	@Column(name="posto_id")
 	private String postoId;
 
 	@Column(name="leitura", columnDefinition = "bpchar", length=24)
-	private String leitura;
+	private String leitura = "000000000000000000000000";
 
 	@Column(name="setor_id")
 	private String setorId;
@@ -61,27 +61,26 @@ public class Producao implements Serializable {
 
 	@Column(name="serie")
 	private String serie;
-	
+
 	@OneToOne
 	private Condicao condicao;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy="producao")  
+	@OneToMany(mappedBy="producao")
 	private List<ProdDefeito> prodDefeitos = new ArrayList<>();
-		
-	
+
+
 	public Producao() {
 	}
-	
-	public Producao(Filtro filto, String leitura) {		
-	}
-	
-	
 
-	public Producao(String produtoId, String descricao, String postoId,
+	public Producao(Filtro filto, String leitura) {
+	}
+
+
+
+	public Producao( String produtoId, String descricao, String postoId,
 			String leitura, String setorId, String usuarioId, String serie, Condicao condicao) {
 		super();
-		this.id = null;
 		this.produtoId = produtoId;
 		this.descricao = descricao;
 		this.postoId = postoId;
@@ -131,7 +130,7 @@ public class Producao implements Serializable {
 	public String getHrStr() {
 		return hr.format( DateTimeFormatter.ofPattern("HH:mm"));
 	}
-	
+
 	public void setHr(LocalTime hr) {
 		this.hr = hr;
 	}
@@ -183,7 +182,7 @@ public class Producao implements Serializable {
 	public void setCondicao(Condicao condicao) {
 		this.condicao = condicao;
 	}
-		
+
 	public List<ProdDefeito> getProdDefeitos() {
 		return prodDefeitos;
 	}
@@ -204,9 +203,7 @@ public class Producao implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Producao other = (Producao) obj;
 		if (id == null) {
@@ -216,5 +213,5 @@ public class Producao implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

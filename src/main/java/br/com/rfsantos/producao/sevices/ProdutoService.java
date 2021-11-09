@@ -12,33 +12,33 @@ import br.com.rfsantos.producao.repositories.ProdutoRepository;
 @Service
 public class ProdutoService {
 
-	
+
 	@Autowired
 	private ProdutoRepository repo;
-	
+
 	private Produto produto;
-	
+
 	public Produto produtoEan(String leitura){
 		String ean = leitura.substring(3,16);
 		this.produto = repo.findEan(ean);
-		return this.produto;		
+		return this.produto;
 	}
-	
+
 	public Produto findById(String codigo){
 		Optional <Produto> obj = repo.findById(codigo);
-		return obj.orElse(null);			
+		return obj.orElse(null);
 	}
-	
+
 	public String getId() {
 		return this.produto.getId();
 	}
-	
-	
+
+
 	public List<Produto> listar(){
-		List<Produto> obj = repo.findAll(); 
+		List<Produto> obj = repo.findAll();
 		return obj;
 	}
-	
-	
-	
+
+
+
 }

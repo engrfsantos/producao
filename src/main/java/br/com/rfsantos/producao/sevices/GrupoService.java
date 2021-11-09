@@ -14,15 +14,15 @@ public class GrupoService {
 
 	@Autowired
 	private GrupoRepository repo;
-	
+
 	public List<Grupo> listar(){
 		List<Grupo> obj = repo.findAll();
 		return obj;
 	}
-	
+
 	public Grupo findById(String id){
 		Optional<Grupo> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
-		
+
 }

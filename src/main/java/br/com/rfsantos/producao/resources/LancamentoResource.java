@@ -2,6 +2,7 @@ package br.com.rfsantos.producao.resources;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,17 +33,17 @@ public class LancamentoResource {
 
 	//static private DateFormat formatterDt = new SimpleDateFormat("yyyy-MM-dd");
 	//static private DateFormat formatterHr = new SimpleDateFormat("hh:mm:ss");
-	
+
 	@Autowired
 	private ProducaoService producaoService;
 	@Autowired
 	private ProdDefeitoService prodDefeitoService;
 	@Autowired
-	private SetorService setor;	
+	private SetorService setor;
 	@Autowired
-	private PostoService posto;	
+	private PostoService posto;
 	@Autowired
-	private Usuario usuario;	
+	private Usuario usuario;
 	@Autowired
 	private Filtro filtro;
 	@Autowired
@@ -51,42 +52,47 @@ public class LancamentoResource {
 	private DefeitoService defeitoService;
 	@Autowired
 	private ProdutoService produtoService;
-	
+
+	private Producao producao;
+
 	private long producaoIdL=0;
-		
+
 	@RequestMapping(value="/producao/{id}", method=RequestMethod.GET)
-	public ModelAndView lancamentoId (@PathVariable Long id) throws ParseException {		
+	public ModelAndView lancamentoId (@PathVariable Long id) throws ParseException {
 		ModelAndView modelAndView = new ModelAndView("Lancamento");
-			
-		if (id!=null) 				
-			modelAndView.addObject("producoes", producaoService.findById(id));
-	//	else
-		//	modelAndView.addObject("producoes", producaoService.producoesHoje());
-		
+
+		if (id!=null) {
+			producao = producaoService.findById(id);
+			modelAndView.addObject("producoes", producao);
+		} else {
+			producao = new Producao();
+			modelAndView.addObject("producoes", producaoService.producoesHoje());
+		}
+
 		modelAndView.addObject("locais", setor.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
-		
-		Producao producao = producaoService.findById(id);
-		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
-		modelAndView.addObject("producao", producao);		
-		modelAndView.addObject("proddefeito", new ProdDefeito());	
-		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
+
+
+		modelAndView.addObject("proddefeitos", producao.getProdDefeitos());
+		modelAndView.addObject("producao", producao);
+		modelAndView.addObject("proddefeito", new ProdDefeito(producao));
+		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 		modelAndView.addObject("locais", setor.listar());
-		
+
 		modelAndView.addObject("condicoes", this.condicao.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
-		
-		
+
+
 		return modelAndView;
 		}
 
 	@RequestMapping(value="/producao", method=RequestMethod.GET)
 	public ModelAndView lancamento (	@RequestParam(value="setor", required = false) String setor,
 										@RequestParam(value="nomeAcesso", required = false) String nomeAcesso,
-										@RequestParam(value="posto", required = false) String posto,										
-										@RequestParam(value="dt", required = false) String dtS) throws ParseException {		
+										@RequestParam(value="posto", required = false) String posto,
+										@RequestParam(value="dt", required = false) String dtS) throws ParseException {
 		ModelAndView modelAndView = new ModelAndView("Lancamento");
 		if (dtS!="" & dtS!=null)
 			this.filtro.setDtS(dtS);
@@ -100,32 +106,32 @@ public class LancamentoResource {
 			this.filtro.setUsuario(usuario);
 		else
 			this.filtro.setUsuarioRe(nomeAcesso);
-		
+
 			modelAndView.addObject("producoes", producaoService.producoesHoje());
 			modelAndView.addObject("locais", this.setor.listar());
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
-			
-			Producao producao = new Producao();
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
-			modelAndView.addObject("producao", producao);		
+
+			producao = new Producao();
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
+			modelAndView.addObject("producao", producao);
 			modelAndView.addObject("condicoes", this.condicao.listar());
-			modelAndView.addObject("proddefeito", new ProdDefeito());	
+			modelAndView.addObject("proddefeito", new ProdDefeito());
 			modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 
-			
-			return modelAndView;			
+
+			return modelAndView;
 		}
 
-	
-	
-	
+
+
+
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView lancamentoProducao (@RequestParam(value="prodid", required = false) String prodid,
 										@RequestParam(value="setor", required = false) String setor,
 										@RequestParam(value="nomeAcesso", required = false) String nomeAcesso,
-										@RequestParam(value="posto", required = false) String posto,										
-										@RequestParam(value="dt", required = false) String dtS) throws ParseException {		
+										@RequestParam(value="posto", required = false) String posto,
+										@RequestParam(value="dt", required = false) String dtS) throws ParseException {
 		ModelAndView modelAndView = new ModelAndView("Lancamento");
 		if (dtS!="" & dtS!=null)
 			this.filtro.setDtS(dtS);
@@ -139,54 +145,54 @@ public class LancamentoResource {
 			this.filtro.setUsuario(usuario);
 		else
 			this.filtro.setUsuarioRe(nomeAcesso);
-		
-		
+
+
 		if (prodid!=null & prodid!="") { // & !id.isEmpty()) {
-			producaoIdL = Long.parseLong(prodid);						
-			modelAndView.addObject("producoes", producaoService.producoesId(producaoIdL)); 
+			producaoIdL = Long.parseLong(prodid);
+			modelAndView.addObject("producoes", producaoService.producoesId(producaoIdL));
 			modelAndView.addObject("locais", this.setor.listar());
 			modelAndView.addObject("postos", this.posto.listar());
 			modelAndView.addObject("filtro", filtro);
-			
-			Producao producao = producaoService.findById(producaoIdL);
-			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));			
-			modelAndView.addObject("producao", producao);		
-			
+
+			producao = producaoService.findById(producaoIdL);
+			modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
+			modelAndView.addObject("producao", producao);
+
 			modelAndView.addObject("condicoes", this.condicao.listar());
-			modelAndView.addObject("proddefeito", new ProdDefeito());				
+			modelAndView.addObject("proddefeito", new ProdDefeito());
 			modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 
-			
-			return modelAndView;			
+
+			return modelAndView;
 		}
-		
-		
+
+
 		//sem filtro dt e dtf são nulos
-		if (dtS!=null & dtS!="") 
-			modelAndView.addObject("producoes", producaoService.producoesData(filtro)); 
-		 else 
+		if (dtS!=null & dtS!="")
+			modelAndView.addObject("producoes", producaoService.producoesData(filtro));
+		 else
 			modelAndView.addObject("producoes", producaoService.producoesHoje());
-				
-	
+
+
 		modelAndView.addObject("locais", this.setor.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
-		
+
 		Producao producao = new Producao();
 		modelAndView.addObject("producao", producao);
 		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
-		
+
 		modelAndView.addObject("condicoes", this.condicao.listar());
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
-		modelAndView.addObject("proddefeito", new ProdDefeito());		
+		modelAndView.addObject("proddefeito", new ProdDefeito());
 		return modelAndView;
 		}
 
-	
+
 @PostMapping
 @RequestMapping(method=RequestMethod.POST)
-public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", required = true) String condicao) {	
-	
+public ModelAndView salvar(@Autowired Producao producao, @RequestParam(value="condicao", required = true) String condicao) {
+
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
 	String leitura = producao.getLeitura();
 	Produto produto = produtoService.produtoEan(leitura);
@@ -200,41 +206,54 @@ public ModelAndView salvar(Producao producao, @RequestParam(value="condicao", re
 	producao.setCondicao(this.condicao.findById(Integer.parseInt(condicao)));
 	producao.setSetorId(filtro.getSetor());
 	producao.setPostoId(filtro.getPosto());
-	
-	this.producaoService.save(producao);	
-	
-	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId())); 
+
+	this.producaoService.save(producao);
+
+	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId()));
 	modelAndView.addObject("locais", setor.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("filtro", filtro);
 	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao));
 	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
-	
-	modelAndView.addObject("condicoes", this.condicao.listar());	
+
+	modelAndView.addObject("condicoes", this.condicao.listar());
 	modelAndView.addObject("producao", producao);
 	modelAndView.addObject("proddefeito", new ProdDefeito());
-	
-	return modelAndView;			
+
+	return modelAndView;
 }
 
 
 @PostMapping
 @RequestMapping(value="/proddefeito",method=RequestMethod.POST)
-public ModelAndView salvar(ProdDefeito prodDefeito) {	
-	
+public ModelAndView salvar(ProdDefeito prodDefeito) {
+
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
-	Producao producao = prodDefeito.getProducao();
-	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId())); 
+
+	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId()));
 	modelAndView.addObject("locais", setor.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("condicoes", this.condicao.listar());
-	modelAndView.addObject("filtro", filtro);
-	modelAndView.addObject("producao",  producao);		
-	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));		
-		
-	modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producao.getId()));
-	//modelAndView.addObject("proddefeito", new ProdDefeito());	
+	modelAndView.addObject("filtro", filtro);	
+	modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
+
+	
+	prodDefeito.setProducaoId(producao);
+	
+	List<ProdDefeito> prodDefeitos = producao.getProdDefeitos();
+	prodDefeitos.add(prodDefeito);
+	
+	producao.setProdDefeitos(prodDefeitos);
+	
 	this.prodDefeitoService.save(prodDefeito);
+	this.producaoService.save(producao);
+	
+	
+	
+	modelAndView.addObject("producao",  producao);
+	modelAndView.addObject("proddefeitos", producao.getProdDefeitos());
+	modelAndView.addObject("proddefeito", new ProdDefeito());
+	
 	return modelAndView;
 	}
 

@@ -13,23 +13,23 @@ import br.com.rfsantos.producao.domain.Posto;
 import br.com.rfsantos.producao.sevices.PostoService;
 
 @RestController
-@RequestMapping(value="/posto")	
+@RequestMapping(value="/posto")
 public class PostoResource {
-	
+
 	@Autowired
-	private PostoService service;	
+	private PostoService service;
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> list(){
 		List<Posto> obj = service.listar();
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable String id){
 		Posto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	
+
+
 }

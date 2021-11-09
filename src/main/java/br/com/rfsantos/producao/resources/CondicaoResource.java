@@ -13,23 +13,23 @@ import br.com.rfsantos.producao.domain.Condicao;
 import br.com.rfsantos.producao.sevices.CondicaoService;
 
 @RestController
-@RequestMapping(value="/condicao")	
+@RequestMapping(value="/condicao")
 public class CondicaoResource {
-	
+
 	@Autowired
-	private CondicaoService service;	
+	private CondicaoService service;
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> list(){
 		List<Condicao> obj = service.listar();
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id){
 		Condicao obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	
+
+
 }

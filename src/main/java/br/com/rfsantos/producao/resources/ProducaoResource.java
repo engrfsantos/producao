@@ -19,19 +19,19 @@ public class ProducaoResource {
 
 	@Autowired
 	private ProducaoService producaoService;
-	
-	
+
+
 	private long producaoIdL=0;
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> list(){
 		List<Producao> obj = producaoService.listar();
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable long id){
 		Producao obj = producaoService.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	}

@@ -14,17 +14,17 @@ public class CondicaoService {
 
 	@Autowired
 	private CondicaoRepository repo;
-	
+
 	public List<Condicao> listar(){
 		List<Condicao> obj = repo.findAll();
 		return obj;
 	}
-	
+
 	public Condicao findById(Integer id){
 		Optional<Condicao> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
-	
+
 	public Condicao findByDescricao(String descricao){
 		Optional<Condicao> obj = repo.findByDescricao(descricao);
 		return obj.orElse(null);

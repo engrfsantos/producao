@@ -12,40 +12,40 @@ import br.com.rfsantos.producao.repositories.ProdDefeitoRepository;
 
 @Service
 public class ProdDefeitoService {
-	
+
 	@Autowired
 	private ProdDefeitoRepository repo;
 
 	public List<ProdDefeito> listar(){
 		List<ProdDefeito> obj = repo.findAll();
-		return obj;		
-	}	
-	
+		return obj;
+	}
+
 	public ProdDefeito findById(Long id){
 		Optional<ProdDefeito> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
-	
+
 	public List<ProdDefeito> prodDefeitosProducaoId(Long id) {
 		//Producao obj = new Producao();
 		//obj.setId(id);
 		return repo.prodDefeitosProducaoId(id);
 	}
-	
+
 	public List<ProdDefeito> prodDefeitosProducaoId(Producao producao) {
 		return repo.prodDefeitosProducaoId(producao);
 	}
 
 	public List<ProdDefeito> prodDefeitosProducao() {
 		List<ProdDefeito> lst = repo.findAll();
-		return lst;	
+		return lst;
 	}
 
 	public void save(ProdDefeito prodDefeito) {
 		repo.save(prodDefeito);
 		return;
 	}
-	
+
 
 
 }

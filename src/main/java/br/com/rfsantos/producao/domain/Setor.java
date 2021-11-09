@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Setor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id	
+	@Id
 	@Column(name="id", columnDefinition = "bpchar", length=4)
 	private String id;
 

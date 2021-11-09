@@ -1,16 +1,19 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 
 
 /**
  * The persistent class for the ts01_grupo database table.
- * 
+ *
  */
 @Entity
 @Table(name="grupo")
@@ -31,7 +34,7 @@ public class Grupo implements Serializable {
 
 	public Grupo() {
 	}
-	
+
 	public Grupo(String id, String descBreve, String descricao) {
 		super();
 		this.id = id;
@@ -75,9 +78,7 @@ public class Grupo implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Grupo other = (Grupo) obj;
 		if (id == null) {
@@ -86,5 +87,5 @@ public class Grupo implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 }

@@ -12,11 +12,11 @@ import br.com.rfsantos.producao.domain.Usuario;
 import br.com.rfsantos.producao.sevices.UsuarioService;
 
 @RestController
-@RequestMapping(value="/usuario")	
+@RequestMapping(value="/usuario")
 public class UsuarioResource {
-	
+
 	@Autowired
-	private UsuarioService service;	
+	private UsuarioService service;
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> list(){

@@ -23,7 +23,7 @@ public class Condicao implements Serializable {
 
 	public Condicao() {
 	}
-		
+
 	public Condicao(Integer id, String descBreve, String descricao) {
 		this.id = id;
 		this.descBreve = descBreve;
@@ -66,9 +66,7 @@ public class Condicao implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Condicao other = (Condicao) obj;
 		if (id == null) {
@@ -79,5 +77,5 @@ public class Condicao implements Serializable {
 		return true;
 	}
 
-	
+
 }

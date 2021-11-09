@@ -34,25 +34,23 @@ public class ProdDefeito implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="producao_id")
 	private Producao producao;
-	
-	
+
+
 	@ManyToOne
 	@JoinColumn(name="defeito_id")
 	private Defeito defeito;
-	
+
 	@Column(name="analise")
 	private String analise;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	//@JsonFormat(pattern="yyyy-HH-dd")
-	@Column(name="dt")	
+	@Column(name="dt")
 	private LocalDate dt = LocalDate.now();
 
 	@DateTimeFormat(pattern = "HH:mm")
-	//@JsonFormat(pattern="HH:mm")
 	@Column(name="hr")
 	private LocalTime hr = LocalTime.now();
-	
+
 	@Column(name="reparo")
 	private String reparo;
 
@@ -61,22 +59,24 @@ public class ProdDefeito implements Serializable {
 
 	@OneToOne
 	private Condicao condicao;
-	
+
 	public ProdDefeito() {
 	}
 
-	public ProdDefeito(Long id, Producao producao, Defeito defeito, String analise, LocalDate dt, LocalTime hr,
-			String reparo, String serie, Condicao condicao) {
-		this.id = id;
+	public ProdDefeito(Producao producao, Defeito defeito, String analise, String reparo, String serie, Condicao condicao) {
 		this.producao = producao;
 		this.defeito = defeito;
 		this.analise = analise;
-		this.dt = dt;
-		this.hr = hr;
 		this.reparo = reparo;
 		this.serie = serie;
 		this.condicao = condicao;
 	}
+
+	public ProdDefeito(Producao producao) {
+		this.id = null;
+		this.producao = producao;
+	}
+
 
 	public Long getId() {
 		return id;
@@ -89,11 +89,11 @@ public class ProdDefeito implements Serializable {
 	public Producao getProducao() {
 		return producao;
 	}
-	
+
 	public void setProducaoId(Producao producao) {
 		this.producao = producao;
 	}
-	
+
 	public Defeito getDefeito() {
 		return defeito;
 	}
@@ -121,7 +121,7 @@ public class ProdDefeito implements Serializable {
 	public LocalTime getHr() {
 		return hr;
 	}
-	
+
 	public String getHrStr() {
 		return hr.format( DateTimeFormatter.ofPattern("HH:mm"));
 	}
@@ -149,7 +149,7 @@ public class ProdDefeito implements Serializable {
 	public Condicao getCondicao() {
 		return this.condicao;
 	}
-	
+
 	public void setCondicao(Condicao condicao) {
 		this.condicao = condicao;
 	}
@@ -166,9 +166,7 @@ public class ProdDefeito implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		ProdDefeito other = (ProdDefeito) obj;
 		if (id == null) {
@@ -179,5 +177,5 @@ public class ProdDefeito implements Serializable {
 		return true;
 	}
 
-	
+
 }

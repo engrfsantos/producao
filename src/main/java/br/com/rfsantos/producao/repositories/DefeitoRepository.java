@@ -10,6 +10,6 @@ import br.com.rfsantos.producao.domain.Defeito;
 
 public interface DefeitoRepository extends JpaRepository<Defeito, Long> {
 
-	@Query(value = "SELECT d from Defeito d where d.ean = :ean")	
+	@Query(value = "SELECT d from Defeito d where d.ean = :ean")
 	List<Defeito> findByEan(@Param("ean") String ean);
 }

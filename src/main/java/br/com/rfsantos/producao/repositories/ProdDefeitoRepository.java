@@ -11,13 +11,13 @@ import br.com.rfsantos.producao.domain.Producao;
 
 public interface ProdDefeitoRepository extends JpaRepository<ProdDefeito, Long> {
 
-	@Query(value = "SELECT u from ProdDefeito u")	
+	@Query(value = "SELECT u from ProdDefeito u")
 	List<ProdDefeito> listar();
-	
-	@Query(value = "SELECT u from ProdDefeito u WHERE u.producao = :producao")	
+
+	@Query(value = "SELECT u from ProdDefeito u WHERE u.producao = :producao")
 	List<ProdDefeito> prodDefeitosProducaoId(@Param("producao") Long producaoId);
-	
-	@Query(value = "SELECT u from ProdDefeito u WHERE u.producao = :producao")	
+
+	@Query(value = "SELECT u from ProdDefeito u WHERE u.producao = :producao")
 	List<ProdDefeito> prodDefeitosProducaoId(@Param("producao") Producao producao);
-	
+
 }

@@ -14,25 +14,26 @@ public class DefeitoService {
 
 	@Autowired
 	private DefeitoRepository repo;
-	
+
 	public List<Defeito> listar(){
 		List<Defeito> obj = repo.findAll();
 		return obj;
 	}
-	
+
 	public Defeito findById(Long id){
 		Optional<Defeito> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
 
-	public List<Defeito> findByEan(String ean) {		
-		
+	public List<Defeito> findByEan(String ean) {
+
 		return repo.findByEan(ean);
 	}
 
 	public List<Defeito> FindByLeitura(String leitura) {
-		
-		return listar();
+		String ean = leitura.substring(2,13);
+		List<Defeito> obj = repo.findByEan(ean);
+		return obj;
 	}
-		
+
 }

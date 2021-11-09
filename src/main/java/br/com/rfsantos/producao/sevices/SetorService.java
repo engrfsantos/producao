@@ -14,15 +14,15 @@ public class SetorService {
 
 	@Autowired
 	private SetorRepository repo;
-	
+
 	public Setor buscar(String LocalID) {
 		Optional <Setor> obj = repo.findById(LocalID);
-		return obj.orElse(null);				
+		return obj.orElse(null);
 	}
-	
+
 	public List<Setor> listar(){
-		List<Setor> obj = repo.findAll(); 
+		List<Setor> obj = repo.findAll();
 		return obj;
 	}
-	
+
 }

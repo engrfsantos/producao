@@ -12,19 +12,19 @@ import javax.persistence.Table;
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id	
+	@Id
 	private String id;
 	@Column(name="nome_acesso")
 	private String nomeAcesso;
-	private String senha;	
+	private String senha;
 	private String nome;
 	@Column(columnDefinition = "bpchar", length=1)
-	private String condicaoId;	
+	private String condicaoId;
 	@Column(columnDefinition = "bpchar", length=1)
 	private String perfil;
-	private String setor_id;	
+	private String setor_id;
 	public Usuario() {
-		
+
 	}
 
 	public Usuario(String id, String nomeAcesso, String senha, String nome, String condicao, String perfil, String local) {
@@ -133,9 +133,7 @@ public class Usuario implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Usuario other = (Usuario) obj;
 		if (id == null) {
@@ -145,5 +143,5 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

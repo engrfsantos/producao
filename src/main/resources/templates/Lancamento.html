@@ -91,7 +91,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</thead>
 		<tbody>			
 				<tr th:each="producao : ${producoes}">
-				<td><a th:href="@{'/lancamento/producao/' + ${producao.id}}" th:text="${producao.id}"></a></td>
+				<td ht:text="${producao.id}"><a th:href="@{'/lancamento/producao/' + ${producao.id}}" th:text="${producao.id}"></a></td>				
 				<td th:text="${producao.produtoId}"></td>
 				<td th:text="${producao.descricao}"></td>
 				<td th:text="${producao.dt}"></td>
@@ -124,38 +124,38 @@ xmlns:th="http://www.thymeleaf.org">
 				</tr>
 			</thead>
 			<tbody>				
-				<tr th:each="proddefeito : ${proddefeitos}">						
-					<td th:text="${proddefeito.id}"/></td>
-					<td th:text="${proddefeito.producao.id}"  /></td>
-					<td th:text="${proddefeito.defeito.descricao}" /></td>						
-					<td th:text="${proddefeito.dt}"  /></td>
-					<td th:text="${proddefeito.HrStr}" /></td>						
-					<td th:text="${proddefeito.serie}" /></td>
-					<td th:text="${proddefeito.condicao.descricao}" /></td>						
-					<td th:text="${proddefeito.analise}" /></td>
-					<td th:text="${proddefeito.reparo}" /></td>						 
+				<tr th:each="proddefeitoL : ${proddefeitos}">						
+					<td th:text="${proddefeitoL.id}"/></td>
+					<td th:text="${proddefeitoL.producao.getId()}"  /></td>
+					<td th:text="${proddefeitoL.defeito.getDescricao()}" /></td>						
+					<td th:text="${proddefeitoL.dt}"  /></td>
+					<td th:text="${proddefeitoL.HrStr}" /></td>						
+					<td th:text="${proddefeitoL.serie}" /></td>
+					<td th:text="${proddefeitoL.condicao.getDescricao()}" /></td>						
+					<td th:text="${proddefeitoL.analise}" /></td>
+					<td th:text="${proddefeitoL.reparo}" /></td>						 
 				</tr>	
-				<form class="form-inline" method="POST" th:object="${proddefeito}" th:action="@{/lancamento/proddefeito}" style="margin: 1px 0">
+				<form class="form-inline" method="POST" th:object="${prodDefeito}" th:action="@{/lancamento/proddefeito}" style="margin: 1px 0">
 					<tr>						
 						<td><input type="text" name="id" class="form-control"/></td>
-						<td><input type="text" name="producao" class="form-control" placeholder="producao" th:value="${producao.id}"/> </td>						
+						<td><input type="text" name="producao_id" class="form-control" placeholder="producao" th:value="${producao.getId()}"/> </td>						
 						<td>							
-							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito">
+							<input list="defeitolist" name="defeito.id" class="form-control"  placeholder="defeito" >
 		 					<datalist id="defeitolist">					
-								<option  th:each="defeito : ${defeitos}" th:value="${defeito.id}">							
+								<option  th:each="defeito : ${defeitos}" th:value="${defeito.getId()}" >							
 							</datalist>	
 						</td>												
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
 						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
 						<td>
-							<input list="condicaolist" name="condicao" class="form-control" placeholder="condicao" >
+							<input list="condicaolist" name="condicao.id" class="form-control" placeholder="condicao" >
 							<datalist id="condicaolist">
-								<option th:each="condicao : ${condicoes}" th:value="${condicao.id}">
+								<option th:each="condicao : ${condicoes}" th:value="${condicao.id}" >
 							</datalist>
 						</td>						
-						<td><input type="text" name="analise" class="form-control"  /></td>
-						<td><input type="text" name="reparo" class="form-control"  /></td>										
+						<td><input type="text" name="analise" class="form-control" placeholder="analise" /></td>
+						<td><input type="text" name="reparo" class="form-control" placeholder="reparo" /></td>										
 					</tr>				
 					<button type="submit" class="btn btn-primary" style="background: green; height: 30px;">Enviar</button>
 					<button type="submit" class="btn btn-primary" style="background: gray; height: 30px;">Limpar</button>

@@ -13,20 +13,20 @@ import br.com.rfsantos.producao.sevices.ProdDefeitoService;
 @RestController
 @RequestMapping(value="/proddefeitos")
 public class ProdDefeitosResource {
-	
+
 	@Autowired
 	private ProdDefeitoService prodDefeitoService;
 
 	@RequestMapping(value="/{producaoId}", method=RequestMethod.GET)
-	public ModelAndView listarProducao (@PathVariable Long producaoId) {		
+	public ModelAndView listarProducao (@PathVariable Long producaoId) {
 		ModelAndView modelAndView = new ModelAndView("ListaProdDefeitos");
-		
+
 		modelAndView.addObject("proddefeitos", prodDefeitoService.prodDefeitosProducaoId(producaoId));
-		
+
 		modelAndView.addObject("proddefeito", new ProdDefeito());
-		
+
 		return modelAndView;
 		}
-	
+
 
 }

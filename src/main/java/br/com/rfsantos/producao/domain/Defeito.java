@@ -1,14 +1,11 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -32,10 +29,10 @@ public class Defeito implements Serializable {
 
 	@Column(name="grupo_id")
 	private String grupoId;
-	
+
 	public Defeito() {
 	}
-	
+
 	public Defeito(Long id, String descricao, String ean, String grupo) {
 		super();
 		this.id = id;
@@ -88,9 +85,7 @@ public class Defeito implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Defeito other = (Defeito) obj;
 		if (id == null) {
@@ -101,5 +96,5 @@ public class Defeito implements Serializable {
 		return true;
 	}
 
-	
+
 }

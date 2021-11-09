@@ -8,22 +8,22 @@ import br.com.rfsantos.producao.domain.Usuario;
 
 @Controller
 public class FiltroProduces {
-	
+
 
 	@Autowired
 	private Usuario usuario;
 
 	public FiltroProduces() {
-		
+
 	}
-		
+
 	@Bean
-		public Filtro getFiltro() {		
+		public Filtro getFiltro() {
 			return new Filtro("PROD", this.usuario, "INSP");
 		}
 
-		
-		
-	
+
+
+
 
 }

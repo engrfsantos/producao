@@ -14,12 +14,12 @@ public class PostoService {
 
 	@Autowired
 	private PostoRepository repo;
-	
+
 	public List<Posto> listar(){
 		List<Posto> obj = repo.findAll();
-		return obj;		
-	}	
-	
+		return obj;
+	}
+
 	public Posto findById(String id){
 		Optional<Posto> obj = repo.findById(id);
 		return obj.orElse(null);

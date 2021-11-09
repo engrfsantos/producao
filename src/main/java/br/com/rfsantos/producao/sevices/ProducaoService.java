@@ -16,30 +16,30 @@ public class ProducaoService {
 
 	@Autowired
 	ProducaoRepository repo;
-	
+
 	public Producao findById(Long id) {
 		Optional<Producao> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
 
-	
+
 	public List<Producao> listar(){
-		List<Producao> obj = repo.findAll(); 
+		List<Producao> obj = repo.findAll();
 		return obj;
 	}
-	
+
 	public Producao producaoId(Long producaoID){
 		Optional<Producao> obj = repo.findById(producaoID);
 		return obj.orElse(null);
-	}	
-	
+	}
+
 	public List<Producao> producoesId(Long producaoId){
 		List<Producao> prod = repo.producoesId(producaoId);
 		return prod;
-	}	
-	
+	}
+
 	public List<Producao> producoesHoje(){
-		return repo.producoesHoje();	
+		return repo.producoesHoje();
 	}
 
 	public List<Producao> producoesAte(LocalDate localDate) {
@@ -55,9 +55,9 @@ public class ProducaoService {
 	}
 
 	public void save(Producao producao) {
-		repo.save(producao);		
+		repo.save(producao);
 	}
 
-	
-	
+
+
 }
