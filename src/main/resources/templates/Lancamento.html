@@ -140,18 +140,22 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><input type="text" name="id" class="form-control"/></td>
 						<td><input type="text" name="producao" class="form-control" placeholder="producao" th:value="${producao.id}"/> </td>						
 						<td>							
-							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" >
-		 					<datalist id="defeitolist">					
-								<option  th:each="defeito : ${defeitos}" th:value="${defeito.getId()}" >							
+							<input list="defeitol" name="defeito" class="form-control"  placeholder="defeito" >
+		 					<datalist id="defeitol">		
+		 						<select th:field="*{defeito.getId()}">			
+									<option  th:each="defeito : ${defeitos}" th:text="${defeito.getDescricao()}" >
+								</select>							
 							</datalist>	
 						</td>												
 						<td><name="dt" class="form-control" th:text="${proddefeito.dt}" /></td>
 						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
 						<td>
-							<input list="condicaolist" name="condicao" class="form-control" placeholder="condicao" >
-							<datalist id="condicaolist">
-								<option th:each="condicao : ${condicoes}" th:value="${condicao.id}" >
+							<input list="condicaol" th:name="condicao" class="form-control" placeholder="condicao" >
+							<datalist id="condicaol">
+								<select th:field="*{condicao.getId()}">
+									<option th:each="condicao : ${condicoes}" th:text="${condicao.getDescricao()}"  >
+								</select>
 							</datalist>
 						</td>						
 						<td><input type="text" name="analise" class="form-control" placeholder="analise" /></td>
