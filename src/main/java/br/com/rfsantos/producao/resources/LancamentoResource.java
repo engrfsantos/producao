@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rfsantos.producao.Filtro;
+import br.com.rfsantos.producao.domain.Defeito;
 import br.com.rfsantos.producao.domain.ProdDefeito;
 import br.com.rfsantos.producao.domain.Producao;
 import br.com.rfsantos.producao.domain.Produto;
@@ -58,7 +59,7 @@ public class LancamentoResource {
 	private long producaoIdL=0;
 
 	@RequestMapping(value="/producao/{id}", method=RequestMethod.GET)
-	public ModelAndView lancamentoId (@PathVariable Long id) throws ParseException {
+	public ModelAndView lancamentoId (@PathVariable Long id)  {
 		ModelAndView modelAndView = new ModelAndView("Lancamento");
 
 		if (id!=null) {
@@ -73,11 +74,15 @@ public class LancamentoResource {
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 
-
-		modelAndView.addObject("proddefeitos", producao.getProdDefeitos());
+		List<ProdDefeito> prodDefeitos = producao.getProdDefeitos();
+		modelAndView.addObject("proddefeitos", prodDefeitos);
+		
 		modelAndView.addObject("producao", producao);
+		
 		modelAndView.addObject("proddefeito", new ProdDefeito(producao));
-		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
+		
+		List<Defeito> defeitos = defeitoService.FindByLeitura(producao.getLeitura());
+		modelAndView.addObject("defeitos",  defeitos);
 		modelAndView.addObject("locais", setor.listar());
 
 		modelAndView.addObject("condicoes", this.condicao.listar());
@@ -223,14 +228,14 @@ public ModelAndView salvar(@Autowired Producao producao, @RequestParam(value="co
 	return modelAndView;
 }
 
-
 @PostMapping
-@RequestMapping(value="/proddefeito",method=RequestMethod.POST)
-public ModelAndView salvar(ProdDefeito prodDefeito) {
-
+@RequestMapping(value="/producao/{id}",method=RequestMethod.POST)
+public ModelAndView salvar(@PathVariable Long id, ProdDefeito prodDefeito) throws ParseException { 	
 	ModelAndView modelAndView = new ModelAndView("Lancamento");
+	
+	producao = producaoService.findById(id);
 
-	modelAndView.addObject("producoes", producaoService.producoesId(producao.getId()));
+	modelAndView.addObject("producoes", producao);
 	modelAndView.addObject("locais", setor.listar());
 	modelAndView.addObject("postos", this.posto.listar());
 	modelAndView.addObject("condicoes", this.condicao.listar());

@@ -135,12 +135,12 @@ xmlns:th="http://www.thymeleaf.org">
 					<td th:text="${proddefeitoL.analise}" /></td>
 					<td th:text="${proddefeitoL.reparo}" /></td>						 
 				</tr>	
-				<form class="form-inline" method="POST" th:object="${prodDefeito}" th:action="@{/lancamento/proddefeito}" style="margin: 1px 0">
+				<form class="form-inline" method="POST" th:object="${prodDefeito}" th:action="@{'/lancamento/producao/' + ${producao.id}}" style="margin: 1px 0">
 					<tr>						
 						<td><input type="text" name="id" class="form-control"/></td>
-						<td><input type="text" name="producao_id" class="form-control" placeholder="producao" th:value="${producao.getId()}"/> </td>						
+						<td><input type="text" name="producao" class="form-control" placeholder="producao" th:value="${producao.id}"/> </td>						
 						<td>							
-							<input list="defeitolist" name="defeito.id" class="form-control"  placeholder="defeito" >
+							<input list="defeitolist" name="defeito" class="form-control"  placeholder="defeito" >
 		 					<datalist id="defeitolist">					
 								<option  th:each="defeito : ${defeitos}" th:value="${defeito.getId()}" >							
 							</datalist>	
@@ -149,7 +149,7 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
 						<td>
-							<input list="condicaolist" name="condicao.id" class="form-control" placeholder="condicao" >
+							<input list="condicaolist" name="condicao" class="form-control" placeholder="condicao" >
 							<datalist id="condicaolist">
 								<option th:each="condicao : ${condicoes}" th:value="${condicao.id}" >
 							</datalist>

@@ -31,7 +31,7 @@ public class DefeitoService {
 	}
 
 	public List<Defeito> FindByLeitura(String leitura) {
-		String ean = leitura.substring(2,13);
+		String ean = leitura.substring(3,16);
 		List<Defeito> obj = repo.findByEan(ean);
 		return obj;
 	}
