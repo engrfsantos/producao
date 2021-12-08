@@ -1,37 +1,14 @@
 $(document).ready(function(){
-        	
-/*        	
-$(function buscarEmpresa() {
-        $.ajax({
-            type: "GET",
-            url: "/status",
-            data: "{'status':'" + $("#inputstatus").val() + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                alert(data.descBreve);
-            },
-            error: function () {
-                alert("Erro");
-            }
-        });
 
-    });  */      	
-        	
-$('#inputLeitura').on('blur', function(){
-	 //validar a leitura	 
-	});    
-
-$(function(){
-$('#frmProducao').submit(function(event){	 
-	 //alert($("#producaoID").val());
-	}); 
+$(function() {
+  $('#defeitoi').on('input',function() {	
+	var opt = $("#defeitol option[value='" + $('#defeitoi').val() + "']").attr('id')
+	alert(opt);	
+  });
 });
-
 
 $(function(){
 	$("#dt").datepicker({    	
-		//showOn: 'button',
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
@@ -45,7 +22,6 @@ $(function(){
 
 $(function(){
 	$("#dtf").datepicker({    	
-		//showOn: 'button',        
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
@@ -101,9 +77,7 @@ $(function(){
 	}else{
 		$("#dtf").name = "dtf";
 	}
-	
-	
-	 
+
 	});
 });
 
@@ -131,7 +105,6 @@ function dataPrimeiroDiaSemana() {
         dia = data.getDate(),
         mes = data.getMonth() + 1,
         ano = data.getFullYear();        
-    //return [dia, mes, ano].join('/');
 	return [ano, mes, dia].join('-') ;
 	
 	};
@@ -152,8 +125,7 @@ function dataPrimeiroDiaMes() {
 		dia = primeiroDia.getDate(),
         mes = primeiroDia.getMonth() + 1,
         ano = primeiroDia.getFullYear();  
-    //return [dia, mes, ano].join('/');
-	return [ano, mes, dia].join('-') ;
+ 	return [ano, mes, dia].join('-') ;
 	
 	};
 
@@ -163,8 +135,7 @@ function dataUltimoDiaMes() {
     	dia = ultimoDia.getDate(),
         mes = ultimoDia.getMonth() + 1,
         ano = ultimoDia.getFullYear();  
-    //return [dia, mes, ano].join('/');
-	return [ano, mes, dia].join('-') ;  
+ 	return [ano, mes, dia].join('-') ;  
 	};
 	
 function segundaFeira(date) {

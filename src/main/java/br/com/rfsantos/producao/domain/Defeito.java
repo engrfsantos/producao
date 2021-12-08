@@ -1,14 +1,19 @@
 package br.com.rfsantos.producao.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="defeito")
@@ -29,6 +34,10 @@ public class Defeito implements Serializable {
 
 	@Column(name="grupo_id")
 	private String grupoId;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy="defeito")
+	private List<ProdDefeito> prodDefeitos = new ArrayList<>();
 
 	public Defeito() {
 	}

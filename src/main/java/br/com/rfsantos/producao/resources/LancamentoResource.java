@@ -51,7 +51,9 @@ public class LancamentoResource {
 	@Autowired
 	private ProdutoService produtoService;
 
+	
 	private Producao producao;
+	private ProdDefeito prodDefeito;
 
 	private long producaoIdL=0;
 
@@ -151,18 +153,13 @@ public class LancamentoResource {
 			modelAndView.addObject("condicoes", this.condicao.listar());
 			modelAndView.addObject("proddefeito", new ProdDefeito());
 			modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
-
-
 			return modelAndView;
 		}*/
-
-	
 	
 	// /lancamento/producao/101
 	@RequestMapping(value="/producao/{id}", method=RequestMethod.GET)
 	public ModelAndView lancamentoId (@PathVariable Long id)  {
 		ModelAndView modelAndView = new ModelAndView("Lancamento");
-
 		if (id!=null) {
 			producao = producaoService.findById(id);
 			modelAndView.addObject("producoes", producao);
@@ -175,21 +172,22 @@ public class LancamentoResource {
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
 
-		List<ProdDefeito> prodDefeitos = producao.getProdDefeitos();
+		//List<ProdDefeito> prodDefeitos = producao.getProdDefeitos();
+		List<ProdDefeito> prodDefeitos = prodDefeitoService.prodDefeitosProducaoId(producao);
+		
+		
 		modelAndView.addObject("proddefeitos", prodDefeitos);
 		
-		modelAndView.addObject("producao", producao);
-		
+		modelAndView.addObject("producao", producao);		
 		modelAndView.addObject("proddefeito", new ProdDefeito(producao));
 		
 		List<Defeito> defeitos = defeitoService.FindByLeitura(producao.getLeitura());
 		modelAndView.addObject("defeitos",  defeitos);
 		modelAndView.addObject("locais", setor.listar());
-
+		
 		modelAndView.addObject("condicoes", this.condicao.listar());
 		modelAndView.addObject("postos", this.posto.listar());
 		modelAndView.addObject("filtro", filtro);
-
 
 		return modelAndView;
 		}
@@ -247,7 +245,7 @@ public class LancamentoResource {
 		modelAndView.addObject("defeitos",  defeitoService.FindByLeitura(producao.getLeitura()));
 	
 		
-		prodDefeito.setProducaoId(producao);
+		prodDefeito.setProducao(producao);
 		
 		List<ProdDefeito> prodDefeitos = producao.getProdDefeitos();
 		prodDefeitos.add(prodDefeito);

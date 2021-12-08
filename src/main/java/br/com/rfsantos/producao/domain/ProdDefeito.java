@@ -35,7 +35,7 @@ public class ProdDefeito implements Serializable {
 	@JoinColumn(name="producao_id")
 	private Producao producao;
 
-
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="defeito_id")
 	private Defeito defeito;
@@ -57,7 +57,8 @@ public class ProdDefeito implements Serializable {
 	@Column(name="serie")
 	private String serie;
 
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "condicao_id") //, referencedColumnName = "id")
 	private Condicao condicao;
 
 	public ProdDefeito() {
@@ -90,7 +91,7 @@ public class ProdDefeito implements Serializable {
 		return producao;
 	}
 
-	public void setProducaoId(Producao producao) {
+	public void setProducao(Producao producao) {
 		this.producao = producao;
 	}
 

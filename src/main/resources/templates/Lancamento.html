@@ -15,7 +15,7 @@ xmlns:th="http://www.thymeleaf.org">
 	<script th:src="@{http://code.jquery.com/jquery-1.8.3.js}"></script>
     <script th:src="@{http://code.jquery.com/ui/1.9.2/jquery-ui.js}"></script>	
 	
-	<script src="js/producao.js"></script>
+	<script src="/js/producao.js"></script>
 	
 	<script type="text/javascript">	</script>
 </head>
@@ -124,26 +124,26 @@ xmlns:th="http://www.thymeleaf.org">
 				</tr>
 			</thead>
 			<tbody>				
-				<tr th:each="proddefeitoL : ${proddefeitos}">						
-					<td th:text="${proddefeitoL.id}"/></td>
-					<td th:text="${proddefeitoL.producao.getId()}"  /></td>
-					<td th:text="${proddefeitoL.defeito.getDescricao()}" /></td>						
-					<td th:text="${proddefeitoL.dt}"  /></td>
-					<td th:text="${proddefeitoL.HrStr}" /></td>						
-					<td th:text="${proddefeitoL.serie}" /></td>
-					<td th:text="${proddefeitoL.condicao.getDescricao()}" /></td>						
-					<td th:text="${proddefeitoL.analise}" /></td>
-					<td th:text="${proddefeitoL.reparo}" /></td>						 
+				<tr th:each="proddefeito: ${proddefeitos}">						
+					<td th:text="${proddefeito.id}"/></td>
+					<td th:text="${proddefeito.producao.id}"  /></td>
+					<td th:text="${proddefeito.defeito.descricao}" /></td>						
+					<td th:text="${proddefeito.dt}"  /></td>
+					<td th:text="${proddefeito.HrStr}" /></td>						
+					<td th:text="${proddefeito.serie}" /></td>
+					<td th:text="${proddefeito.condicao.descricao}" /></td>						
+					<td th:text="${proddefeito.analise}" /></td>
+					<td th:text="${proddefeito.reparo}" /></td>						 
 				</tr>	
-				<form class="form-inline" method="POST" th:object="${prodDefeito}" th:action="@{'/lancamento/producao/' + ${producao.id}}" style="margin: 1px 0">
+				<form id="frmProdDefeito" class="form-inline" method="POST" th:object="${prodDefeito}" th:action="@{'/lancamento/producao/' + ${producao.id}}" style="margin: 1px 0">
 					<tr>						
 						<td><input type="text" name="id" class="form-control"/></td>
-						<td><input type="text" name="producao" class="form-control" placeholder="producao" th:value="${producao.id}"/> </td>						
+						<td><input type="text" name="producao" class="form-control" placeholder="producao" th:value="${producao.getId()}"/> </td>						
 						<td>							
-							<input list="defeitol" name="defeito" class="form-control"  placeholder="defeito" >
+							<input list="defeitol" id="defeitoi" name="defeito" class="form-control"  placeholder="defeito" >
 		 					<datalist id="defeitol">		
-		 						<select th:field="*{defeito.getId()}">			
-									<option  th:each="defeito : ${defeitos}" th:text="${defeito.getDescricao()}" >
+		 						<select>			
+									<option  th:each="defeito : ${defeitos}" th:id="${defeito.getId()}" th:text="${defeito.getDescricao()}" >
 								</select>							
 							</datalist>	
 						</td>												
@@ -151,10 +151,10 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><name="hr" class="form-control"  th:text="${proddefeito.HrStr}" /></td>						
 						<td><input type="text" name="serie" class="form-control" placeholder="bipagem"/></td>
 						<td>
-							<input list="condicaol" th:name="condicao" class="form-control" placeholder="condicao" >
+							<input list="condicaol" id="condicaoi" th:name="condicao" class="form-control" placeholder="condicao" >
 							<datalist id="condicaol">
-								<select th:field="*{condicao.getId()}">
-									<option th:each="condicao : ${condicoes}" th:text="${condicao.getDescricao()}"  >
+								<select>
+									<option th:each="condicao : ${condicoes}" th:id="${condicao.getId()}" th:text="${condicao.getDescricao()}"  >
 								</select>
 							</datalist>
 						</td>						
