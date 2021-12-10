@@ -1,11 +1,27 @@
 $(document).ready(function(){
 
+
 $(function() {
-  $('#defeitoi').on('input',function() {	
-	var opt = $("#defeitol option[value='" + $('#defeitoi').val() + "']").attr('id')
-	alert(opt);	
-  });
-});
+	$("#defeitoi").click(function() {
+	var defeitoi = document.getElementById("defeitoi");
+	alert(defeitoi.value);	//borrao
+	
+	var defeitol = document.getElementById("defeitol");	
+	
+	alert(defeitol.selectedIndex);
+	
+	var opcao1 = defeitol.options[defeitol.selectedIndex]; //ligaçao inversa funciona
+	alert(opcao1);
+	
+	var opcao = $('#defeitol option:selected').id();
+	alert(opcao);
+	
+	
+	var str = opcao1.getAttribute('data-id');
+   alert(str);
+  })
+ });
+
 
 $(function(){
 	$("#dt").datepicker({    	

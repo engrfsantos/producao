@@ -140,10 +140,10 @@ xmlns:th="http://www.thymeleaf.org">
 						<td><input type="text" name="id" class="form-control"/></td>
 						<td><input type="text" name="producao" class="form-control" placeholder="producao" th:value="${producao.getId()}"/> </td>						
 						<td>							
-							<input list="defeitol" id="defeitoi" name="defeito" class="form-control"  placeholder="defeito" >
+							<input list="defeitol" id="defeitoi" name="defeito" class="form-control"  placeholder="defeito">
 		 					<datalist id="defeitol">		
-		 						<select>			
-									<option  th:each="defeito : ${defeitos}" th:id="${defeito.getId()}" th:text="${defeito.getDescricao()}" >
+		 						<select >			
+									<option th:each="defeito : ${defeitos}" th:id="${defeito.getId()}" th:text="${defeito.getDescricao()}">
 								</select>							
 							</datalist>	
 						</td>												
