@@ -1,27 +1,42 @@
 $(document).ready(function(){
 
-
-$(function() {
-	$("#defeitoi").click(function() {
+$(function(){
+	$("#frmProdDefeito").submit(function(){
 	var defeitoi = document.getElementById("defeitoi");
-	alert(defeitoi.value);	//borrao
+	alert(defeitoi.value);	
+	var defeitol = document.getElementById("defeitol");
+	alert(defeitol.value);	
+	var options = defeitol.options;        
+    for(var i = 0; i < options.length;i++){          
+		  if (options[i].value == defeitoi.value){
+			alert(options[i].value);
+			alert(options[i].id);
+			defeitoi.value = options[i].id;		 
+		 }		  		  
+	}
 	
-	var defeitol = document.getElementById("defeitol");	
+	var condicaoi = document.getElementById("condicaoi");
+	alert(condicaoi.value);	
+	var condicaol = document.getElementById("condicaol");
+	alert(condicaol.value);	
+	var options = condicaol.options;        
+    for(var i = 0; i < options.length;i++){          
+		  if (options[i].value == condicaoi.value){
+			alert(options[i].value);
+			alert(options[i].id);
+			condicaoi.value = options[i].id;		 
+		 }		  		  
+	}
 	
-	alert(defeitol.selectedIndex);
-	
-	var opcao1 = defeitol.options[defeitol.selectedIndex]; //ligaçao inversa funciona
-	alert(opcao1);
-	
-	var opcao = $('#defeitol option:selected').id();
-	alert(opcao);
 	
 	
-	var str = opcao1.getAttribute('data-id');
-   alert(str);
-  })
- });
-
+	
+	
+	
+			
+})
+}
+)
 
 $(function(){
 	$("#dt").datepicker({    	
